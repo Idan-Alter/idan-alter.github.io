@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-11-04T08:08:49+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Dr Alter’s Math Laboratory</title><subtitle>Applying the scientific method to mathematics.</subtitle><author><name>Idan Alter</name></author><entry><title type="html">Discovering Euler’s Formula Like a Physicist</title><link href="http://localhost:4000/2022/11/03/Feynmans-Algebra-Chapter-22.html" rel="alternate" type="text/html" title="Discovering Euler’s Formula Like a Physicist" /><published>2022-11-03T00:00:00+02:00</published><updated>2022-11-03T00:00:00+02:00</updated><id>http://localhost:4000/2022/11/03/Feynmans-Algebra-Chapter-22</id><content type="html" xml:base="http://localhost:4000/2022/11/03/Feynmans-Algebra-Chapter-22.html"><![CDATA[<p>Euler’s identity is widely regarded as <em>the</em> prime example of mathematical beauty. In this post we’ll rediscover it using high school math and a bit of common sense.
+<!--more--></p>
+
+<p>Contents:</p>
+<ul>
+  <li><a href="#eulers-formula-and-eulers-identity">Euler’s formula and Euler’s identity</a></li>
+  <li><a href="#how-do-we-calculate-ex">How do we calculate \(e^x\)?</a></li>
+  <li><a href="#ok-were-good-with-ex-but-what-does-eix-even-mean">OK, we’re good with \(e^x\), but what does \(e^{ix}\) even mean?</a></li>
+  <li><a href="#this-is-what-youve-come-to-see">This is what you’ve come to see</a></li>
+  <li><a href="#whats-next">What’s next?</a></li>
+</ul>
+
+<h2 id="eulers-formula-and-eulers-identity">Euler’s formula and Euler’s identity</h2>
+
+<p>The equality</p>
+
+\[e^{i\cdot\pi}+1=0,\]
+
+<p>known as Euler’s <strong>identity</strong>, ties up all the mathematical constants we know from high school, namely \(0,1,e,\pi\) and \(i=\sqrt{-1}\), in one surprisingly neat formula. what’s even more surprising is that this identity is effectively a special case of Euler’s <strong>formula</strong>:</p>
+
+\[e^{i\cdot x}=\mathrm{cos}(x)+i\cdot\mathrm{sin}(x).\]
+
+<blockquote>
+  <p>Don’t see it?
+Plug in \(x=\pi\) and remember that \(\mathrm{cos}(\pi)=-1, \mathrm{sin}(\pi)=0.\)</p>
+</blockquote>
+
+<p>You could argue that this version is all the more beautiful, as now even the trig functions pop up. Richard Feynman went as far as to say that it’s <em>“the most remarkable formula in mathematics”</em>, but only after <a href="https://www.feynmanlectures.caltech.edu/I_22.html">having shown</a> experimentally that it’s actually true. let’s retrace his steps, only this time with <a href="https://p5js.org/">p5.js</a>. If you know nothing about coding you can still follow along perfectly fine, just skip <code class="language-plaintext highlighter-rouge">the code blocks</code>.</p>
+
+<h2 id="how-do-we-calculate-ex">How do we calculate \(e^x\)?</h2>
+
+<p>Using <code class="language-plaintext highlighter-rouge">Math.exp(x)</code> would be cheating! But no worries, There’s a way to do it using only:</p>
+
+<ol>
+  <li>A good enough estimate of \(e\).</li>
+  <li>Square roots (If the <em>Babylonians</em> <a href="MISSING LINK: SQRT BLOG POST">could do it</a>, so can we).</li>
+  <li>
+    <p>The exponent rules:</p>
+
+\[e^{a+b}=e^{a}\cdot e^{b},\\ (e^{a})^{b}= e^{a \cdot b}.\]
+  </li>
+</ol>
+
+<p>We’ll calculate \(e^{3.126}\) as an example. Start by rewriting the exponent in what may seem an awkward way:</p>
+
+\[3.626 = 3 + 625/1000 + 1/1000.\]
+
+<p>The reason for doing this will become clear soon enough, for now, just make sure you notice that \(625/1000 = 5/8\), and so:</p>
+
+\[e^{3.126} = e^{3 + 5/8+ 1/1000} = e^{3}\cdot e^{5/8}\cdot e^{1/1000}.\]
+
+<p>Each of these three multiplicands requires unique treatment:</p>
+
+<ol>
+  <li>
+    <p>\(e^{3}=e\cdot e \cdot e \approx 2.718 \cdot 2.718 \cdot 2.718 \approx 20.08\), and if you ever need a more accurate result, just plug in a better approximation of \(e\).</p>
+  </li>
+  <li>
+    <p>To get at \(e^{5/8}\), we need to know \(e^{1/8}\) first, which we calculate by taking the square root three times in succession:</p>
+
+\[e^{1/8} = \sqrt{e^{1/4}} = \sqrt{\sqrt{e^{1/2}}} = \sqrt{\sqrt{\sqrt{e}}} \approx \sqrt{\sqrt{\sqrt{2.718}}} \approx 1.133.\]
+
+    <p>The rest of the way is similar to the first case, we take the fifth power of the last result:</p>
+
+\[e^{5/8}=(e^{1/8})^{5}\approx 1.133^{5} \approx 1.867.\]
+  </li>
+  <li>
+    <p>Finally, \(1/1000\) is small enough so that we can just say
+\(e^{1/1000}\approx e^{0} = 1.\)</p>
+    <blockquote>
+      <p>In case \(1/1000\) is not so small after all, can you think of a way to get an even better estimate here? Hint: \(1/1000 = 1/1024 +\) something even smaller.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>All in all, we get</p>
+
+\[e^{3.126} \approx  20.08\cdot 1.867 \approx 37.49,\]
+
+<p>and as hinted above, we can get as close as we want to the actual value with more of the same work.</p>
+
+<p>Let’s take stock here, and apply this method to calculate</p>
+
+\[e^{0/16},\ e^{1/16},\ e^{2/16}, \ldots,\ e^{3}.\]
+
+<p>Run the following JavaScript code in the <a href="https://editor.p5js.org/">p5.js web editor</a>.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">e</span> <span class="o">=</span> <span class="mf">2.718281828459045</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">kth_sq_root</span> <span class="o">=</span> <span class="nx">e</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">kth_sq_root</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">kth_sq_root</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">kth_sq_root</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>You should have gotten in the console a list with successive square roots of \(e\), all the way down to \(e^{1/16}\):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.6487212707001282
+1.2840254166877414
+1.1331484530668263
+1.0644944589178595
+</code></pre></div></div>
+<blockquote>
+  <p>Check the bar at the bottom of the p5.js editor to find the console.</p>
+</blockquote>
+
+<p>For what follows, we really only need the last number in the list, since with it we can calculate</p>
+
+\[e^{2/16}=e^{1/16}\cdot e^{1/16} \approx 1.064 \cdot 1.064\]
+
+<p>and then using this result we get the next one,</p>
+
+\[e^{3/16}=e^{2/16}\cdot e^{1/16} \approx 1.064 \cdot 1.064 \cdot 1.064\]
+
+<p>and so on…</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">let</span> <span class="nx">ex</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">let</span> <span class="nx">current</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">x</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">k</span> <span class="o">/</span> <span class="mi">16</span><span class="p">);</span>
+  <span class="nx">ex</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">current</span><span class="p">);</span>
+  <span class="nx">current</span> <span class="o">=</span> <span class="nx">current</span> <span class="o">*</span> <span class="nx">kth_sq_root</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>plotting <code class="language-plaintext highlighter-rouge">ex</code> against <code class="language-plaintext highlighter-rouge">x</code>, we get:</p>
+
+<div id="x_ex_scatterplot"></div>
+<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+
+<script>
+let e = 2.718281828459045;
+let roots_of_e = [e];
+kth_sq_root = e;
+for (let k = 1; k <= 4; k++) {
+  kth_sq_root = Math.sqrt(kth_sq_root);
+  roots_of_e.push(kth_sq_root);
+}
+
+let x = [];
+let ex = [];
+let current = 1;
+
+for (let k = 1; k <= 3 * 16; k++) {
+  x.push(k / 16);
+  ex.push(current);
+  current = current * kth_sq_root;
+}
+
+var trace = {
+  x: x,
+  y: ex,
+  mode: 'markers',
+  type: 'scatter'
+};
+
+Plotly.newPlot('x_ex_scatterplot', [trace]);
+</script>
+
+<p>The result should not surprise you, after all you’ve seen the graph of \(e^{x}\) before. What’s new here is that we calculated everything “by hand”.</p>
+
+<p>Look again at the code block before the figure and come back. Will you agree that we stopped at 3 arbitrarily? We could have run the loop for as long as we wanted and by doing so we would have gotten estimates of \(e^x\) for  as large an \(x\) as we wanted. Not only that, we can even “fill in the blanks” by halving the step size: instead of <code class="language-plaintext highlighter-rouge">1/16</code> we can increment \(x\) by <code class="language-plaintext highlighter-rouge">1/32</code> in each iteration, we would just need to calculate one extra square root, \(e^{1/32}=\sqrt{e^{1/16}}\) before we run the loop.</p>
+<blockquote>
+  <p>If you feel like it, change the code above to calculate</p>
+
+\[e^{0/2^{10}},\ e^{1/2^{10}},\ e^{2/2^{10}}, \ldots,\ e^{4}.\]
+</blockquote>
+
+<p>With all positive \(x\)’s taken care of, what about negative values? How do we calculate \(e^{-x}\)? That one’s easy: \(e^{-x}=1/e^{x}.\)</p>
+
+<h2 id="ok-were-good-with-ex-but-what-does-eix-even-mean">OK, we’re good with \(e^x\), but what does \(e^{ix}\) even mean?</h2>
+
+<p>Surely you “felt like it” and filled in the blanks per my request, So I’m assuming already seen these results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">\(k\)</th>
+      <th style="text-align: center">\(x=k/2^{10}\)</th>
+      <th style="text-align: center">\(e^{x}\)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0.000976</td>
+      <td style="text-align: center">1.000977</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">0.001953</td>
+      <td style="text-align: center">1.001955</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">0.002929</td>
+      <td style="text-align: center">1.002933</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">0.003906</td>
+      <td style="text-align: center">1.003913</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">50</td>
+      <td style="text-align: center">0.048828</td>
+      <td style="text-align: center">1.050040</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>But have you noticed the pattern? It seems as though</p>
+
+\[e^x\approx1+x\]
+
+<p>is a really good approximation for small values of \(x\), although it gets worse very fast as \(x\) increases. This should come as no surprise to you if you remember some calculus. Otherwise, a quick look at a plot of the two functions together should be convincing enough.</p>
+
+<div id="1+x_vs_ex_lineplot"></div>
+<script>
+let x1 = [];
+let ex1 = [];
+let tangent = [];
+let current_x = -1;
+let num_samp = 10 ** 3;
+let spacing = 2 / num_samp;
+for (let k = 0; k <= num_samp; k++) {
+  x1.push(current_x);
+  ex1.push(Math.exp(current_x));
+  tangent.push(1 + current_x);
+  current_x = current_x + spacing;
+}
+  var trace1 = {
+  x: x1,
+  y: ex1,
+  mode: 'line',
+  type: 'scatter',
+  name: '$e^x$'
+};
+  var trace2 = {
+  x: x1,
+  y: tangent,
+  mode: 'line',
+  type: 'scatter',
+  name: '$1+x$'
+};
+Plotly.newPlot('1+x_vs_ex_lineplot', [trace1,trace2]);
+</script>
+
+<p>How does this apply to \(e^{ix}\)? Well, the thing is, if \(x\) is very small, i.e. \(x \approx 0\), then by multiplying both sides by \(i\) we get</p>
+
+\[i \cdot x \approx i\cdot 0 = 0.\]
+
+<p>Now, an approximation that works for “very small” \(x\) <em>should still work</em> if there’s also just a little bit of  \(i\) in it. Making the educated guess that</p>
+
+\[e^{i\cdot x} \approx 1+i\cdot x\]
+
+<p>is valid is all we need to see Euler’s formula materialize.</p>
+
+<h2 id="this-is-what-youve-come-to-see">This is what you’ve come to see</h2>
+
+<p>The recipe is as follows:</p>
+
+<ol>
+  <li>Pick a small enough \(x\), say \(x = 0.1\).</li>
+  <li>
+    <p>Estimate</p>
+
+\[e^{0.1i} \approx 1+0.1i.\]
+  </li>
+  <li>Use the exponent rule a bunch of times:
+    <ul>
+      <li>\(e^{0.2i} = e^{0.1i}\cdot e^{0.1i} \approx (1+0.1i)\cdot (1+0.1i)\)</li>
+      <li>\(e^{0.3i} = e^{0.2i}\cdot e^{0.1i} \approx (1+0.1i)\cdot (1+0.1i)\cdot (1+0.1i)\)</li>
+      <li>\(e^{0.4i} = e^{0.3i}\cdot e^{0.1i} \approx (1+0.1i)\cdot (1+0.1i)\cdot (1+0.1i)\cdot (1+0.1i)\\ \vdots\)</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Doesn’t sound too complicated right? let’s write some code to visualize the process.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>
+<span class="c1">// e^ix = 1 + ix = a +ib</span>
+<span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span></code></pre></figure>
+
+<p>Now, to iterate the procedure described above, we need to keep track of the value of \(e^{0.2i}\), or \(e^{0.3i}\) or whatever it is we just calculated, and multiply it by \(1+0.1i\).</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">a_n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">b_n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="c1">// e^inx = a_n + ib_n</span>
+<span class="kd">function</span> <span class="nx">iterate</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">a_n</span> <span class="o">*</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b_n</span> <span class="o">*</span> <span class="nx">b</span><span class="p">,</span>  <span class="c1">//new a_n</span>
+          <span class="nx">a_n</span> <span class="o">*</span> <span class="nx">b</span> <span class="o">+</span> <span class="nx">b_n</span> <span class="o">*</span> <span class="nx">a</span><span class="p">];</span> <span class="c1">//new b_n</span>
+<span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>Do you recall how to multiply two complex numbers?</p>
+
+\[(a_n+ib_n)(a+ib)=a_{n}a-b_{n}b +i(a_{n}b+b_{n}a).\]
+</blockquote>
+
+<p>The rest is just graphics: we’ll draw the values we get back from <code class="language-plaintext highlighter-rouge">iterate</code> as points on the complex plane. I’m sparing you the boilerplate <code class="language-plaintext highlighter-rouge">setup</code> function here which lays down the plane. Curious minds should look at <a href="MISSING LINK to MISC">my other blog post</a>, I’ve done this before in full detail.</p>
+
+<div style="text-align: center;" id="complex_plane"> </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+
+<script>
+let sketch_e01 = function (p) {
+  p.x = 0.1;
+  // e^ix = 1 + ix = a +ib
+  p.a = 1;
+  p.b = p.x;
+  p.a_n = 1;
+  p.b_n = 0;
+  // e^inx = a_n + ib_n
+  p.iterate = function () {
+    return [p.a_n * p.a - p.b_n * p.b, p.a_n * p.b + p.b_n * p.a];
+  };
+  p.setup = function () {
+    p.createCanvas(400, 400);
+    p.background(220);
+    p.fill(0);
+    p.line(p.width / 2, 0, p.width / 2, p.height);
+    p.line(0, p.height / 2, p.width, p.height / 2);
+    p.translate(p.width / 2, p.height / 2);
+    p.textSize(24);
+    p.text("1+i", 55, -70);
+    p.text("1", 80, 30);
+    p.text("i", -20, -70);
+    p.scale(1, -1);
+    p.strokeWeight(7);
+    p.point(100, 100);
+    p.point(100, 0);
+    p.point(0, 100);
+  };
+}
+let p5complex_plane = new p5(sketch_e01,'complex_plane');
+</script>
+
+<p>The canvas is in place, we just need the <code class="language-plaintext highlighter-rouge">draw</code> function to handle the dynamics - it is called over and over again by p5.js. Let’s leave out some of the technical details here as well.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">e_inx</span> <span class="o">=</span> <span class="nx">iterate</span><span class="p">();</span>
+  <span class="nx">a_n</span> <span class="o">=</span> <span class="nx">e_inx</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="nx">b_n</span> <span class="o">=</span> <span class="nx">e_inx</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+
+  <span class="c1">//boilerplate code goes here</span>
+
+  <span class="nx">point</span><span class="p">(</span><span class="nx">a_n</span><span class="p">,</span> <span class="nx">b_n</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Click <button onclick="animateIterations()">here</button> to let <code class="language-plaintext highlighter-rouge">draw</code> loose on the canvas above, or <a href="https://editor.p5js.org/Idan-Alter/sketches/2jIbqBVp9">run the code by yourself</a>.
+<script>
+  function animateIterations(){
+    p5complex_plane.remove()
+    p5complex_plane = new p5(exponentIterations,'complex_plane')
+  }
+  let exponentIterations = function (p) {
+  p.x = 0.1;
+  // e^ix = 1 + ix = a +ib
+  p.a = 1;
+  p.b = p.x;
+  p.a_n = 1;
+  p.b_n = 0;
+  // e^inx = a_n + ib_n
+  p.iterate = function () {
+    return [p.a_n * p.a - p.b_n * p.b, p.a_n * p.b + p.b_n * p.a];
+  };
+  p.setup = function () {
+    p.createCanvas(400, 400);
+    p.background(220);
+    p.line(p.width / 2, 0, p.width / 2, p.height);
+    p.line(0, p.height / 2, p.width, p.height / 2);
+  };
+  p.draw = function () {
+    e_inx = p.iterate();
+    p.a_n = e_inx[0];
+    p.b_n = e_inx[1];
+    p.translate(p.width / 2, p.height / 2);
+    p.scale(1, -1);
+    p.scale(100); 
+    p.strokeWeight(1 / 20);
+    p.point(p.a_n, p.b_n);
+  };
+};
+</script></p>
+
+<p>Cool spiral… but how does this relate to Euler’s formula? We just drew (what we believe to be) the left hand side of the equality</p>
+
+\[e^{i\cdot x}=\mathrm{cos}(x)+i\cdot\mathrm{sin}(x),\]
+
+<p>for</p>
+
+\[x = 0,0.1,0.2,...\]
+
+<p>Let’s compare it head to head with the right hand side. Add  <code class="language-plaintext highlighter-rouge">let n = 0;</code> <strong>before</strong>  <code class="language-plaintext highlighter-rouge">draw</code>, and append the following code <strong>to</strong> it:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">n</span><span class="o">++</span>
+  <span class="nx">cos_xn</span> <span class="o">=</span> <span class="nx">cos</span><span class="p">(</span><span class="nx">n</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span>
+  <span class="nx">sin_xn</span> <span class="o">=</span> <span class="nx">sin</span><span class="p">(</span><span class="nx">n</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span>
+  <span class="nx">stroke</span><span class="p">(</span><span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">)</span>
+  <span class="nx">point</span><span class="p">(</span><span class="nx">cos_xn</span><span class="p">,</span><span class="nx">sin_xn</span><span class="p">)</span></code></pre></figure>
+
+<p>Or let me <button onclick="addSinCos()">do it</button> for you.</p>
+
+<div style="text-align: center;" id="LHS_vs_RHS"> </div>
+
+<script>
+  let p5LHS_vs_RHS = new p5(sketch_e01,'LHS_vs_RHS');
+  function addSinCos(){
+    if (p5LHS_vs_RHS !== null){
+      p5LHS_vs_RHS.remove()
+    }
+    p5LHS_vs_RHS = new p5(exponentIterationsWithRHS,'LHS_vs_RHS');
+  }
+  let exponentIterationsWithRHS = function (p) {
+  exponentIterations(p)
+  p.n = 0
+  p.draw = function () {
+    e_inx = p.iterate();
+    p.a_n = e_inx[0];
+    p.b_n = e_inx[1];
+    p.translate(p.width / 2, p.height / 2);
+    p.scale(1, -1);
+    p.scale(100); 
+    p.strokeWeight(1 / 20);
+    p.stroke("black");
+    p.point(p.a_n, p.b_n);
+    p.n++;
+    p.cos_xn = p.cos(p.n * p.x);
+    p.sin_xn = p.sin(p.n * p.x);
+    p.stroke("red");
+    p.point(p.cos_xn, p.sin_xn);
+  };
+};
+</script>
+
+<p>Why do the black and red points diverge? Do you remember that we began with the approximation</p>
+
+\[e^{i\cdot 0.1} \approx 1+i\cdot 0.1,\]
+
+<p>and that I said this should only be valid for small exponents? Maybe \(0.1\) is just not small enough! Find out by changing the line  <code class="language-plaintext highlighter-rouge">x = 0.1</code> in the code, or as usual, let me:</p>
+<div style="text-align: center;">
+<input type="range" min="0.001" max="0.5" value="0.1" step="0.001" width="100%" id="x_range" />
+
+<div style="text-align: center;" id="output"></div>
+<button onclick="runFinalSketch()">DO IT</button>
+</div>
+
+<script>
+  let slider = document.getElementById("x_range");
+  let output = document.getElementById("output");
+  output.innerHTML = `<code> x = ` + slider.value+`<\code>`;
+  slider.oninput = function() {
+  output.innerHTML = `<code> x = ` + this.value+`<\code>`;
+}
+</script>
+
+<div style="text-align: center;" id="final_sketch"> </div>
+<script>
+  let p5final = new p5(sketch_e01,'final_sketch');;
+  function runFinalSketch() {
+    if (p5final !== null) {
+      p5final.remove();
+    };
+    p5final = new p5(final_sketch_closure,'final_sketch');
+  }
+  let final_sketch_closure = function (p) {
+      exponentIterationsWithRHS(p);
+      p.x = slider.value;
+      p.b = slider.value;
+      p.setup = function () {
+        p.createCanvas(400, 400);
+        p.background(220);
+        p.line(p.width / 2, 0, p.width / 2, p.height);
+        p.line(0, p.height / 2, p.width, p.height / 2);
+        p.frameRate(30*0.1/p.x)
+      };
+      };
+</script>
+
+<p>Make <code class="language-plaintext highlighter-rouge">x</code> small enough and it’s right on the money! That’s it, we’re done here.</p>
+
+<h2 id="whats-next">What’s next?</h2>
+
+<p>We now have <em>reasonable evidence</em> that Euler’s formula is true, but how do we <em>prove</em> it? I particularly like <a href="https://en.wikipedia.org/wiki/Euler%27s_formula#Using_power_series">this proof</a>.</p>
+
+<p>Some challenges to think about:</p>
+<ul>
+  <li>Look closely at the last sketch. No mater how small <code class="language-plaintext highlighter-rouge">x</code> is, eventually the black points diverge away from the origin, while the red ones stay on the unit circle. Can you figure out why?
+    <blockquote>
+      <p>Hint: calculate the absolute value (distance from the origin) of \(1+ix\).</p>
+    </blockquote>
+  </li>
+  <li>It looks as if the black and red points go around <strong>in phase</strong>: they always complete a full circle at the same time. Can you use this “fact” to make the black points better approximate \(e^{ix}\)?
+    <blockquote>
+      <p>Check your idea by changing the function <code class="language-plaintext highlighter-rouge">iterate</code> and rerunning the sketch.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><em>P.S. In case you haven’t had enough of this subject, definitely watch <a href="https://www.youtube.com/watch?v=v0YEaeIClKY">the video by 3blue1brown</a> for another intuitive explanation, from a different angle.</em></p>]]></content><author><name>Idan Alter</name></author><summary type="html"><![CDATA[Euler’s identity is widely regarded as the prime example of mathematical beauty. In this post we’ll rediscover it using high school math and a bit of common sense.]]></summary></entry><entry><title type="html">JavaScript Miscellanea</title><link href="http://localhost:4000/2022/11/01/JavaScript-Miscellanea.html" rel="alternate" type="text/html" title="JavaScript Miscellanea" /><published>2022-11-01T00:00:00+02:00</published><updated>2022-11-01T00:00:00+02:00</updated><id>http://localhost:4000/2022/11/01/JavaScript-Miscellanea</id><content type="html" xml:base="http://localhost:4000/2022/11/01/JavaScript-Miscellanea.html"><![CDATA[<p>Technical details that get in the way instead of helping go here. What’s p5.js? How to orient the canvas? Etc.
+<!--more--></p>
+
+<p>Contents:</p>
+<ul>
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li><a href="#p5js">p5.js</a>
+    <ul>
+      <li><a href="#drawing-a-cartesian-plane">Drawing a Cartesian plane</a></li>
+    </ul>
+  </li>
+  <li><a href="#plotlyjs">plotly.js</a></li>
+</ul>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>I’ll be assuming throughout this blog that you know a bit of coding, just the basic concepts:</p>
+<ul>
+  <li>variables</li>
+  <li>flow control</li>
+  <li>functions</li>
+</ul>
+
+<p>If that doesn’t mean anything to you, maybe come back here later.  The <a href="https://thecodingtrain.com/guides/getting-started">Coding Train</a> is a good place to start learning JavaScript, but it doesn’t really matter which language you learn, the knowledge is transferable.</p>
+
+<h2 id="p5js">p5.js</h2>
+
+<p>p5.js is a framework focused on <em>“on making coding accessible”</em>. For me, that means I can write cool interactive visualizations (<strong>sketches</strong>, as they are called), with code that’s basically self explanatory. Check it out:<br />
+<script src="//toolness.github.io/p5.js-widget/p5-widget.js"></script>
+<script type="text/p5" data-height="350" data-preview-width="350">
+function setup() {
+  createCanvas(200, 200);
+  background(220);
+  line(width/2, 0, width/2, height);
+  line(0, height/2, width, height/2);
+}
+</script>
+Edit the code a bit and run it again. Try changing the second line to <code class="language-plaintext highlighter-rouge">createCanvas(200, 100)</code> with <code class="language-plaintext highlighter-rouge">100</code> instead of <code class="language-plaintext highlighter-rouge">200</code> at the end. Also give <code class="language-plaintext highlighter-rouge">background(110)</code> a go. You can always check the <a href="https://p5js.org/reference/#/p5/background">official reference</a> to find out how something works exactly.</p>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">setup</code> function to create and, well, <em>setup</em> the canvas, but if we want something dynamic, we need to add a <code class="language-plaintext highlighter-rouge">draw</code> function: p5.js calls it repeatedly for as long as this page is open in your browser.</p>
+
+<script type="text/p5" data-height="350" data-preview-width="350">
+function setup() {
+  createCanvas(200, 200);
+  background(220);
+}
+
+function draw() {
+  background(220);
+  rect(mouseX,mouseY,15,15)
+}
+</script>
+
+<p>Can you guess what <code class="language-plaintext highlighter-rouge">mouseX</code> does? This is what sold me on p5.js. There’s plenty other ways to interact with the sketch, and they’re all just as easy! <a href="https://p5js.org/learn/interactivity.html">This tutorial</a> is a good place to read about them.</p>
+
+<h3 id="drawing-a-cartesian-plane">Drawing a Cartesian plane</h3>
+
+<p>You can imagine that using the canvas to draw points in a Cartesian plane will be useful in a blog about math. Unfortunately for me, the creators of p5.js had the computer graphics community in mind when choosing default settings. I specifically don’t enjoy their answers to the following questions:</p>
+<ul>
+  <li>Where is the origin?
+    <blockquote>
+      <p>“top-left.”</p>
+    </blockquote>
+  </li>
+  <li>In which way are the axes directed?
+    <blockquote>
+      <p>“to the right and <strong>down</strong>.”</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>The result is that <code class="language-plaintext highlighter-rouge">(x,y)</code> of p5.js is not <em>my</em> \((x,y)\). Let me show you this by drawing a circle of radius 50 pixels around (0,0).</p>
+
+<script type="text/p5" data-height="450" data-preview-width="350">
+let t = 0;
+
+function setup() {
+  createCanvas(200, 200);
+  background(220);
+  line(width/2, 0, width/2, height);
+  line(0, height/2, width, height/2);
+}
+
+function draw() {
+  let x = 50*cos(t);
+  let y = 50*sin(t);
+  stroke("red")
+  point(x,y)
+  t = t+0.01
+}
+</script>
+
+<p>What I expect to see, given that we start out with</p>
+
+\[(x,y) = 50\cdot(\cos(0),\sin(0)) = (50,0)\]
+
+<p>and increase the angle inside the trig functions slowly, is a circle going counterclockwise in the middle of the canvas. Obviously, the result is quite different than what I had in mind. Luckily, we have a quick fix for that: add the following code to <code class="language-plaintext highlighter-rouge">draw</code> right before <code class="language-plaintext highlighter-rouge">point(x,y)</code> and run it again.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">translate</span><span class="p">(</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// Move the origin to the center of the canvas.</span>
+  <span class="nx">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>  <span class="c1">// Make the y-axis point upwards.</span></code></pre></figure>
+
+<h2 id="plotlyjs">plotly.js</h2>
+<p>p5.js gives you the ability to draw anything you want on the canvas super easily, but sometimes you might want to plot a function without any boilerplate code. In those cases I use <a href="https://plotly.com/javascript/">plotly.js</a>. It does require working just a bit behind the scenes of this webpage though.</p>
+
+<p>Try it yourself: <button onclick="letsGo()">Go</button> <button onclick="stop()">Stop</button></p>
+
+<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+
+<div id="plotly_unit_circle"></div>
+<div id="plotly_sin_cos"></div>
+<script>
+  let trace_unit_circle = {
+    x: [50],
+    y: [0],
+    mode: 'line',
+    type: 'scatter',
+     };
+  Plotly.newPlot('plotly_unit_circle', [trace_unit_circle],{title: "The Unit Circle"});
+  var trace11 = {
+    x: [0],
+    y: [1],
+    mode: 'line',
+    type: 'scatter',
+    name: `$50cos(t)$`
+  };
+  var trace22 = {
+    x: [0],
+    y: [0],
+    mode: 'line',
+    type: 'scatter',
+    name: `$50sin(t)$`
+  };
+  Plotly.newPlot('plotly_sin_cos', [trace11, trace22]);
+  let t = 0;
+  function updatePlots(){
+  let a = 50*Math.cos(t);
+  let b = 50*Math.sin(t);
+  Plotly.extendTraces('plotly_unit_circle',{
+    x: [[a]],
+    y: [[b]]
+  }, [0]);
+  Plotly.extendTraces('plotly_sin_cos',{
+    x: [[t],[t]],
+    y: [[a], [b]]
+  }, [0,1]);
+  t += 0.1;
+  };
+  let interval_id = null;
+  function letsGo(){
+    if (interval_id === null) {
+    interval_id = setInterval(updatePlots,10);
+    }
+  };
+  function stop(){
+    clearInterval(interval_id);
+    interval_id = null
+  };
+</script>]]></content><author><name>Idan Alter</name></author><summary type="html"><![CDATA[Technical details that get in the way instead of helping go here. What’s p5.js? How to orient the canvas? Etc.]]></summary></entry></feed>
