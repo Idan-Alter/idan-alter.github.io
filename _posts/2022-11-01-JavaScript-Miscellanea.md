@@ -97,39 +97,27 @@ p5.js gives you the ability to draw anything you want on the canvas super easily
 Try it yourself: <button onclick="letsGo()">Go</button> <button onclick="stop()">Stop</button>
 
 <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
-<div id="plotly_unit_circle"></div>
 <div id="plotly_sin_cos"></div>
 <script>
-  let trace_unit_circle = {
-    x: [50],
-    y: [0],
-    mode: 'line',
-    type: 'scatter',
-     };
-  Plotly.newPlot('plotly_unit_circle', [trace_unit_circle],{title: "The Unit Circle"});
   var trace11 = {
     x: [0],
     y: [1],
     mode: 'line',
     type: 'scatter',
-    name: `$50cos(t)$`
+    name: `50cos(t)`
   };
   var trace22 = {
     x: [0],
     y: [0],
     mode: 'line',
     type: 'scatter',
-    name: `$50sin(t)$`
+    name: `50sin(t)`
   };
   Plotly.newPlot('plotly_sin_cos', [trace11, trace22]);
   let t = 0;
   function updatePlots(){
   let a = 50*Math.cos(t);
   let b = 50*Math.sin(t);
-  Plotly.extendTraces('plotly_unit_circle',{
-    x: [[a]],
-    y: [[b]]
-  }, [0]);
   Plotly.extendTraces('plotly_sin_cos',{
     x: [[t],[t]],
     y: [[a], [b]]
