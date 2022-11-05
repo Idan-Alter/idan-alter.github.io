@@ -20,9 +20,18 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Idan Alter"},"dateModified":"2022-11-01T00:00:00+02:00","datePublished":"2022-11-01T00:00:00+02:00","description":"Technical details that get in the way instead of helping go here. What’s p5.js? How to orient the canvas? Etc.","headline":"JavaScript Miscellanea","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022/11/01/JavaScript-Miscellanea.html"},"url":"http://localhost:4000/2022/11/01/JavaScript-Miscellanea.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Dr Alter&apos;s Math Laboratory" /><script type="text/javascript" async
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Dr Alter&apos;s Math Laboratory" />
+  <script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
   </script>
+  
+
+  
+  <script src="//toolness.github.io/p5.js-widget/p5-widget.js"></script>
+  
+
+  
+
 
 </head>
 <body><header class="site-header" role="banner">
@@ -53,36 +62,6 @@
       • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Idan Alter</span></span></p>
   </header>
 
-  <div class="share-links">
-    <style>
-  #share-buttons {display: inline-block; vertical-align: middle; }
-  #share-buttons:after {content: ""; display: block; clear: both;}
-  #share-buttons > div {position: relative; text-align: left; height: 36px; width: 32px; float: left; text-align: center;}
-  #share-buttons > div > svg {height: 16px; fill: #d5d5d5; margin-top: 10px;}
-  #share-buttons > div:hover {cursor: pointer;}
-  #share-buttons > div.facebook:hover > svg {fill: #3B5998;}
-  #share-buttons > div.twitter:hover > svg {fill: #55ACEE;}
-  #share-buttons > div.linkedin:hover > svg {fill: #0077b5;}
-  #share-buttons > div.facebook > svg {height: 18px; margin-top: 9px;}
-  #share-buttons > div.twitter > svg {height: 20px; margin-top: 8px;}
-  #share-buttons > div.linkedin > svg {height: 19px; margin-top: 7px;}
-  </style>
-
-
-
-
-
-<span style="color: silver;">Share on: </span><div id="share-buttons">
-  <div class="facebook" title="Share this on Facebook"    onclick="window.open('http://www.facebook.com/share.php?u=http%3A%2F%2Flocalhost%3A4000%2F2022%2F11%2F01%2FJavaScript-Miscellanea.html','popup','width=600,height=600'); return false;">
-    <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1343 12v264h-157q-86 0-116 36t-30 108v189h293l-39 296h-254v759h-306v-759h-255v-296h255v-218q0-186 104-288.5t277-102.5q147 0 228 12z"/></svg></div>
-  <div class="twitter"  title="Share this on Twitter"     onclick="window.open('https://twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%3A4000%2F2022%2F11%2F01%2FJavaScript-Miscellanea.html&text=JavaScript+Miscellanea&via=','popup','width=600,height=600'); return false;">
-    <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1684 408q-67 98-162 167 1 14 1 42 0 130-38 259.5t-115.5 248.5-184.5 210.5-258 146-323 54.5q-271 0-496-145 35 4 78 4 225 0 401-138-105-2-188-64.5t-114-159.5q33 5 61 5 43 0 85-11-112-23-185.5-111.5t-73.5-205.5v-4q68 38 146 41-66-44-105-115t-39-154q0-88 44-163 121 149 294.5 238.5t371.5 99.5q-8-38-8-74 0-134 94.5-228.5t228.5-94.5q140 0 236 102 109-21 205-78-37 115-142 178 93-10 186-50z"/></svg></div>
-  <div class="linkedin" title="Share this on Linkedin"    onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url=http%3A%2F%2Flocalhost%3A4000%2F2022%2F11%2F01%2FJavaScript-Miscellanea.html','popup','width=600,height=600'); return false;">
-    <svg viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M477 625v991h-330v-991h330zm21-306q1 73-50.5 122t-135.5 49h-2q-82 0-132-49t-50-122q0-74 51.5-122.5t134.5-48.5 133 48.5 51 122.5zm1166 729v568h-329v-530q0-105-40.5-164.5t-126.5-59.5q-63 0-105.5 34.5t-63.5 85.5q-11 30-11 81v553h-329q2-399 2-647t-1-296l-1-48h329v144h-2q20-32 41-56t56.5-52 87-43.5 114.5-15.5q171 0 275 113.5t104 332.5z"/></svg></div>
- </div>
-
-  </div>
-
   <div class="post-content e-content" itemprop="articleBody">
     <p>Technical details that get in the way instead of helping go here. What’s p5.js? How to orient the canvas? Etc.
 <!--more--></p>
@@ -98,7 +77,7 @@
   <li><a href="#plotlyjs">plotly.js</a></li>
 </ul>
 
-<h2 id="prerequisites">Prerequisites</h2>
+<h3 id="prerequisites">Prerequisites</h3>
 
 <p>I’ll be assuming throughout this blog that you know a bit of coding, just the basic concepts:</p>
 <ul>
@@ -109,10 +88,9 @@
 
 <p>If that doesn’t mean anything to you, maybe come back here later.  The <a href="https://thecodingtrain.com/guides/getting-started">Coding Train</a> is a good place to start learning JavaScript, but it doesn’t really matter which language you learn, the knowledge is transferable.</p>
 
-<h2 id="p5js">p5.js</h2>
+<h3 id="p5js">p5.js</h3>
 
 <p>p5.js is a framework focused on <em>“on making coding accessible”</em>. For me, that means I can write cool interactive visualizations (<strong>sketches</strong>, as they are called), with code that’s basically self explanatory. Check it out:<br />
-<script src="//toolness.github.io/p5.js-widget/p5-widget.js"></script>
 <script type="text/p5" data-height="350" data-preview-width="350">
 function setup() {
   createCanvas(200, 200);
@@ -139,7 +117,7 @@ function draw() {
 
 <p>Can you guess what <code class="language-plaintext highlighter-rouge">mouseX</code> does? This is what sold me on p5.js. There’s plenty other ways to interact with the sketch, and they’re all just as easy! <a href="https://p5js.org/learn/interactivity.html">This tutorial</a> is a good place to read about them.</p>
 
-<h3 id="drawing-a-cartesian-plane">Drawing a Cartesian plane</h3>
+<h4 id="drawing-a-cartesian-plane">Drawing a Cartesian plane</h4>
 
 <p>You can imagine that using the canvas to draw points in a Cartesian plane will be useful in a blog about math. Unfortunately for me, the creators of p5.js had the computer graphics community in mind when choosing default settings. I specifically don’t enjoy their answers to the following questions:</p>
 <ul>
@@ -155,7 +133,7 @@ function draw() {
   </li>
 </ul>
 
-<p>The result is that <code class="language-plaintext highlighter-rouge">(x,y)</code> of p5.js is not <em>my</em> \((x,y)\). Let me show you this by drawing a circle of radius 50 pixels around (0,0).</p>
+<p>The result is that <code class="language-plaintext highlighter-rouge">(x,y)</code> of p5.js is not <em>my</em> \((x,y).\) Let me show you this by drawing a circle of radius 50 pixels around (0,0).</p>
 
 <script type="text/p5" data-height="450" data-preview-width="350">
 let t = 0;
@@ -185,46 +163,34 @@ function draw() {
 <figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">translate</span><span class="p">(</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// Move the origin to the center of the canvas.</span>
   <span class="nx">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>  <span class="c1">// Make the y-axis point upwards.</span></code></pre></figure>
 
-<h2 id="plotlyjs">plotly.js</h2>
+<h3 id="plotlyjs">plotly.js</h3>
 <p>p5.js gives you the ability to draw anything you want on the canvas super easily, but sometimes you might want to plot a function without any boilerplate code. In those cases I use <a href="https://plotly.com/javascript/">plotly.js</a>. It does require working just a bit behind the scenes of this webpage though.</p>
 
 <p>Try it yourself: <button onclick="letsGo()">Go</button> <button onclick="stop()">Stop</button></p>
 
 <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
 
-<div id="plotly_unit_circle"></div>
 <div id="plotly_sin_cos"></div>
 <script>
-  let trace_unit_circle = {
-    x: [50],
-    y: [0],
-    mode: 'line',
-    type: 'scatter',
-     };
-  Plotly.newPlot('plotly_unit_circle', [trace_unit_circle],{title: "The Unit Circle"});
   var trace11 = {
     x: [0],
     y: [1],
     mode: 'line',
     type: 'scatter',
-    name: `$50cos(t)$`
+    name: `50cos(t)`
   };
   var trace22 = {
     x: [0],
     y: [0],
     mode: 'line',
     type: 'scatter',
-    name: `$50sin(t)$`
+    name: `50sin(t)`
   };
   Plotly.newPlot('plotly_sin_cos', [trace11, trace22]);
   let t = 0;
   function updatePlots(){
   let a = 50*Math.cos(t);
   let b = 50*Math.sin(t);
-  Plotly.extendTraces('plotly_unit_circle',{
-    x: [[a]],
-    y: [[b]]
-  }, [0]);
   Plotly.extendTraces('plotly_sin_cos',{
     x: [[t],[t]],
     y: [[a], [b]]
@@ -243,9 +209,6 @@ function draw() {
   };
 </script>
 
-
-    <hr>
-<div class="post_navi"></div>
 
   </div>
 

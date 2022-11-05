@@ -1,7 +1,8 @@
 ---
 layout: post
 title: JavaScript Miscellanea
-date: 2022-11-01
+import_MathJax3: true
+import_p5_widget: true
 ---
 Technical details that get in the way instead of helping go here. What's p5.js? How to orient the canvas? Etc.
 <!--more-->
@@ -12,7 +13,7 @@ Contents:
   - [Drawing a Cartesian plane](#drawing-a-cartesian-plane)
 - [plotly.js](#plotlyjs)
 
-## Prerequisites
+### Prerequisites
 
 I'll be assuming throughout this blog that you know a bit of coding, just the basic concepts:
 - variables
@@ -21,10 +22,9 @@ I'll be assuming throughout this blog that you know a bit of coding, just the ba
 
 If that doesn't mean anything to you, maybe come back here later.  The [Coding Train](https://thecodingtrain.com/guides/getting-started) is a good place to start learning JavaScript, but it doesn't really matter which language you learn, the knowledge is transferable.
 
-## p5.js
+### p5.js
 
 p5.js is a framework focused on *"on making coding accessible"*. For me, that means I can write cool interactive visualizations (**sketches**, as they are called), with code that's basically self explanatory. Check it out:  
-<script src="//toolness.github.io/p5.js-widget/p5-widget.js"></script>
 <script type="text/p5" data-height="350" data-preview-width="350">
 function setup() {
   createCanvas(200, 200);
@@ -51,7 +51,7 @@ function draw() {
 </script>
 Can you guess what `mouseX` does? This is what sold me on p5.js. There's plenty other ways to interact with the sketch, and they're all just as easy! [This tutorial](https://p5js.org/learn/interactivity.html) is a good place to read about them.
 
-### Drawing a Cartesian plane
+#### Drawing a Cartesian plane
 
 You can imagine that using the canvas to draw points in a Cartesian plane will be useful in a blog about math. Unfortunately for me, the creators of p5.js had the computer graphics community in mind when choosing default settings. I specifically don't enjoy their answers to the following questions:
 - Where is the origin? 
@@ -59,7 +59,7 @@ You can imagine that using the canvas to draw points in a Cartesian plane will b
 - In which way are the axes directed? 
    > "to the right and **down**."
 
-The result is that `(x,y)` of p5.js is not *my* $$(x,y)$$. Let me show you this by drawing a circle of radius 50 pixels around (0,0).
+The result is that `(x,y)` of p5.js is not *my* $$(x,y).$$ Let me show you this by drawing a circle of radius 50 pixels around (0,0).
 
 <script type="text/p5" data-height="450" data-preview-width="350">
 let t = 0;
@@ -91,7 +91,7 @@ and increase the angle inside the trig functions slowly, is a circle going count
   scale(1, -1);  // Make the y-axis point upwards.
 {% endhighlight %}
 
-## plotly.js
+### plotly.js
 p5.js gives you the ability to draw anything you want on the canvas super easily, but sometimes you might want to plot a function without any boilerplate code. In those cases I use [plotly.js](https://plotly.com/javascript/). It does require working just a bit behind the scenes of this webpage though. 
 
 Try it yourself: <button onclick="letsGo()">Go</button> <button onclick="stop()">Stop</button>

@@ -1,0 +1,10 @@
+{
+    "spellright.language": [
+        "en",
+        "he"
+    ],
+    "spellright.documentTypes": [
+        "latex",
+        "plaintext"
+    ]
+}
