@@ -90,7 +90,7 @@ Are the sides equal?
 
 ### This is all you need to see, basically
 
-Let's see the method in play. I already drew that first rectangle, it's up to you to make it <button onclick="updateSketch()">GO</button> (בlick a bunch of times). Also useful:  <button onclick="resetSketch()">RESET</button>
+Let's see the method in play. I already drew that first rectangle, it's up to you to make it <button onclick="updateSketch()">GO</button> (click a bunch of times). Also useful:  <button onclick="resetSketch()">RESET</button>
 <div style="text-align: left;" id  ="long_side"></div>
 <div style="text-align: left;" id  ="short_side"></div>
 <div style="text-align: center;" id="sketch_div"> </div>
