@@ -16,7 +16,7 @@ Contents:
 - [Final thoughts and random sqrt trivia](#final-thoughts-and-random-sqrt-trivia)
 
 ### Exposition belongs on Wikipedia
-So, in case you're not aware, there's a Babylonian clay tablet from ~1700 BCE with an incredibly accurate approximation of $$ \sqrt{2} $$ written on it [\[Wiki\]](https://en.wikipedia.org/wiki/YBC_7289). This is a big thing: it seems like they knew it's just an approximation of (what we call today) an irrational number. More than 1000 years later, the Pythagoreans allegedly drowned Hippasus because he rediscovered this fact [\[more Wiki\]](https://en.wikipedia.org/wiki/Hippasus). Obviously `Math.sqrt(2)` didn't exist yet, so how did they calculate it?
+So, in case you're not aware, there's a Babylonian clay tablet from ~1700 BCE with an incredibly accurate approximation of $$ \sqrt{2} $$ written on it [\[Wiki\]](https://en.wikipedia.org/wiki/YBC_7289). This is a big thing: it seems like they knew it's just an approximation of (what we call today) an irrational number. More than 1,000 years later, the Pythagoreans allegedly drowned Hippasus because he rediscovered this fact [\[more Wiki\]](https://en.wikipedia.org/wiki/Hippasus). Obviously `Math.sqrt(2)` didn't exist yet, so how did they calculate it?
 
 
 ### But... Pythagoras was Greek!
@@ -151,7 +151,7 @@ You can run this sketch yourself in the [p5.js web editor](https://editor.p5js.o
 
 ### Final thoughts and random sqrt trivia
 
-- We only used basic arithmetic for the calculations, cool huh? Even cooler is the fact that almost 4000 years later, the algorithm behind `Math.sqrt(2)` is not *that much* different.
+- We only used basic arithmetic for the calculations, cool huh? Even cooler is the fact that almost 4,000 years later, the algorithm behind `Math.sqrt(2)` is not *that much* different.
 - Does it always work? Yes. Why? [\[Wiki\]](https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method).
  - 
     ```
