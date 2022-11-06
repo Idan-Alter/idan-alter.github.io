@@ -23,7 +23,7 @@ So, in case you're not aware, there's a Babylonian clay tablet from ~1700 BCE wi
 To approximate $$ \sqrt{2} $$ like they do in Babylon we need to think like the ancients, and they were really big on **geometry**. What's $$ \sqrt{2} $$ in geometry? Well, the usual suspect is the hypotenuse of a right triangle with two legs of length 1.
 
 Let's draw one in p5.js:
-<script type="text/p5" data-autoplay data-height="300" data-preview-width="300">
+<script type="text/p5" data-height="300" data-preview-width="300">
 createCanvas(210, 210);
 background(220);
 triangle(20, 80, 20, 180, 120, 180);
@@ -45,7 +45,7 @@ The Babylonian method is all about finding this **square** with area 2:
 
 **Step 1:** start with a **rectangle** of area 2, but one with side lengths that you can actually calculate, like 1 for the short side and 2 for the long side.
 
-<script type="text/p5" data-autoplay data-height="300" data-preview-width="300">
+<script type="text/p5" data-height="300" data-preview-width="300">
 createCanvas(210, 210);
 background(220);
 let a = 1;
@@ -57,7 +57,7 @@ text('b', 10, 105);
 
 **Step 2:** the short side is obviously too short, so let's make it a bit bigger. How much bigger? Let's just split the difference.
 
-<script type="text/p5" data-autoplay data-height="300" data-preview-width="300">
+<script type="text/p5" data-height="300" data-preview-width="300">
 createCanvas(210, 210);
 background(220);
 let a = 1;
@@ -71,7 +71,7 @@ OK, but now the rectangle is too big! Its area is `new_side*b` and that's surely
 
 **Step 3:** shorten that long side so that the total area is still 2.
 
-<script type="text/p5" data-autoplay data-height="330" data-preview-width="300">
+<script type="text/p5" data-height="330" data-preview-width="300">
 createCanvas(210, 210);
 background(220);
 let a = 1;
