@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How Did They Calculate Square Roots in 1700 BCE?"
-tags: Approximation Algorithms
+tags: Approximation Algorithms Geometry
 import_MathJax3: true
 import_p5_widget: true
 import_p5_lib: true
@@ -91,20 +91,22 @@ Are the sides equal?
 ### This is all you need to see, basically
 
 Let's see the method in play. I already drew that first rectangle, it's up to you to make it <button onclick="updateSketch()">GO</button> (click a bunch of times). Also useful:  <button onclick="resetSketch()">RESET</button>
-<div style="text-align: left;" id  ="long_side"></div>
-<div style="text-align: left;" id  ="short_side"></div>
-<div style="text-align: center;" id="sketch_div"> </div>
 
+<figure class="centerme">
+<div id  ="long_side"></div>
+<div id  ="short_side"></div>
+<div id="sketch_div"> </div>
+<figcaption> You can run this sketch yourself in the <a href="https://editor.p5js.org/Idan-Alter/sketches/wEjTnaAz0">p5.js web editor </a>BTW.</figcaption>
+</figure>
 <script>
-
   let sqrt_sketch_fact = function (p) {
   p.a = 1;
   p.b = 2;
-  p.scl = 390 / 2;
+  p.scl = 120;
   p.shift = 5;
   p.bckgrnd = 220
   p.setup = function () {
-    p.createCanvas(740, 400);
+    p.createCanvas(520, 250);
     p.background(220);
     p.rect(p.shift, 5, p.a * p.scl, p.b * p.scl);
     p.frameRate(1);
@@ -127,8 +129,8 @@ Let's see the method in play. I already drew that first rectangle, it's up to yo
   }
 };
   function ExtractSideLenghts(){
-  long_side.innerHTML = `<code>long side = ` + sqrt_sketch.b +`<\code>`;
-  short_side.innerHTML = `<code>short side = ` + sqrt_sketch.a +`<\code>`;
+  long_side.innerHTML = `<code>long side = ` + sqrt_sketch.nfc(sqrt_sketch.b,15) +`<\code>`;
+  short_side.innerHTML = `<code>short side = ` + sqrt_sketch.nfc(sqrt_sketch.a,15) +`<\code>`;
   }
   let sqrt_sketch = new p5(sqrt_sketch_fact,'sketch_div');
   ExtractSideLenghts()
@@ -144,7 +146,6 @@ Let's see the method in play. I already drew that first rectangle, it's up to yo
   }
 </script>
 
-You can run this sketch yourself in the [p5.js web editor](https://editor.p5js.org/Idan-Alter/sketches/wEjTnaAz0) BTW.
 
 > Up for a challenge? Rewrite the code to calculate the square root of any given `x`. If you still draw squares after a few iterations, it works.
 >
