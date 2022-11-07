@@ -153,10 +153,9 @@ You can run this sketch yourself in the [p5.js web editor](https://editor.p5js.o
 
 - We only used basic arithmetic for the calculations, cool huh? Even cooler is the fact that almost 4,000 years later, the algorithm behind `Math.sqrt(2)` is not *that much* different.
 - Does it always work? Yes. Why? [\[Wiki\]](https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method).
- - 
+ - Look at this line of code:
     ```
     i  = * ( long * ) &y; // evil floating point bit level hacking
     ```
-
-    This line of code is part of the "Quake III" algorithm for the (inverse) square root, and it gets even better. I obviously can't write about approximating square roots without mentioning this immortal stroke of genius. Read up on it [\[Wiki\]](https://en.wikipedia.org/wiki/Fast_inverse_square_root), or watch this [great video](https://www.youtube.com/watch?v=p8u_k2LIZyo) if you're not afraid of C and its pointers, but at the very least, read this [xkcd comic](https://www.explainxkcd.com/wiki/index.php/664:_Academia_vs._Business).
+    This is part of the "Quake III" algorithm for the (inverse) square root, and it gets even better. I obviously can't write about approximating square roots without mentioning this immortal stroke of genius. Read up on it [\[Wiki\]](https://en.wikipedia.org/wiki/Fast_inverse_square_root), or watch this [great video](https://www.youtube.com/watch?v=p8u_k2LIZyo) if you're not afraid of C and its pointers, but at the very least, read this [xkcd comic](https://www.explainxkcd.com/wiki/index.php/664:_Academia_vs._Business).
 - Did you know that the A series of paper sizes, which includes the GOAT, A4 paper, is designed such that the long side is exactly $$ \sqrt{2} $$ times the length of the short side. Why? It has to do with preserving the ratio when you fold it in half [\[Wiki\]](https://en.wikipedia.org/wiki/Paper_size#A_series).
