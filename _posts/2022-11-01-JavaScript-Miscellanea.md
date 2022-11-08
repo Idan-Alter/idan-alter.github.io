@@ -10,7 +10,7 @@ Technical details that get in the way instead of helping go here. What's p5.js? 
 Contents:
 - [Prerequisites](#prerequisites)
 - [p5.js](#p5js)
-  - [Drawing a Cartesian plane](#drawing-a-cartesian-plane)
+- [Drawing a Cartesian plane](#drawing-a-cartesian-plane)
 - [plotly.js](#plotlyjs)
 
 ### Prerequisites
@@ -51,7 +51,7 @@ function draw() {
 </script>
 Can you guess what `mouseX` does? This is what sold me on p5.js. There's plenty other ways to interact with the sketch, and they're all just as easy! [This tutorial](https://p5js.org/learn/interactivity.html) is a good place to read about them.
 
-#### Drawing a Cartesian plane
+### Drawing a Cartesian plane
 
 You can imagine that using the canvas to draw points in a Cartesian plane will be useful in a blog about math. Unfortunately for me, the creators of p5.js had the computer graphics community in mind when choosing default settings. I specifically don't enjoy their answers to the following questions:
 - Where is the origin? 
