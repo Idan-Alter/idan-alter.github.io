@@ -4,4 +4,4 @@
 
 layout: home
 ---
-Mathematical concepts explored interactively with super easy JavaScript! 
+Short informal writeups of mathy stuff with interactive visualizations, written in easy to use JavaScript. I let things speak for themselves and avoid the usual definition-theorem-proof dogma.

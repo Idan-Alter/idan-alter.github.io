@@ -4,3 +4,46 @@
 @import "minima";
 
 .centerme { display: block; margin-left: auto; margin-right: auto; text-align: center; }
+
+/** Blockquotes */
+blockquote { color: #828282; border-left: 4px solid #e8e8e8; padding-left: 15px; font-size: 16px; font-style: normal; }
+
+blockquote > :last-child { margin-bottom: 0; }
+
+figcaption {
+    margin-bottom: 10px
+}
+
+.theorem {
+    display: block;
+    margin: 10px 4px 10px 0;
+    font-style: italic;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-left: 6px solid;
+    border-color: rgba(0, 0, 0, 1);
+    padding:4px 2px 4px 10px;
+}
+.theorem:before {
+    content: "Theorem.";
+    font-weight: bold;
+    font-style: normal;
+    padding-right: 4px
+}
+
+.proof {
+    display: block;
+    margin: 10px 4px 10px 0;
+    font-style: normal;
+    padding:4px 2px 4px 10px;
+    border-left: 6px solid;
+    border-color:rgba(0, 0, 0, 1);
+}
+.proof:before {
+    content: "Proof.";
+    font-weight: bold;
+    font-style: normal;
+}
+.proof:after {
+    content: "\25FC";
+    float:right;
+}
