@@ -4,4 +4,4 @@
 
 layout: home
 ---
-Short informal writeups of mathy stuff with interactive visualizations, written in easy to use JavaScript. I let things speak for themselves and avoid the usual definition-theorem-proof dogma.
+Short informal writeups with interactive visualizations, written in easy to use JavaScript. I let things speak for themselves and avoid the usual definition-theorem-proof dogma.
