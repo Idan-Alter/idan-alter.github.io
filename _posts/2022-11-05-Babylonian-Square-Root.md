@@ -10,7 +10,7 @@ import_p5_lib: true
 The *Babylonian method* might be the first known algorithm for approximating square roots. In this post we're going to visualize its amazing geometric interpretation.
 
 <!--more-->
-Contents:
+#### Contents:
 - [Exposition belongs on Wikipedia](#exposition-belongs-on-wikipedia)
 - [But... Pythagoras was Greek!](#but-pythagoras-was-greek)
 - [This is all you need to see, basically](#this-is-all-you-need-to-see-basically)

@@ -7,7 +7,7 @@ import_p5_widget: true
 Technical details that get in the way instead of helping go here. What's p5.js? How to orient the canvas? Etc.
 <!--more-->
 
-Contents:
+#### Contents:
 - [Prerequisites](#prerequisites)
 - [p5.js](#p5js)
 - [Drawing a Cartesian plane](#drawing-a-cartesian-plane)
@@ -25,6 +25,7 @@ If that doesn't mean anything to you, maybe come back here later.  The [Coding T
 ### p5.js
 
 p5.js is a framework focused on *"on making coding accessible"*. For me, that means I can write cool interactive visualizations (**sketches**, as they are called), with code that's basically self explanatory. Check it out:  
+
 <script type="text/p5" data-height="350" data-preview-width="350">
 function setup() {
   createCanvas(200, 200);
