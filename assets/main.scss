@@ -288,14 +288,21 @@ figcaption { margin-bottom: 10px; }
 
 h3, h4, h5, h6 { margin-bottom: 5px; }
 
-.theorem { display: block; margin: 10px 4px 10px 0; font-style: italic; background-color: rgba(0, 0, 0, 0.05); border-left: 6px solid; border-color: black; padding: 4px 2px 4px 10px; }
+.theorem { display: block; margin: 10px 4px 15px 0; font-style: italic; background-color: rgba(0, 0, 0, 0.05); border-left: 6px solid; border-color: black; padding: 4px 2px 4px 10px; }
 
-.theorem:before { content: "Theorem."; font-weight: bold; font-style: normal; padding-right: 4px; }
+.theorem:before { content: "THEOREM."; font-family: serif; font-weight: bold; font-style: normal; padding-right: 4px; }
 
-.proof { display: block; margin: 10px 4px 10px 0; font-style: normal; padding: 4px 2px 4px 10px; border-left: 6px solid; border-color: black; }
+.proposition { display: block; margin: 10px 4px 10px 0; font-style: italic; background-color: rgba(0, 0, 0, 0.05); border-left: 6px solid; border-color: black; padding: 4px 2px 4px 10px; }
 
-.proof:before { content: "Proof."; font-weight: bold; font-style: normal; }
+.proposition:before { content: "PROP."; font-family: serif; font-weight: bold; font-style: normal; padding-right: 4px; }
 
-.proof:after { content: "\25FC"; float: right; }
+
+.proof { display: block; margin: 10px 4px 15px 0; font-style: normal; padding: 4px 2px 4px 10px; border-left: 6px solid; border-color: black; }
+
+.proof:before { content: "PROOF."; font-family: serif; font-weight: bold; font-style: normal; }
+
+.proof:after { content: "\25FC"; float: right; margin-top: -15px }
+
+
 
 /*# sourceMappingURL=main.css.map */
