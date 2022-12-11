@@ -32,7 +32,6 @@ linkedin_username: "idanalter"
 theme: minima
 markdown: kramdown
 plugins:
-  - jekyll-feed
   - jekyll-titles-from-headings
 # Exclude from processing.
 show_excerpts: true
