@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How Did They Calculate Square Roots in 1700 BCE?"
-tags: Approximation Algorithms Geometry
+tags: approximation algorithms geometry
 import_MathJax3: true
 import_p5_widget: true
 import_p5_lib: true
