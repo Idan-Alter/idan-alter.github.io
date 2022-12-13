@@ -529,7 +529,8 @@ Take the slider **all the way to the left** and it's right on the money! That's 
 
 ### What's next?
 
-We now have **reasonable evidence** that Euler's formula is true, but how do we **prove** it? I particularly like Euler's original [proof](https://en.wikipedia.org/wiki/Euler%27s_formula#Using_power_series). Also, definitely watch [the video by 3Blue1Brown](https://www.youtube.com/watch?v=v0YEaeIClKY) for another intuitive explanation, using a completely different approach.
+- We now have **reasonable evidence** that Euler's formula is true, but how do we **prove** it? I particularly like Euler's original [proof](https://en.wikipedia.org/wiki/Euler%27s_formula#Using_power_series). Also, definitely watch [the video by 3Blue1Brown](https://www.youtube.com/watch?v=v0YEaeIClKY) for another intuitive explanation, using a completely different approach.
+- Some would argue that Euler's formula is even more beautiful with $$ \tau $$ instead of $$ \pi $$. Read all about it (and much more) [here](https://tauday.com/tau-manifesto).
 
 Finally, some challenges to think about:
 - Look closely at the last sketch. If you're patient enough, you'll see the black points diverge away from the origin, while the red ones stay on a circle. This always happens. Can you figure out why?
