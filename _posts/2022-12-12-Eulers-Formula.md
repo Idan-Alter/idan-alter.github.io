@@ -479,7 +479,7 @@ I've colored these points red here:
 
 Somewhat disappointing, no? Why do the black and red points diverge? 
 
-Do you remember I said $$ 0.1 $$ is small, so $$ e^{0.1i} \approx 1+0.1$$ should be true? Maybe $$0.1$$ is just **not small enough**! Maybe. **You tell me:**
+Do you remember I said $$ 0.1 $$ is small, so $$ e^{0.1i} \approx 1+0.1i$$ should be true? Maybe $$0.1$$ is just **not small enough**! Maybe. **You tell me:**
 
 <div style="text-align: center;">
 <input type="range" min="0.001" max="0.3" value="0.1" step = "0.001" width ="100%" id="x_range">
