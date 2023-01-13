@@ -54,7 +54,7 @@ Can you guess what `mouseX` does? This is what sold me on p5.js. There's plenty 
 
 ### Drawing a Cartesian plane
 
-You can imagine that using the canvas to draw points in a Cartesian plane will be useful in a blog about math. Unfortunately for me, the creators of p5.js had the computer graphics community in mind when choosing default settings. I specifically don't enjoy their answers to the following questions:
+You can imagine that using the canvas to draw points in a Cartesian plane will be useful in a blog about math. Unfortunately for me, the creators of p5.js followed the HTML standards when choosing default settings. I specifically don't enjoy their answers to the following questions:
 - Where is the origin? 
     >"top-left."
 - In which way are the axes directed? 
