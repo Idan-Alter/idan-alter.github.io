@@ -5,6 +5,7 @@ tags: probability approximations RNG
 import_MathJax3: true
 import_p5_lib: true
 import_plotly: true
+image: "assets/post_gifs/2023-01-12-Ziggurat-Algorithm.gif"
 ---
 
 It's **blazingly** fast and is the best RNG you've never heard of. Let me show you how it works with some interactive sketches. We'll throw darts along the way!
