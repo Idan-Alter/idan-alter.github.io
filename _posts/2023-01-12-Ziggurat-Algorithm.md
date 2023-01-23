@@ -524,7 +524,7 @@ var layout ={xaxis:{title:{text:'x Value'}},
              yaxis:{title:{text:'No. of Darts'}}};
 setInterval(()=>{
 Plotly.newPlot('rejection_histogram', data, layout);
-},200)
+},1500)
 
 </script>
 
