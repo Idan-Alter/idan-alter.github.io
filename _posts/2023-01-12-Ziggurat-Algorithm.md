@@ -522,9 +522,17 @@ var data = [
 ];
 var layout ={xaxis:{title:{text:'x Value'}},
              yaxis:{title:{text:'No. of Darts'}}};
+Plotly.newPlot('rejection_histogram', data, layout)             
+const hist_el = document.getElementById("rejection_histogram")
+function in_view () {
+    const rect = hist_el.getBoundingClientRect();
+    return (rect.top<= window.innerHeight && 
+           rect.bottom >= 0) 
+}
 setInterval(()=>{
-Plotly.newPlot('rejection_histogram', data, layout);
-},1500)
+  if (in_view()) {Plotly.newPlot('rejection_histogram', data, layout)
+  console.log('render')};
+},500)
 
 </script>
 
