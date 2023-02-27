@@ -86,7 +86,7 @@ $$z = e^{-r^2} = e^{-(x^2+y^2)} = e^{-x^2}e^{-y^2}.$$
 
 This, combined with having $$ x $$ fixed at some value means that the top of each slice is indeed **the original Gaussian**, $$ e^{-y^2}$$, scaled down by the constant $$e^{-x^2}$$.
 
- >This part only works with Gaussians, you usually won't get such nice expressions by slicing a random solid of revolution this way.
+ >This part only works with Gaussians, you usually won't get such nice expressions by slicing a random solid of revolution this way. See the math [here](https://www.unf.edu/~dbell/Poisson.pdf).
 
 From here we just **follow the recipe of the first approach.**
 
