@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Dr Alter's Math Laboratory
+title: Dr. Alter's Math Laboratory
 author: "Idan Alter"
 description: >- # this means to ignore newlines until "baseurl:"
   Applying the scientific method to mathematics.
