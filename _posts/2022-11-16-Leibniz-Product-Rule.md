@@ -9,7 +9,7 @@ import_p5_lib: true
 In high school you learned by rote how to calculate the derivative of *"f times g"*. In first year calculus you proved it mathematically. But can you say off the cuff why it *should* be true?
 <!--more-->
 
-Contents:
+#### Contents:
 - [Credit where credit is due](#credit-where-credit-is-due)
 - [This is going to be short](#this-is-going-to-be-short)
 - [Bonus round](#bonus-round)
