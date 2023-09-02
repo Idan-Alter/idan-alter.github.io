@@ -330,5 +330,10 @@ h3, h4, h5, h6 { margin-bottom: 5px; }
       margin-right: auto;
        text-align: center; }
 
+.prevent-select .katex {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    }
 
 /*# sourceMappingURL=main.css.map */

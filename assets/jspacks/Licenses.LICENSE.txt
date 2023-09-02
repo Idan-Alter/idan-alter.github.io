@@ -5,6 +5,11 @@
  */
 
 /**
+ * @license Apache 2.0
+ * Copyright 2004 MathJax
+ * 
+ */
+/**
  * lil-gui
  * https://lil-gui.georgealways.com
  * @version 0.16.1
