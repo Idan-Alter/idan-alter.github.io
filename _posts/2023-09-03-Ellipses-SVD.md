@@ -65,7 +65,7 @@ What does a linear map do to the unit circle? Well, since they make parallelogra
 <div class="centerme" id="root_0" ></div>
 <figcaption class="centerme" style="margin-bottom: 15px">You can move the red and blue image vectors (on the right)</figcaption>
 
-With the intuition satisfied, let's get to proving "circles → ellipses".
+With the intuition affirmed, let's get to **proving** "circles → ellipses".
 ### Easy mode
 Every matrix $$ A $$ has a SVD [[Wiki]](https://en.wikipedia.org/wiki/Singular_value_decomposition), which basically says its action is equivalent to a composition of three simple actions:
 
