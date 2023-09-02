@@ -70,7 +70,7 @@ With the intuition affirmed, let's get to **proving** "circles → ellipses".
 Every matrix $$ A $$ has a SVD [[Wiki]](https://en.wikipedia.org/wiki/Singular_value_decomposition), which basically says its action is equivalent to a composition of three simple actions:
 
 <div id="root_1" ></div>
-<figcation class="centerme">You know what to do</figcation>
+<figcaption class="centerme">You know what to do</figcaption>
 
 ##### LEGEND:  <!-- omit from toc --> 
 1. The first action is a rotation (you might know it as $$V^T$$). The unit circle being, well, a circle, doesn't care about this one.
