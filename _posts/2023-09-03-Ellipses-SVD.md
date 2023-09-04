@@ -66,8 +66,9 @@ What does a linear map do to the unit circle? Well, since they make parallelogra
 <figcaption class="centerme" style="margin-bottom: 15px">You can move the red and blue image vectors (on the right)</figcaption>
 
 With the intuition affirmed, let's get to **proving** "circles → ellipses".
+
 ### Easy mode
-Every matrix $$ A $$ has a SVD [[Wiki]](https://en.wikipedia.org/wiki/Singular_value_decomposition), which basically says its action is equivalent to a composition of three simple actions:
+Every matrix has a SVD [[Wiki]](https://en.wikipedia.org/wiki/Singular_value_decomposition), which basically says its action is equivalent to a composition of three simple actions:
 
 <div id="root_1" ></div>
 <figcaption class="centerme">You know what to do</figcaption>
@@ -109,7 +110,7 @@ There's really nothing more to it. *Except...* What if you wanted to work backwa
 ### Normal difficulty
 We need to avoid circular reasoning, so **the SVD is not allowed**. How do we prove it then?
 
-If A is invertible then we can write
+If the matrix $$ A $$ is invertible then we can write
 
 
 $$ \begin{bmatrix}
