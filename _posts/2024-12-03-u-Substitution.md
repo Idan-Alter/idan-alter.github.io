@@ -68,7 +68,7 @@ We moved geometric information (about lengths of $$ \Delta x_i $$'s) from the wo
     <img style="width: 200px" src="/assets/imgs/Map_scale_-_8km,_5mi.png" alt="Map Scale" />
    <figcaption>A pullback</figcaption>
    </div>
-- for really good maps, this 1d scale doesn't cut it anymore. You need to pull back a **metric tensor**. The first 10 mins of this [video](https://www.youtube.com/watch?v=TvFvL_sMg4g) are a great intro, though it picks up speed afterwards. 
+- For really good maps, this 1d scale doesn't cut it anymore. You need to pull back a **metric tensor**. The first 10 mins of this [video](https://www.youtube.com/watch?v=TvFvL_sMg4g) are a great intro, though it picks up speed afterwards. 
 - [Steve Mould](https://youtu.be/wk67eGXtbIw?t=369) has some other, physics inspired examples. 
 
 ### Reverse chain rule
