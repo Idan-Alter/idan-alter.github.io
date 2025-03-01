@@ -304,6 +304,7 @@ h3, h4, h5, h6 { margin-bottom: 5px; }
 .proof:before { content: "PROOF."; font-family: serif; font-weight: bold; font-style: normal; }
 
 .proof:after { content: "\25FC"; float: right; margin-top: -15px }
+.mycode {font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;}
 
 
 .react_root
