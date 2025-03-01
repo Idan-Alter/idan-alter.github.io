@@ -6,6 +6,10 @@ import_MathJax3: true
 --- 
 They used **Euclid's algorithm**. Saved you a click.
 <!--more-->
+#### Contents:
+- [Euclid's algorithm](#euclids-algorithm)
+- [A stopping problem](#a-stopping-problem)
+- [Name dropping](#name-dropping)
 
 ### Euclid's algorithm
 <script defer="defer" src="\assets\jspacks\EuclidsAlgorithm.js"></script>
