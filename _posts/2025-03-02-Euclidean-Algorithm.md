@@ -6,6 +6,7 @@ import_MathJax3: true
 --- 
 They used **Euclid's algorithm**. Saved you a click.
 <!--more-->
+
 #### Contents:
 - [Euclid's algorithm](#euclids-algorithm)
 - [A stopping problem](#a-stopping-problem)
