@@ -25,7 +25,7 @@ The original formulation is quite a mouthful, so here's a translation to code an
 
 ### A stopping problem
 
-The modern form of this algorithm saves a few iterations and uses <span class="mycode">a mod b</span> instead of subtractions. This is also helpful since any self-respecting <span class="mycode">mod</span> function would throw an error when either number is not an integer. But then, what happens if one of them *is*? 
+The modern form of this algorithm saves a few iterations and uses <span class="mycode">a mod b</span> instead of subtractions. This is also helpful since any self-respecting <span class="mycode">mod</span> function would throw an error when either number is not an integer. But then, what happens if one of them actually *isn't*? 
 
 <div  id="root_2" ></div>
 
