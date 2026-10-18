@@ -1,26 +1,2 @@
-function makeGrid(p,origin, v0, v1, myColor) {
-    p.push();
-    p.stroke(myColor);
-    p.strokeWeight(0.5)
-    
-    let up = origin.copy();
-    let down = origin.copy();
-    
-    let v1mega = v1.copy().setMag(10 ** 4 * p.max(p.width, p.height));
-    
-    for (let k = 0; k <= 10; k++) {
-      
-      let upv1 = p5.Vector.add(up, v1mega);
-      let downv1 = p5.Vector.sub(up, v1mega);
-      p.line(upv1.x, upv1.y, downv1.x, downv1.y);
-        // I should calculate here the intersection of the line with the canvas, but taking a huge step up and down the line will usually cover the entire visible area. it's a hack, but it works.
-      
-      up.add(v0);
-  
-      upv1 = p5.Vector.add(down, v1mega);
-      downv1 = p5.Vector.sub(down, v1mega);
-      p.line(upv1.x, upv1.y, downv1.x, downv1.y);
-      down.sub(v0);
-    }
-    p.pop();
-  }
+
+function makeGrid(_0x57c3e7,_0x17f522,_0x174ae2,_0x40f9c1,_0x58d0b9){_0x57c3e7['push']();_0x57c3e7['stroke'](_0x58d0b9);_0x57c3e7['strokeWeight'](0.5);let _0x58b226=_0x17f522['copy']();let _0x429110=_0x17f522['copy']();let _0x3f4f44=_0x40f9c1['copy']()['setMag'](0xa**0x4*_0x57c3e7['max'](_0x57c3e7['width'],_0x57c3e7['height']));for(let _0x2d3643=0x0;_0x2d3643<=0xa;_0x2d3643++){let _0x3bf123=p5['Vector']['add'](_0x58b226,_0x3f4f44);let _0xea8071=p5['Vector']['sub'](_0x58b226,_0x3f4f44);_0x57c3e7['line'](_0x3bf123['x'],_0x3bf123['y'],_0xea8071['x'],_0xea8071['y']);_0x58b226['add'](_0x174ae2);_0x3bf123=p5['Vector']['add'](_0x429110,_0x3f4f44);_0xea8071=p5['Vector']['sub'](_0x429110,_0x3f4f44);_0x57c3e7['line'](_0x3bf123['x'],_0x3bf123['y'],_0xea8071['x'],_0xea8071['y']);_0x429110['sub'](_0x174ae2);}_0x57c3e7['pop']();}

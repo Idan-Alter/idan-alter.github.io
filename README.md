@@ -1,2 +1,5 @@
 # math.rmx
-This is the repo for my blog, check it out here: [https://idan-alter.github.io/](https://idan-alter.github.io/)
+
+This repository contains the built static website for https://idan-alter.github.io/.
+The maintained application source and build run in a private repository.
+Do not edit generated files here; deployments replace them.

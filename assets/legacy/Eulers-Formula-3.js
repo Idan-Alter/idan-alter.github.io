@@ -1,0 +1,2 @@
+
+let x1=[];let ex1=[];let tangent=[];let current_x=-0x1;let num_samp=0xa**0x3;let spacing=0x2/num_samp;for(let k=0x0;k<=num_samp;k++){x1['push'](current_x);ex1['push'](Math['exp'](current_x));tangent['push'](0x1+current_x);current_x=current_x+spacing;}var trace1={'x':x1,'y':ex1,'mode':'line','type':'scatter','name':'e^x'};var trace2={'x':x1,'y':tangent,'mode':'line','type':'scatter','name':'1+x'};Plotly['newPlot']('1+x_vs_ex_lineplot',[trace1,trace2]);

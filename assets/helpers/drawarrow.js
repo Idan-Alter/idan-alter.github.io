@@ -1,14 +1,2 @@
-// draw an arrow for a vector at a given base position
-function drawArrow(p, base, vec, myColor) {
-    p.push();
-    p.stroke(myColor);
-    p.strokeWeight(3);
-    p.fill(myColor);
-    p.translate(base.x, base.y);
-    p.line(0, 0, vec.x, vec.y);
-    p.rotate(vec.heading());
-    let arrowSize = 7;
-    p.translate(vec.mag() - arrowSize, 0);
-    p.triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
-    p.pop();
-  }
+
+function drawArrow(_0x11627f,_0x59cd1c,_0x2dfbeb,_0x5313a0){_0x11627f['push']();_0x11627f['stroke'](_0x5313a0);_0x11627f['strokeWeight'](0x3);_0x11627f['fill'](_0x5313a0);_0x11627f['translate'](_0x59cd1c['x'],_0x59cd1c['y']);_0x11627f['line'](0x0,0x0,_0x2dfbeb['x'],_0x2dfbeb['y']);_0x11627f['rotate'](_0x2dfbeb['heading']());let _0x3cf1b8=0x7;_0x11627f['translate'](_0x2dfbeb['mag']()-_0x3cf1b8,0x0);_0x11627f['triangle'](0x0,_0x3cf1b8/0x2,0x0,-_0x3cf1b8/0x2,_0x3cf1b8,0x0);_0x11627f['pop']();}

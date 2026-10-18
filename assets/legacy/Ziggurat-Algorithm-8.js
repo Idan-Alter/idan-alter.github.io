@@ -1,0 +1,2 @@
+
+var data=[{'x':x_hist,'type':'histogram','marker':{'color':'\x22rgba(0,\x200,\x20255,0.5)\x22'}}];var layout={'xaxis':{'title':{'text':'x\x20Value'}},'yaxis':{'title':{'text':'No.\x20of\x20Darts'}}};Plotly['newPlot']('rejection_histogram',data,layout);const hist_el=document['getElementById']('rejection_histogram');function in_view(){const _0x3609f8=hist_el['getBoundingClientRect']();return _0x3609f8['top']<=window['innerHeight']&&_0x3609f8['bottom']>=0x0;}setInterval(()=>{if(in_view()){Plotly['newPlot']('rejection_histogram',data,layout);console['log']('render');};},0x1f4);

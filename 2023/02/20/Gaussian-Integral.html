@@ -1,0 +1,201 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-749a80f74a08dd79.js"/><script src="/_next/static/chunks/4bd1b696-217264fa27a771c4.js" async=""></script><script src="/_next/static/chunks/794-5e09a61f9079e80a.js" async=""></script><script src="/_next/static/chunks/main-app-9fe5d0a6514609a4.js" async=""></script><script src="/_next/static/chunks/app/%5Byear%5D/%5Bmonth%5D/%5Bday%5D/%5Bslug%5D/page-b8d43ee9620fdbba.js" async=""></script><link rel="preload" href="/assets/main.css" as="style"/><title>The Gaussian Integral, a Geometrically Annotated Proof | math.rmx</title><meta name="description" content="More 3d graphics and less symbol manipulations really make this classic proof shine."/><meta name="author" content="Idan Alter"/><link rel="canonical" href="https://idan-alter.github.io/2023/02/20/Gaussian-Integral.html"/><meta property="og:title" content="The Gaussian Integral, a Geometrically Annotated Proof"/><meta property="og:description" content="More 3d graphics and less symbol manipulations really make this classic proof shine."/><meta property="og:site_name" content="math.rmx"/><meta property="og:locale" content="en_US"/><meta property="og:type" content="article"/><meta property="article:published_time" content="2023-02-20T00:00:00+00:00"/><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="The Gaussian Integral, a Geometrically Annotated Proof"/><meta name="twitter:description" content="More 3d graphics and less symbol manipulations really make this classic proof shine."/><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="math.rmx"/><link rel="stylesheet" href="/assets/main.css"/><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><div hidden=""><!--$--><!--/$--></div><header class="site-header"><div class="wrapper"><a class="site-title" rel="author" href="/">math.rmx</a></div></header><main class="page-content" aria-label="Content"><div class="wrapper"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The Gaussian Integral, a Geometrically Annotated Proof","author":{"@type":"Person","name":"Idan Alter"},"datePublished":"2023-02-20T00:00:00+00:00","url":"/2023/02/20/Gaussian-Integral.html","description":"More 3d graphics and less symbol manipulations really make this classic proof shine."}</script><article class="post h-entry" data-blog-runtime="legacy" itemScope="" itemType="http://schema.org/BlogPosting"><header class="post-header"><h1 class="post-title p-name" itemProp="name headline">The Gaussian Integral, a Geometrically Annotated Proof</h1><p class="post-meta"><time class="dt-published" dateTime="2023-02-20T00:00:00+00:00" itemProp="datePublished">
+        Feb 20, 2023
+      </time>• <span itemProp="author" itemScope="" itemType="http://schema.org/Person"><span class="p-author h-card" itemProp="name">Idan Alter</span></span></p></header><div class="post-content e-content" itemProp="articleBody"><p><em>More</em> <strong>3d graphics</strong> and <em>less</em> symbol manipulations really make this classic proof shine.</p>
+<!-- -->
+
+<!-- -->
+<!-- -->
+<!-- -->
+<h4 id="contents">Contents:</h4>
+<!-- -->
+<!-- -->
+<ul>
+  <li><a href="#whats-this-all-about">What’s this all about</a></li>
+  <li><a href="#slice-and-dice">Slice and dice</a>
+    <ul>
+      <li><a href="#first-approach">First approach</a></li>
+      <li><a href="#second-approach">Second approach</a></li>
+    </ul>
+  </li>
+  <li><a href="#tying-ends">Tying ends</a></li>
+</ul>
+<!-- -->
+
+<!-- -->
+<!-- -->
+
+<!-- -->
+<h3 id="whats-this-all-about">What’s this all about</h3>
+<!-- -->
+<!-- -->
+<span style="display:contents"><canvas class="centerme nlbig" id="Sketch0" height="200" width="400"></canvas></span>
+<!-- -->
+
+<!-- -->
+<p><strong>The white area up there</strong> is the <a href="https://en.wikipedia.org/wiki/Gaussian_integral">Gaussian integral</a>,</p>
+<!-- -->
+
+\[\int_{-\infty}^{\infty}e^{-x^2}dx = \sqrt{\pi}.\]
+
+<!-- -->
+<p>Aside from popping up everywhere, this integral is worth talking about because the Gaussian \(e^{-x^2}\) doesn’t have an explicit anti-derivative: calculating the integral the usual way doesn’t work (try <a href="https://www.wolframalpha.com/input?i=integrate+e%5E%28-x%5E2%29">Wolfram Alpha</a>). So <strong>how</strong> do we know its value? start by thinking <strong>outside the box</strong>.</p>
+<!-- -->
+
+<!-- -->
+<span style="display:contents"><canvas class="centerme nlbig" id="Sketch1" height="200" width="400"></canvas></span>
+<!-- -->
+
+<!-- -->
+<p>We collect <strong>all the points that the spinning half bell touches</strong> into a <a href="https://en.wikipedia.org/wiki/Solid_of_revolution">solid of revolution</a>, whose top is described by the functions</p>
+<!-- -->
+
+\[x(r,\theta) = r\cos{\theta},\]
+
+\[y(r,\theta) = r\sin{\theta},\]
+
+\[z(r,\theta) = e^{-r^2}.\]
+
+<!-- -->
+<blockquote>
+  <p>Legend:</p>
+  <ul>
+    <li>\(r\ \ \ \ \    =\) How far along the right pointing arrow to go before taking it for a spin.</li>
+    <li>\(e^{-r^2} =\)  The height of the half bell above that point.</li>
+    <li>\(\theta \ \ \ \ \ =\) How far to rotate the bell.</li>
+  </ul>
+</blockquote>
+<!-- -->
+
+<!-- -->
+<h3 id="slice-and-dice">Slice and dice</h3>
+<!-- -->
+
+<!-- -->
+<p>Now, the crux of the calculation is looking at <strong>the volume</strong> of this solid from <strong>two different points of view</strong>.</p>
+<!-- -->
+
+<!-- -->
+<h4 id="first-approach">First approach</h4>
+<!-- -->
+<!-- -->
+<p>This one is common practice for solids of revolution, nothing unique here.</p>
+<!-- -->
+
+<!-- -->
+<p><strong>Step 1:</strong> Chop up the bell with the provided circular blades.</p>
+<!-- -->
+
+<!-- -->
+<figcaption class="centerme"> Move the slider to slice the 3d bell.</figcaption>
+<!-- -->
+<!-- -->
+<span style="display:contents"><canvas class="centerme newline" id="Sketch3" height="200" width="400"></canvas></span>
+<!-- -->
+
+<!-- -->
+<p><strong>Step 2:</strong> Calculate the <strong>area</strong> of each slice. Look carefully and convince yourself that <strong>each slice is a cylinder</strong>. Also of note, if the radius of the cylinder is some value \(r\) then its height has to be \(z = e^{-r^2}\) (that’s how high the bell goes at the distance \(r\) from the origin).  Conclude that</p>
+<!-- -->
+
+\[\mathrm{Area\  of\  cylinder} = 2\pi re^{-r^2}.\]
+
+<!-- -->
+<p><strong>Step 3:</strong> Sum up the <strong>area of all the cylinders</strong> and you get the <strong>volume of the 3d bell</strong> (this is <a href="https://en.wikipedia.org/wiki/Shell_integration">shell integration</a>). There’s a cylinder for every radius between \(0\) and \(\infty\) (I’m showing you just a select few of them up above), so the “sum” of the areas is</p>
+<!-- -->
+
+\[\int_{0}^{\infty}2\pi re^{-r^2}dr.\]
+
+<!-- -->
+<p>While \(e^{-r^2}\) doesn’t have a nice anti-derivative, \(re^{-r^2}\) <em>does</em>, so we can calculate this integral the usual way.</p>
+<!-- -->
+
+\[\int_{0}^{\infty}2\pi re^{-r^2}dr = 2\pi\left.\frac{-e^{-r^2}}{2}\right|_0^\infty = \pi.\]
+
+<!-- -->
+<blockquote>
+  <p><strong>Side note:</strong> these days, this part of the proof is usually obfuscated by a <strong>substitution to polar coordinates</strong>. It’s interesting to note that the earliest renditions of this proof still had the solid of revolution front and center. See more <a href="https://www.york.ac.uk/depts/maths/histstat/normal_history.pdf">here</a> (item #4, partly in French).</p>
+</blockquote>
+<!-- -->
+
+<!-- -->
+<h4 id="second-approach">Second approach</h4>
+<!-- -->
+
+<!-- -->
+<p>We’ll slice up the bell again, but this time we use a <strong>different set of blades</strong>.</p>
+<!-- -->
+
+<!-- -->
+<figcaption class="centerme"> Move the slider to slice the 3d bell.</figcaption>
+<!-- -->
+<!-- -->
+<span style="display:contents"><canvas class="centerme newline" id="Sketch2" height="200" width="400"></canvas></span>
+<!-- -->
+
+<!-- -->
+<p>It’s no coincidence that <strong>these slices look like 2d bells themselves</strong>, since each slice is obtained by:</p>
+<!-- -->
+<!-- -->
+<ol>
+  <li>Fixing some \(x\) value (that’s the line on the floor where the blade is positioned).</li>
+  <li>Sweeping over all possible \(y\)’s: from \(-\infty\) to \(\infty\) (that’s you moving the blade).</li>
+  <li>Collecting all points \((x,y,z)\) between the floor and the top of the bell as we sweep.</li>
+</ol>
+<!-- -->
+
+<!-- -->
+<p>Now, looking back at the definitions of \(x,y\) and \(z\), we get:</p>
+<!-- -->
+
+\[z = e^{-r^2} = e^{-(x^2+y^2)} = e^{-x^2}e^{-y^2}.\]
+
+<!-- -->
+<blockquote>
+  <p>\(r^2 = x^2+y^2\) comes from applying a trig identity.</p>
+</blockquote>
+<!-- -->
+
+<!-- -->
+<p>This, combined with having \(x\) fixed at some value means that the top of each slice is indeed <strong>the original Gaussian</strong>, \(e^{-y^2}\), scaled down by the constant \(e^{-x^2}\).</p>
+<!-- -->
+
+<!-- -->
+<blockquote>
+  <p>This part only works with Gaussians, you usually won’t get such nice expressions by slicing a random solid of revolution this way. See the math <a href="https://www.unf.edu/~dbell/Poisson.pdf">here</a>.</p>
+</blockquote>
+<!-- -->
+
+<!-- -->
+<p>From here we just <strong>follow the recipe of the first approach.</strong></p>
+<!-- -->
+
+<!-- -->
+<p><strong>Step 2</strong>: calculate the <strong>area of each slice</strong>. This time it’s just the scaled down area of the original 2d bell,</p>
+<!-- -->
+
+\[e^{-x^2}\int_{-\infty}^{\infty}e^{-y^2}dy.\]
+
+<!-- -->
+<p><strong>Step 3:</strong> sum all the areas. we have slices for <strong>all possible values of</strong> \(x\), which goes from \(-\infty\) to \(\infty\), so the sum of all of them is</p>
+<!-- -->
+
+\[\int_{-\infty}^{\infty}e^{-x^2}dx\int_{-\infty}^{\infty}e^{-y^2}dy.\]
+
+<!-- -->
+<p>Renaming \(y\) as \(x\), we finally get a second expression for the volume:</p>
+<!-- -->
+
+\[\left(\int_{-\infty}^{\infty}e^{-x^2}dx\right)^2.\]
+
+<!-- -->
+<h3 id="tying-ends">Tying ends</h3>
+<!-- -->
+
+<!-- -->
+<p>We now know that <strong>volume</strong> of the 3d bell is the <strong>square of the area</strong> of the 2d bell. We also know from the first approach that <strong>the volume is \(\pi\)</strong>, so we can finish the calculation:</p>
+<!-- -->
+
+\[\left( \int_{-\infty}^{\infty}e^{-x^2}dx \right)^2=\pi\]
+
+\[\int_{-\infty}^{\infty}e^{-x^2}dx =\sqrt{\pi}.\]
+
+  </div><a class="u-url" href="/2023/02/20/Gaussian-Integral.html" hidden=""></a></article><!--$--><!--/$--></div></main><footer class="site-footer h-card"><data class="u-url" href="/"></data><div class="wrapper"><h2 class="footer-heading"><a style="color:#111" rel="author" href="/">math.rmx</a></h2><div class="footer-col-wrapper"><div class="footer-col footer-col-1"><ul class="contact-list"><li class="p-name">Idan Alter</li></ul></div><div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://www.linkedin.com/in/idanalter"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">idanalter</span></a></li></ul></div><div class="footer-col footer-col-3"><p>Short informal writeups with interactive visualizations</p></div></div></div></footer><script src="/_next/static/chunks/webpack-749a80f74a08dd79.js" id="_R_" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[7121,[],\"\"]\n3:I[4581,[],\"\"]\nb:I[484,[],\"OutletBoundary\"]\nc:\"$Sreact.suspense\"\ne:\"ViewportBoundary\"\nf:I[484,[],\"$e\"]\n11:\"MetadataBoundary\"\n12:I[484,[],\"$11\"]\n14:I[7123,[],\"default\",1]\n:HL[\"/assets/main.css\",\"style\"]\n5:X\n9:[[\"children\",{\"s\":\"__PAGE__\",\"h\":512,\"d\":{\"r\":[\"$\",\"$1\",\"c\",{\"children\":[\"$La\",null,[\"$\",\"$Lb\",null,{\"children\":[\"$\",\"$c\",null,{\"name\":\"Next.MetadataOutlet\",\"children\":\"$@d\"}]}]]}],\"p\":false,\"v\":null}}]]\n8:[[\"children\",{\"s\":{\"n\":\"slug\",\"t\":\"d\",\"k\":\"Gaussian-Integral\",\"s\":[]},\"h\":66048,\"d\":{\"r\":[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],\"p\":false,\"v\":\"$5\"},\"c\":\"$Q9\"}]]\n7:[[\"children\",{\"s\":{\"n\":\"day\",\"t\":\"d\",\"k\":\"20\",\"s\":[]},\"h\":197120,\"d\":{\"r\":[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],\"p\":false,\"v\":\"$5\"},\"c\":\"$Q8\"}]]\n6:[[\"children\",{\"s\":{\"n\":\"month\",\"t\":\"d\",\"k\":\"02\",\"s\":[]},\"h\":197120,\"d\":{\"r\":[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],\"p\":false,\"v\":\"$5\"},\"c\":\"$Q7\"}]]\n4:[[\"children\",{\"s\":{\"n\":\"year\",\"t\":\"d\",\"k\":\"2023\",\"s\":[\"_not-found\",\"_global-error\"]},\"h\":197120,\"d\":{\"r\":[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]]}],\"p\":false,\"v\":\"$5\"},\"c\":\"$Q6\"}]]\n0:{\"P\":null,\"c\":[\"\",\"2023\",\"02\",\"20\",\"Gaussian-Integral\"],\"q\":\"\",\"i\":false,\"t\":{\"t\":{\"s\":\"\",\"h\":131600,\"d\":{\"r\":[\"$\",\"$1\",\"c\",{\"children\":[null,[\"$\",\"html\",null,{\"lang\":\"en\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"meta\",null,{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"link\",null,{\"rel\":\"stylesheet\",\"href\":\"/assets/main.css\"}],[\"$\",\"link\",null,{\"type\":\"application/atom+xml\",\"rel\":\"alternate\",\"href\":\"/feed.xml\",\"title\":\"math.rmx\"}]]}],[\"$\",\"body\",null,{\"children\":[[\"$\",\"header\",null,{\"className\":\"site-header\",\"children\":[\"$\",\"div\",null,{\"className\":\"wrapper\",\"children\":[\"$\",\"a\",null,{\"className\":\"site-title\",\"rel\":\"author\",\"href\":\"/\",\"children\":\"math.rmx\"}]}]}],[\"$\",\"main\",null,{\"className\":\"page-content\",\"aria-label\":\"Content\",\"children\":[\"$\",\"div\",null,{\"className\":\"wrapper\",\"children\":[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"style\",null,{\"children\":\".container { margin: 10px auto; max-width: 600px; text-align: center; } .container h1 { margin: 30px 0; font-size: 4em; line-height: 1; letter-spacing: -1px; }\"}],[\"$\",\"div\",null,{\"className\":\"container\",\"children\":[[\"$\",\"h1\",null,{\"children\":\"404\"}],[\"$\",\"p\",null,{\"children\":[\"$\",\"strong\",null,{\"children\":\"Page not found :(\"}]}]]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]}]}],[\"$\",\"footer\",null,{\"className\":\"site-footer h-card\",\"children\":[[\"$\",\"data\",null,{\"className\":\"u-url\",\"href\":\"/\"}],[\"$\",\"div\",null,{\"className\":\"wrapper\",\"children\":[[\"$\",\"h2\",null,{\"className\":\"footer-heading\",\"children\":[\"$\",\"a\",null,{\"style\":{\"color\":\"#111\"},\"rel\":\"author\",\"href\":\"/\",\"children\":\"math.rmx\"}]}],[\"$\",\"div\",null,{\"className\":\"footer-col-wrapper\",\"children\":[[\"$\",\"div\",null,{\"className\":\"footer-col footer-col-1\",\"children\":[\"$\",\"ul\",null,{\"className\":\"contact-list\",\"children\":[\"$\",\"li\",null,{\"className\":\"p-name\",\"children\":\"Idan Alter\"}]}]}],[\"$\",\"div\",null,{\"className\":\"footer-col footer-col-2\",\"children\":[\"$\",\"ul\",null,{\"className\":\"social-media-list\",\"children\":[\"$\",\"li\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"https://www.linkedin.com/in/idanalter\",\"children\":[[\"$\",\"svg\",null,{\"className\":\"svg-icon\",\"children\":[\"$\",\"use\",null,{\"xlinkHref\":\"/assets/minima-social-icons.svg#linkedin\"}]}],\" \",[\"$\",\"span\",null,{\"className\":\"username\",\"children\":\"idanalter\"}]]}]}]}]}],[\"$\",\"div\",null,{\"className\":\"footer-col footer-col-3\",\"children\":[\"$\",\"p\",null,{\"children\":\"Short informal writeups with interactive visualizations\"}]}]]}]]}]]}]]}]]}]]}],\"p\":false,\"v\":null},\"c\":\"$Q4\"},\"h\":{\"r\":[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$Lf\",null,{\"children\":\"$L10\"}],[\"$\",\"$L12\",null,{\"children\":[[\"$\",\"div\",null,{\"hidden\":true,\"children\":[\"$\",\"$c\",null,{\"name\":\"Next.Metadata\",\"children\":\"$L13\"}]}],null]}],null]}],\"p\":false,\"v\":null}},\"m\":\"$undefined\",\"G\":[\"$14\",[]],\"S\":true,\"r\":\"$undefined\",\"s\":\"$undefined\",\"a\":\"$undefined\",\"l\":\"$undefined\",\"p\":\"$undefined\",\"d\":\"$undefined\",\"b\":\"S9Mcigp7V24R4ASTS-40q\"}\n15:\"static/chunks/app/%5Byear%5D/%5Bmonth%5D/%5Bday%5D/%5Bslug%5D/page-b8d43ee9620fdbba.js\"\n16:I[1919,[\"336\",\"$15\"],\"LegacyHtml\"]\n5:C\na:[[\"$\",\"script\",null,{\"type\":\"application/ld+json\",\"dangerouslySetInnerHTML\":{\"__html\":\"{\\\"@context\\\":\\\"https://schema.org\\\",\\\"@type\\\":\\\"BlogPosting\\\",\\\"headline\\\":\\\"The Gaussian Integral, a Geometrically Annotated Proof\\\",\\\"author\\\":{\\\"@type\\\":\\\"Person\\\",\\\"name\\\":\\\"Idan Alter\\\"},\\\"datePublished\\\":\\\"2023-02-20T00:00:00+00:00\\\",\\\"url\\\":\\\"/2023/02/20/Gaussian-Integral.html\\\",\\\"description\\\":\\\"More 3d graphics and less symbol manipulations really make this classic proof shine.\\\"}\"}}],[[\"$\",\"article\",null,{\"className\":\"post h-entry\",\"data-blog-runtime\":\"legacy\",\"itemScope\":true,\"itemType\":\"http://schema.org/BlogPosting\",\"children\":[[\"$\",\"header\",null,{\"className\":\"post-header\",\"children\":[[\"$\",\"h1\",null,{\"className\":\"post-title p-name\",\"itemProp\":\"name headline\",\"children\":\"The Gaussian Integral, a Geometrically Annotated Proof\"}],[\"$\",\"p\",null,{\"className\":\"post-meta\",\"children\":[[\"$\",\"time\",null,{\"className\":\"dt-published\",\"dateTime\":\"2023-02-20T00:00:00+00:00\",\"itemProp\":\"datePublished\",\"children\":\"\\n        Feb 20, 2023\\n      \"}],\"• \",[\"$\",\"span\",null,{\"itemProp\":\"author\",\"itemScope\":true,\"itemType\":\"http://schema.org/Person\",\"children\":[\"$\",\"span\",null,{\"className\":\"p-author h-card\",\"itemProp\":\"name\",\"children\":\"Idan Alter\"}]}],\"$undefined\"]}]]}],[\"$\",\"div\",null,{\"className\":\"post-content e-content\",\"itemProp\":\"articleBody\",\"children\":[[\"$\",\"p\",null,{\"children\":[[\"$\",\"em\",null,{\"children\":\"More\"}],\" \",[\"$\",\"strong\",null,{\"children\":\"3d graphics\"}],\" and \",[\"$\",\"em\",null,{\"children\":\"less\"}],\" symbol manipulations really make this classic proof shine.\"]}],\"\\n\",\"\\n\\n\",\"\\n\",\"\\n\",\"\\n\",[\"$\",\"h4\",null,{\"id\":\"contents\",\"children\":\"Contents:\"}],\"\\n\",\"\\n\",\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n  \",[\"$\",\"li\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"#whats-this-all-about\",\"children\":\"What’s this all about\"}]}],\"\\n  \",[\"$\",\"li\",null,{\"children\":[[\"$\",\"a\",null,{\"href\":\"#slice-and-dice\",\"children\":\"Slice and dice\"}],\"\\n    \",[\"$\",\"ul\",null,{\"children\":[\"\\n      \",[\"$\",\"li\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"#first-approach\",\"children\":\"First approach\"}]}],\"\\n      \",[\"$\",\"li\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"#second-approach\",\"children\":\"Second approach\"}]}],\"\\n    \"]}],\"\\n  \"]}],\"\\n  \",[\"$\",\"li\",null,{\"children\":[\"$\",\"a\",null,{\"href\":\"#tying-ends\",\"children\":\"Tying ends\"}]}],\"\\n\"]}],\"\\n\",\"\\n\\n\",\"\\n\",\"\\n\\n\",\"\\n\",[\"$\",\"h3\",null,{\"id\":\"whats-this-all-about\",\"children\":\"What’s this all about\"}],\"\\n\",\"\\n\",\"\\n\",[\"$\",\"$L16\",null,{\"html\":\"\u003ccanvas class=\\\"centerme nlbig\\\" id=\\\"Sketch0\\\" height=\\\"200\\\" width=\\\"400\\\"\u003e\u003c/canvas\u003e\"}],\"\\n\",\"\\n\\n\",\"\\n\",[\"$\",\"p\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"The white area up there\"}],\" is the \",[\"$\",\"a\",null,{\"href\":\"https://en.wikipedia.org/wiki/Gaussian_integral\",\"children\":\"Gaussian integral\"}],\",\"]}],\"\\n\",\"\\n\\n\\\\[\\\\int_{-\\\\infty}^{\\\\infty}e^{-x^2}dx = \\\\sqrt{\\\\pi}.\\\\]\\n\\n\",\"\\n\",[\"$\",\"p\",null,{\"children\":[\"Aside from popping up everywhere, this integral is worth talking about because the Gaussian \\\\(e^{-x^2}\\\\) doesn’t have an explicit anti-derivative: calculating the integral the usual way doesn’t work (try \",[\"$\",\"a\",null,{\"href\":\"https://www.wolframalpha.com/input?i=integrate+e%5E%28-x%5E2%29\",\"children\":\"Wolfram Alpha\"}],\"). So \",[\"$\",\"strong\",null,{\"children\":\"how\"}],\" do we know its value? start by thinking \",[\"$\",\"strong\",null,{\"children\":\"outside the box\"}],\".\"]}],\"\\n\",\"\\n\\n\",\"\\n\",[\"$\",\"$L16\",null,{\"html\":\"\u003ccanvas class=\\\"centerme nlbig\\\" id=\\\"Sketch1\\\" height=\\\"200\\\" width=\\\"400\\\"\u003e\u003c/canvas\u003e\"}],\"\\n\",\"\\n\\n\",\"\\n\",[\"$\",\"p\",null,{\"children\":[\"We collect \",[\"$\",\"strong\",null,{\"children\":\"all the points that the spinning half bell touches\"}],\" into a \",[\"$\",\"a\",null,{\"href\":\"https://en.wikipedia.org/wiki/Solid_of_revolution\",\"children\":\"solid of revolution\"}],\", whose top is described by the functions\"]}],\"\\n\",\"\\n\\n\\\\[x(r,\\\\theta) = r\\\\cos{\\\\theta},\\\\]\\n\\n\\\\[y(r,\\\\theta) = r\\\\sin{\\\\theta},\\\\]\\n\\n\\\\[z(r,\\\\theta) = e^{-r^2}.\\\\]\\n\\n\",\"\\n\",[\"$\",\"blockquote\",null,{\"children\":[\"\\n  \",[\"$\",\"p\",null,{\"children\":\"Legend:\"}],\"\\n  \",[\"$\",\"ul\",null,{\"children\":[\"\\n    \",[\"$\",\"li\",null,{\"children\":\"\\\\(r\\\\ \\\\ \\\\ \\\\ \\\\    =\\\\) How far along the right pointing arrow to go before taking it for a spin.\"}],\"\\n    \",[\"$\",\"li\",null,{\"children\":\"\\\\(e^{-r^2} =\\\\)  The height of the half bell above that point.\"}],\"\\n    \",[\"$\",\"li\",null,{\"children\":\"\\\\(\\\\theta \\\\ \\\\ \\\\ \\\\ \\\\ =\\\\) How far to rotate the bell.\"}],\"\\n  \"]}],\"\\n\"]}],\"\\n\",\"\\n\\n\",\"\\n\",\"$L17\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L18\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L19\",\"\\n\",\"\\n\",\"\\n\",\"$L1a\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L1b\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L1c\",\"\\n\",\"\\n\",\"\\n\",\"$L1d\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L1e\",\"\\n\",\"\\n\\n\\\\[\\\\mathrm{Area\\\\  of\\\\  cylinder} = 2\\\\pi re^{-r^2}.\\\\]\\n\\n\",\"\\n\",\"$L1f\",\"\\n\",\"\\n\\n\\\\[\\\\int_{0}^{\\\\infty}2\\\\pi re^{-r^2}dr.\\\\]\\n\\n\",\"\\n\",\"$L20\",\"\\n\",\"\\n\\n\\\\[\\\\int_{0}^{\\\\infty}2\\\\pi re^{-r^2}dr = 2\\\\pi\\\\left.\\\\frac{-e^{-r^2}}{2}\\\\right|_0^\\\\infty = \\\\pi.\\\\]\\n\\n\",\"\\n\",\"$L21\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L22\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L23\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L24\",\"\\n\",\"\\n\",\"\\n\",\"$L25\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L26\",\"\\n\",\"\\n\",\"\\n\",\"$L27\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L28\",\"\\n\",\"\\n\\n\\\\[z = e^{-r^2} = e^{-(x^2+y^2)} = e^{-x^2}e^{-y^2}.\\\\]\\n\\n\",\"\\n\",\"$L29\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L2a\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L2b\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L2c\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L2d\",\"\\n\",\"\\n\\n\\\\[e^{-x^2}\\\\int_{-\\\\infty}^{\\\\infty}e^{-y^2}dy.\\\\]\\n\\n\",\"\\n\",\"$L2e\",\"\\n\",\"\\n\\n\\\\[\\\\int_{-\\\\infty}^{\\\\infty}e^{-x^2}dx\\\\int_{-\\\\infty}^{\\\\infty}e^{-y^2}dy.\\\\]\\n\\n\",\"\\n\",\"$L2f\",\"\\n\",\"\\n\\n\\\\[\\\\left(\\\\int_{-\\\\infty}^{\\\\infty}e^{-x^2}dx\\\\right)^2.\\\\]\\n\\n\",\"\\n\",\"$L30\",\"\\n\",\"\\n\\n\",\"\\n\",\"$L31\",\"\\n\",\"\\n\\n\\\\[\\\\left( \\\\int_{-\\\\infty}^{\\\\infty}e^{-x^2}dx \\\\right)^2=\\\\pi\\\\]\\n\\n\\\\[\\\\int_{-\\\\infty}^{\\\\infty}e^{-x^2}dx =\\\\sqrt{\\\\pi}.\\\\]\\n\\n  \"]}],\"$L32\"]}],\"$L33\"]]\n34:I[1919,[\"336\",\"$15\"],\"LegacyRuntime\"]\n17:[\"$\",\"h3\",null,{\"id\":\"slice-and-dice\",\"children\":\"Slice and dice\"}]\n18:[\"$\",\"p\",null,{\"children\":[\"Now, the crux of the calculation is looking at \",[\"$\",\"strong\",null,{\"children\":\"the volume\"}],\" of this solid from \",[\"$\",\"strong\",null,{\"children\":\"two different points of view\"}],\".\"]}]\n19:[\"$\",\"h4\",null,{\"id\":\"first-approach\",\"children\":\"First approach\"}]\n1a:[\"$\",\"p\",null,{\"children\":\"This one is common practice for solids of revolution, nothing unique here.\"}]\n1b:[\"$\",\"p\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Step 1:\"}],\" Chop up the bell with the provided circular blades.\"]}]\n1c:[\"$\",\"figcaption\",null,{\"className\":\"centerme\",\"children\":\" Move the slider to slice the 3d bell.\"}]\n1d:[\"$\",\"$L16\",null,{\"html\":\"\u003ccanvas class=\\\"centerme newline\\\" id=\\\"Sketch3\\\" height=\\\"200\\\" width=\\\"400\\\"\u003e\u003c/canvas\u003e\"}]\n1e:[\"$\",\"p\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Step 2:\"}],\" Calculate the \",[\"$\",\"strong\",null,{\"children\":\"area\"}],\" of each slice. Look carefully and convince yourself that \",[\"$\",\"strong\",null,{\"children\":\"each slice is a cylinder\"}],\". Also of note, if the radius of the cylinder is some value \\\\(r\\\\) then its height has to be \\\\(z = e^{-r^2}\\\\) (that’s how high the bell goes at the distance \\\\(r\\\\) from the origin).  Conclude that\"]}]\n1f:[\"$\",\"p\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Step 3:\"}],\" Sum up the \",[\"$\",\"strong\",null,{\"children\":\"area of all the cylinders\"}],\" and you get the \",[\"$\",\"strong\",null,{\"children\":\"volume of the 3d bell\"}],\" (this is \",[\"$\",\"a\",null,{\"href\":\"https://en.wikipedia.org/wiki/Shell_integration\",\"children\":\"shell integration\"}],\"). There’s a cylinder for every radius between \\\\(0\\\\) and \\\\(\\\\infty\\\\) (I’m showing you just a select few of them up above), so the “sum” of the areas is\"]}]\n20:[\"$\",\"p\",null,{\"children\":[\"While \\\\(e^{-r^2}\\\\) doesn’t have a nice anti-derivative, \\\\(re^{-r^2}\\\\) \",[\"$\",\"em\",null,{\"children\":\"does\"}],\", so we can calculate this integral the usual way.\"]}]\n21:[\"$\",\"blockquote\",null,{\"children\":[\"\\n  \",[\"$\",\"p\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Side note:\"}],\" these days, this part of the proof is usually obfuscated by a \",[\"$\",\"strong\",null,{\"children\":\"substitution to polar coordinates\"}],\". It’s interesting to note that the earliest renditions of this proof still had the solid of revolution front and center. See more \",[\"$\",\"a\",null,{\"href\":\"https://www.york.ac.uk/depts/maths/histstat/normal_history.pdf\",\"children\":\"here\"}],\" (item #4, partly in French).\"]}],\"\\n\"]}]\n22:[\"$\",\"h4\",null,{\"id\":\"second-approach\",\"children\":\"Second approach\"}]\n23:[\"$\",\"p\",null,{\"children\":[\"We’ll slice up the bell again, but this time we use a \",[\"$\",\"strong\",null,{\"children\":\"different set of blades\"}],\".\"]}]\n24:[\"$\",\"figcaption\",null,{\"className\":\"centerme\",\"children\":\" Move the slider to slice the 3d bell.\"}]\n25:[\"$\",\"$L16\",null,{\"html\":\"\u003ccanvas class=\\\"centerme newline\\\" id=\\\"Sketch2\\\" height=\\\"200\\\" width=\\\"400\\\"\u003e\u003c/canvas\u003e\"}]\n26:[\"$\",\"p\",null,{\"children\":[\"It’s no coincidence that \",[\"$\",\"strong\",null,{\"children\":\"these slices look like 2d bells themselves\"}],\", since each slice is obtained by:\"]}]\n27:[\"$\",\"ol\",null,{\"children\":[\"\\n  \",[\"$\",\"li\",null,{\"children\":\"Fixing some \\\\(x\\\\) value (that’s the line on the floor where the blade is positioned).\"}],\"\\n  \",[\"$\",\"li\",null,{\"children\":\"Sweeping over all possible \\\\(y\\\\)’s: from \\\\(-\\\\infty\\\\) to \\\\(\\\\infty\\\\) (that’s you moving the blade).\"}],\"\\n  \",[\"$\",\"li\",null,{\"children\":\"Collecting all points \\\\((x,y,z)\\\\) between the floor and the top of the bell as we sweep.\"}],\"\\n\"]}]\n28:[\"$\",\"p\",null,{\"children\":\"Now, looking back at the definitions of \\\\(x,y\\\\) and \\\\(z\\\\), we get:\"}]\n29:[\"$\",\"blockquote\",null,{\"children\":[\"\\n  \",[\"$\",\"p\",null,{\"children\":\"\\\\(r^2 = x^2+y^2\\\\) comes from applying a trig identity.\"}],\"\\n\"]}]\n2a:[\"$\",\"p\",null,{\"children\":[\"This, combined with having \\\\(x\\\\) fixed at some value means that the top of each slice is indeed \",[\"$\",\"strong\",null,{\"children\":\"the original Gaussian\"}],\", \\\\(e^{-y^2}\\\\), scaled down by the constant \\\\(e^{-x^2}\\\\).\"]}]\n2b:[\"$\",\"blockquote\",null,{\"children\":[\"\\n  \",[\"$\",\"p\",null,{\"children\":[\"This part only works with Gaussians, you usually won’t get such nice expressions by slicing a random solid of revolution this way. See the math \",[\"$\",\"a\",null,{\"href\":\"https://www.unf.edu/~dbell/Poisson.pdf\",\"children\":\"here\"}],\".\"]}],\"\\n\"]}]\n2c:[\"$\",\"p\",null,{\"children\":[\"From here we just \",[\"$\",\"strong\",null,{\"children\":\"follow the recipe of the first approach.\"}]]}]\n2d:[\"$\",\"p\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Step 2\"}],\": calculate the \",[\"$\",\"strong\",null,{\"children\":\"area of each slice\"}],\". This time it’s just the scaled down area of the original 2d bell,\"]}]\n2e:[\"$\",\"p\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"Step 3:\"}],\" sum all the areas. we have slices for \",[\"$\",\"strong\",null,{\"children\":\"all possible values of\"}],\" \\\\(x\\\\), which goes from \\\\(-\\\\infty\\\\) to \\\\(\\\\infty\\\\), so the sum of all of them is\"]}]\n2f:[\"$\",\"p\",null,{\"children\":\"Renaming \\\\(y\\\\) as \\\\(x\\\\), we finally get a second expression for the volume:\"}]\n30:[\"$\",\"h3\",null,{\"id\":\"tying-ends\",\"children\":\"Tying ends\"}]\n31:[\"$\",\"p\",null,{\"children\":[\"We now know that \",[\"$\",\"strong\",null,{\"children\":\"volume\"}],\" of the 3d bell is the \",[\"$\",\"strong\",null,{\"children\":\"square of the area\"}],\" of the 2d bell. We also know from the first approach that \",[\"$\",\"strong\",null,{\"children\":\"the volume is \\\\(\\\\pi\\\\)\"}],\", so we can finish the calculation:\"]}]\n32:[\"$\",\"a\",null,{\"className\":\"u-url\",\"href\":\"/2023/02/20/Gaussian-Integral.html\",\"hidden\":true}]\n33:[\"$\",\"$L34\",null,{\"id\":\"Gaussian-Integral\",\"scripts\":[{\"src\":\"https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js\",\"id\":\"MathJax-script\"},{\"src\":\"/assets/jspacks/Gaussian-Integral.js\"}]}]\n10:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\nd:null\n13:[[\"$\",\"title\",\"0\",{\"children\":\"The Gaussian Integral, a Geometrically Annotated Proof | math.rmx\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"More 3d graphics and less symbol manipulations really make this classic proof shine.\"}],[\"$\",\"meta\",\"2\",{\"name\":\"author\",\"content\":\"Idan Alter\"}],[\"$\",\"link\",\"3\",{\"rel\":\"canonical\",\"href\":\"https://idan-alter.github.io/2023/02/20/Gaussian-Integral.html\"}],[\"$\",\"meta\",\"4\",{\"property\":\"og:title\",\"content\":\"The Gaussian Integral, a Geometrically Annotated Proof\"}],[\"$\",\"meta\",\"5\",{\"property\":\"og:description\",\"content\":\"More 3d graphics and less symbol manipulations really make this classic proof shine.\"}],[\"$\",\"meta\",\"6\",{\"property\":\"og:site_name\",\"content\":\"math.rmx\"}],[\"$\",\"meta\",\"7\",{\"property\":\"og:locale\",\"content\":\"en_US\"}],[\"$\",\"meta\",\"8\",{\"property\":\"og:type\",\"content\":\"article\"}],[\"$\",\"meta\",\"9\",{\"property\":\"article:published_time\",\"content\":\"2023-02-20T00:00:00+00:00\"}],[\"$\",\"meta\",\"10\",{\"name\":\"twitter:card\",\"content\":\"summary\"}],[\"$\",\"meta\",\"11\",{\"name\":\"twitter:title\",\"content\":\"The Gaussian Integral, a Geometrically Annotated Proof\"}],[\"$\",\"meta\",\"12\",{\"name\":\"twitter:description\",\"content\":\"More 3d graphics and less symbol manipulations really make this classic proof shine.\"}]]\n"])</script></body></html>

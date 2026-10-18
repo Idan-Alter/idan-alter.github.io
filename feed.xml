@@ -1,0 +1,2604 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2025-03-02T16:36:55+00:00</updated><id>/feed.xml</id><title type="html">math.rmx</title><subtitle>Short informal writeups with interactive visualizations</subtitle><author><name>Idan Alter</name></author><entry><title type="html">How Did the Greeks Prove √2 Is Irrational?</title><link href="/2025/03/02/Euclidean-Algorithm.html" rel="alternate" type="text/html" title="How Did the Greeks Prove √2 Is Irrational?" /><published>2025-03-02T00:00:00+00:00</published><updated>2025-03-02T00:00:00+00:00</updated><id>/2025/03/02/Euclidean-Algorithm</id><content type="html" xml:base="/2025/03/02/Euclidean-Algorithm.html"><![CDATA[<p>They used <strong>Euclid’s algorithm</strong>. Saved you a click.
+<!--more--></p>
+
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#euclids-algorithm">Euclid’s algorithm</a></li>
+  <li><a href="#a-stopping-problem">A stopping problem</a></li>
+  <li><a href="#name-dropping">Name dropping</a></li>
+</ul>
+
+<h3 id="euclids-algorithm">Euclid’s algorithm</h3>
+<script defer="defer" src="\assets\jspacks\EuclidsAlgorithm.js"></script>
+
+<blockquote>
+  <p><em>When two unequal numbers are set out, and the less is continually subtracted in turn from the greater, if the number which is left never measures the one before it until a unit is left, then the original numbers are relatively prime.</em></p>
+
+  <p><em>Proposition VII.I, Euclid’s Elements</em></p>
+</blockquote>
+
+<p>The original formulation is quite a mouthful, so here’s a translation to code and a viz:</p>
+<div id="root_1"></div>
+
+<h3 id="a-stopping-problem">A stopping problem</h3>
+
+<p>The modern form of this algorithm saves a few iterations and uses <span class="mycode">a mod b</span> instead of subtractions. This is also helpful since any self-respecting <span class="mycode">mod</span> function would throw an error when either number is not an integer. But then, what happens if one of them actually <em>isn’t</em>?</p>
+
+<div id="root_2"></div>
+
+<p>After two iterations, we get a rectangle with the same side proportions as the original one. Zoom in, and you’re back to square one.</p>
+
+<p>Three books after describing it, Euclid says (in <em>Prop. X.2</em>) that if you call his <span class="mycode">gcd(a,b)</span> with <span class="mycode">b=1</span> and it goes infinite, then you’ve just proved that <span class="mycode">a</span> is irrational. Congrats.</p>
+
+<h3 id="name-dropping">Name dropping</h3>
+<p>In one of Plato’s dialogues, a young mathematician tells Socrates that his teacher Theodorus <em>“was drawing some figures”</em> to prove \(\sqrt{3},\sqrt{5}, \ldots, \sqrt{17}\) were irrational, but at that <em>“he stopped”</em>.</p>
+
+<p>That’s everything Plato gave us to work with, but Benno Artmann had <a href="https://link.springer.com/article/10.1007/BF01228045">an idea</a> for what exactly these <em>“figures”</em> might be…</p>
+
+<p>Why did Theodorus stop at \(\sqrt{17}\) and not go for \(\sqrt{19}\)? Maybe these two facts had something to do with it:</p>
+<ol>
+  <li>You’d need six iterations of Euclid’s algorithm to get a rectangle with side proportions you’ve seen before.</li>
+  <li>Its area would be 0.000004 of the original area.</li>
+</ol>]]></content><author><name>Idan Alter</name></author><category term="Algebra" /><category term="algorithms" /><category term="geometry" /><category term="history" /><summary type="html"><![CDATA[They used Euclid’s algorithm. Saved you a click.]]></summary></entry><entry><title type="html">u-Substitution: My Very First Pullback</title><link href="/2024/03/12/u-Substitution.html" rel="alternate" type="text/html" title="u-Substitution: My Very First Pullback" /><published>2024-03-12T00:00:00+00:00</published><updated>2024-03-12T00:00:00+00:00</updated><id>/2024/03/12/u-Substitution</id><content type="html" xml:base="/2024/03/12/u-Substitution.html"><![CDATA[<p>You usually hear about <strong>pullbacks</strong> in advanced calculus, but we’ve already snuck one by you in calc 1. Let me show you where.
+<!--more--></p>
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#the-setup">The setup</a></li>
+  <li><a href="#going-fast">Going fast</a></li>
+  <li><a href="#pullbacks-galore">Pullbacks galore</a></li>
+  <li><a href="#reverse-chain-rule">Reverse chain rule</a></li>
+</ul>
+
+<script type="module" crossorigin="" src="\assets\jspacks\u-Substitution\index-0a23f6bd.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous" />
+
+<style>
+.prevent-select .katex {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  white-space: nowrap
+}
+</style>
+
+<h3 id="the-setup">The setup</h3>
+
+<ol>
+  <li>Walk along the \(x\) axis.</li>
+  <li>Stop for a sec every once in while and calculate \(f(x)\).</li>
+  <li>Sum up the areas of some (red) rectangles.</li>
+  <li>
+    <p>Do step 2. often enough and you get</p>
+
+\[\int_{a}^{b}f(x)dx \approx \sum f(x_i)\Delta x_i.\]
+  </li>
+</ol>
+
+<p>Try it out live:</p>
+
+<div id="root_0"></div>
+
+<h3 id="going-fast">Going fast</h3>
+
+<p>Stopping every \(\Delta t_i\) seconds (this is the <em>once in a while</em> from step 2.) is really easy, just keep an eye on your watch. On the downside, there’s the side effect that the <strong>rectangle bases are uneven</strong> when we speed up or slow down. We can fix the aesthetics by <strong>bringing time front and center</strong>.</p>
+
+<div id="root_1"></div>
+
+<p>Somewhat surprisingly, the blue and the red rectangles give us different numbers. <strong>What went wrong?</strong> We slowed down at the top to look at the view, but the relevant <strong>blue rectangle doesn’t know</strong> we haven’t moved much during his \(\Delta t_i\) (<em>Time waits for no one</em>…). Conveniently, his <strong>red friend knows exactly</strong> how much we moved during that time, it’s his \(\Delta x_i\).</p>
+
+<blockquote>
+  <p>You might want to <strong>click a rectangle</strong> up there right now.</p>
+</blockquote>
+
+<p>Let’s redo the sum <strong>with this new information.</strong></p>
+
+<div id="root_2"></div>
+
+<p>This time, each blue rectangle reminded us how much \(x\) we moved during his \(\Delta t_i\). <strong>It momentarily expanded\contracted to the right size</strong> by multiplying its base by \(\frac{\Delta x_i}{\Delta t_i}\) and then snapped back once we were done with it. this gave us the right number:</p>
+
+\[\sum f(x(t_i))\frac{\Delta x_i}{\Delta t_i}\Delta t_i = \sum f(x_i)\Delta x_i.\]
+
+<p>At the limit \(\Delta t_i \to 0\) this becomes <strong>integration by substitution:</strong></p>
+
+\[\int_{x^{-1}(a)}^{x^{-1}(b)}f(x(t))x^\prime (t)dt = \int_{a}^{b}f(x)dx.\]
+
+<h3 id="pullbacks-galore">Pullbacks galore</h3>
+<p>We moved geometric information (about lengths of \(\Delta x_i\)’s) from the world of \(x\) back to the world of \(t\). The jargon for this is <strong>pullback</strong> and it shows up everywhere once you start looking. <strong>Start looking here:</strong></p>
+<ul>
+  <li>
+    <p>You’ve used a map with a scale, so now you know. In this case the map pulls back lengths from the actual world to the paper it’s printed on.</p>
+
+    <div class="centerme">
+  <img style="width: 200px" src="/assets/imgs/Map_scale_-_8km,_5mi.png" alt="Map Scale" />
+ <figcaption>A pullback</figcaption>
+ </div>
+  </li>
+  <li>For really good maps, this 1d scale doesn’t cut it anymore. You need to pull back a <strong>metric tensor</strong>. The first 10 mins of this <a href="https://www.youtube.com/watch?v=TvFvL_sMg4g">video</a> are a great intro, though it picks up speed afterwards.</li>
+  <li><a href="https://youtu.be/wk67eGXtbIw?t=369">Steve Mould</a> has some other, physics inspired examples.</li>
+</ul>
+
+<h3 id="reverse-chain-rule">Reverse chain rule</h3>
+<p>Summing rectangles is cute, but you should check out the proof <a href="https://en.wikipedia.org/wiki/Integration_by_substitution#Proof">[Wiki]</a>. It’s a <strong>one liner</strong> using the chain rule:</p>
+
+\[\frac{df}{dt}=\frac{df}{dx}\frac{dx}{dt}.\]
+
+<p>You understand this one intuitively if you’ve ever switched gears in a car. If not, check out the viz <a href="https://webspace.ship.edu/msrenault/geogebracalculus/derivative_intuitive_chain_rule.html">here</a>.</p>]]></content><author><name>Idan Alter</name></author><category term="Analysis" /><category term="Integration" /><summary type="html"><![CDATA[You usually hear about pullbacks in advanced calculus, but we’ve already snuck one by you in calc 1. Let me show you where.]]></summary></entry><entry><title type="html">Linear Maps Make Ellipses Out of Circles</title><link href="/2023/09/03/Ellipses-SVD.html" rel="alternate" type="text/html" title="Linear Maps Make Ellipses Out of Circles" /><published>2023-09-03T00:00:00+00:00</published><updated>2023-09-03T00:00:00+00:00</updated><id>/2023/09/03/Ellipses-SVD</id><content type="html" xml:base="/2023/09/03/Ellipses-SVD.html"><![CDATA[<p><strong>Inside:</strong> two short proofs and a cool viz of the SVD.
+<!--more--></p>
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#its-in-the-title">It’s in the title</a></li>
+  <li><a href="#easy-mode">Easy mode</a></li>
+  <li><a href="#normal-difficulty">Normal difficulty</a></li>
+  <li><a href="#its-not-over">It’s not over?</a></li>
+  <li><a href="#go-further">Go further</a></li>
+</ul>
+
+<script defer="defer" src="\assets\jspacks\SVD_ellipses.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous" />
+
+<style>
+.react_root
+{
+    /* position: relative;
+    z-index: -1; */
+    width: 100vw;
+    height: 67vw;   
+}
+@media (min-width: 600px) {
+    .react_root 
+    {
+        width: 600px;
+        height: 400px;   
+    }
+}
+/* #texmatrix{
+ margin-bottom: -40px;   
+} */
+#buttons{
+ /* margin-top: -20px; */
+ margin-bottom: 5px;   
+}
+#go{
+visibility: hidden;
+ margin-top: 10px;
+ margin-bottom: -15px;   
+}
+.centerme { display: block;
+     margin-left: auto;
+      margin-right: auto;
+    text-align: center;
+     }
+
+.prevent-select .katex {
+    
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  white-space: nowrap
+}
+</style>
+
+<h3 id="its-in-the-title">It’s in the title</h3>
+<p>What does a linear map do to the unit circle? Well, since they make parallelograms out of squares <a href="https://www.3blue1brown.com/lessons/linear-transformations">[3b1b]</a>, you might guess that <strong>a circle becomes an ellipse</strong>. Then you might check an example or two. Let me help you:</p>
+
+<div class="centerme" id="root_0"></div>
+<figcaption class="centerme" style="margin-bottom: 15px">You can move the red and blue image vectors (on the right)</figcaption>
+
+<p>With the intuition affirmed, let’s get to <strong>proving</strong> “circles → ellipses”.</p>
+
+<h3 id="easy-mode">Easy mode</h3>
+<p>Every matrix has a SVD <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">[Wiki]</a>, which basically says its action is equivalent to a composition of three simple actions:</p>
+
+<div id="root_1"></div>
+<figcaption class="centerme">You know what to do</figcaption>
+
+<h5 id="legend--">LEGEND:  <!-- omit from toc --></h5>
+<ol>
+  <li>The first action is a rotation (you might know it as \(V^T\)). The unit circle being, well, a circle, doesn’t care about this one.</li>
+  <li>
+    <p>Map No. 2 is</p>
+
+\[\begin{bmatrix}
+     u \\
+     v
+     \end{bmatrix}
+     = \begin{bmatrix}
+ \sigma_1 &amp; 0 \\
+ 0 &amp; \sigma_2
+ \end{bmatrix}
+     \begin{bmatrix}
+     x \\
+     y
+     \end{bmatrix}.\]
+
+    <p>It scales  the \(x\) and \(y\) axes by different values, which means the circle</p>
+
+\[x^2+y^2=1\]
+
+    <p>becomes</p>
+
+\[\left(\frac{u}{\sigma_1}\right) ^2+\left( \frac{v}{\sigma_2}\right) ^2=1.\]
+
+    <p>Not a circle anymore, but <strong>still an ellipse</strong>. So far so good.</p>
+  </li>
+  <li>The last action is another rotation (\(U\) is the name). The ellipse stays an ellipse, though <strong>its axes might not be aligned</strong> with the up/down and left/right directions anymore.</li>
+</ol>
+
+<blockquote>
+  <p>Step #2 fails when \(\sigma_2 = 0\). What happens then? Take a guess, then check it by aligning <strong>both image vectors in the same direction</strong>.</p>
+</blockquote>
+
+<p>There’s really nothing more to it. <em>Except…</em> What if you wanted to work backwards and use the “circles → ellipses” property of linear maps to <strong>prove that the SVD exists?</strong> This isn’t <em>that</em> far-fetched, it’s essentially the geometrical interpretation of Camille Jordan’s <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition#Based_on_variational_characterization">original proof</a>.</p>
+
+<h3 id="normal-difficulty">Normal difficulty</h3>
+<p>We need to avoid circular reasoning, so <strong>the SVD is not allowed</strong>. How do we prove it then?</p>
+
+<p>If the matrix \(A\) is invertible then we can write</p>
+
+\[\begin{bmatrix}
+u \\
+v
+\end{bmatrix}
+= A
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}\]
+
+<p>as</p>
+
+\[\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+= A^{-1}
+\begin{bmatrix}
+u \\
+v
+\end{bmatrix}\]
+
+<p>which unpacks to</p>
+
+\[x = a^{11}u+a^{12}v\]
+
+\[y = a^{21}u+a^{22}v\]
+
+<p>where \(a^{ij}\) is what you think it is. With this in mind, the unit circle</p>
+
+\[\left\{ \begin{bmatrix}
+x \\
+y
+\end{bmatrix} : x^2+y^2=1 \right\}\]
+
+<p>becomes</p>
+
+\[\left\{ \begin{bmatrix}
+u \\
+v
+\end{bmatrix} : (a^{11}u+a^{12}v)^2+(a^{21}u+a^{22}v)^2=1 \right\}\]
+
+<p>after the action of \(A\).</p>
+
+<p>While this set is certainly not as attractive as the one before it, <strong>the defining equation is still quadratic</strong>. The solutions to quadratic equations are <strong>conic sections</strong> <a href="https://en.wikipedia.org/wiki/Conic_section">[Wiki]</a>, and there’s just not that much of a variety there:</p>
+
+<p><img src="/assets/imgs/900px-Conic_sections_with_plane.svg.png" alt="Conic Sections" /></p>
+<figcaption class="centerme" style="margin-bottom: 15px">Conics. By Pbroks13 <a href="https://commons.wikimedia.org/wiki/File:Conic_sections_with_plane.svg">[Wikimedia]</a>
+<br />
+Check out the interactive version at <a href="https://cindyjs.org/gallery/main/ConicSections/">CindyJS</a>
+</figcaption>
+
+<p>Specifically, the only <strong>bounded conic is an ellipse</strong>. Since the action of \(A\) is continuous, it doesn’t make unbounded sets out of compact ones, and the unit circle we started with is certainly compact.</p>
+
+<blockquote>
+  <p>What happens when \(A\) is not invertible? If you consider segments and single points as degenerate ellipses then it’s all good.</p>
+</blockquote>
+
+<h3 id="its-not-over">It’s not over?</h3>
+<p>Let me play <strong>devil’s advocate</strong> for a sec:</p>
+<ul>
+  <li><strong>Exhibit A:</strong> the <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition#Based_on_the_spectral_theorem">textbook approach</a>  to prove that the SVD exists (Beltrami’s original) goes through the diagonalization of \(A^TA\).</li>
+  <li><strong>Exhibit B:</strong> we usually do the same to show that the solution set of the quadratic equation in \(u\) and \(v\) is a conic section.</li>
+</ul>
+
+<p><strong><em>Isn’t that cheating?</em></strong></p>
+
+<p><strong>No!</strong> Even Descartes <a href="https://www.jstor.org/stable/2691183">already knew</a> that all you need is to get rid of the \(u\cdot v\) term with a well chosen rotation. <strong>Diagonalization is overkill.</strong></p>
+
+<h3 id="go-further">Go further</h3>
+
+<ol>
+  <li>Want more SVD visualizations? Check out <a href="https://www.youtube.com/watch?v=vSczTbgc8Rc">this video</a>.</li>
+  <li>The SVD is the bomb, but don’t take it from me. <a href="https://www.youtube.com/watch?v=YPe5OP7Clv4">Here’s</a> <strong>Gilbert Strang</strong> himself <strong>singing its praise.</strong></li>
+  <li>BTW, if we’re on the subject of <em>singing</em>, <strong>I learned the SVD exists from <a href="https://www.youtube.com/watch?v=JEYLfIVvR9I">this love song</a></strong> 12 years ago. No lie.</li>
+  <li>If you’ve made it all the way here, you’re ready for the <a href="https://www.jstor.org/stable/2132388">history of the SVD</a>.</li>
+</ol>]]></content><author><name>Idan Alter</name></author><category term="Algebra" /><category term="SVD" /><summary type="html"><![CDATA[Inside: two short proofs and a cool viz of the SVD.]]></summary></entry><entry><title type="html">The Gaussian Integral, a Geometrically Annotated Proof</title><link href="/2023/02/20/Gaussian-Integral.html" rel="alternate" type="text/html" title="The Gaussian Integral, a Geometrically Annotated Proof" /><published>2023-02-20T00:00:00+00:00</published><updated>2023-02-20T00:00:00+00:00</updated><id>/2023/02/20/Gaussian-Integral</id><content type="html" xml:base="/2023/02/20/Gaussian-Integral.html"><![CDATA[<p><em>More</em> <strong>3d graphics</strong> and <em>less</em> symbol manipulations really make this classic proof shine.</p>
+
+<!--more-->
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#whats-this-all-about">What’s this all about</a></li>
+  <li><a href="#slice-and-dice">Slice and dice</a>
+    <ul>
+      <li><a href="#first-approach">First approach</a></li>
+      <li><a href="#second-approach">Second approach</a></li>
+    </ul>
+  </li>
+  <li><a href="#tying-ends">Tying ends</a></li>
+</ul>
+
+<script defer="defer" src="\assets\jspacks\Gaussian-Integral.js"></script>
+
+<h3 id="whats-this-all-about">What’s this all about</h3>
+<canvas class="centerme nlbig" id="Sketch0" height="200" width="400"></canvas>
+
+<p><strong>The white area up there</strong> is the <a href="https://en.wikipedia.org/wiki/Gaussian_integral">Gaussian integral</a>,</p>
+
+\[\int_{-\infty}^{\infty}e^{-x^2}dx = \sqrt{\pi}.\]
+
+<p>Aside from popping up everywhere, this integral is worth talking about because the Gaussian \(e^{-x^2}\) doesn’t have an explicit anti-derivative: calculating the integral the usual way doesn’t work (try <a href="https://www.wolframalpha.com/input?i=integrate+e%5E%28-x%5E2%29">Wolfram Alpha</a>). So <strong>how</strong> do we know its value? start by thinking <strong>outside the box</strong>.</p>
+
+<canvas class="centerme nlbig" id="Sketch1" height="200" width="400"></canvas>
+
+<p>We collect <strong>all the points that the spinning half bell touches</strong> into a <a href="https://en.wikipedia.org/wiki/Solid_of_revolution">solid of revolution</a>, whose top is described by the functions</p>
+
+\[x(r,\theta) = r\cos{\theta},\]
+
+\[y(r,\theta) = r\sin{\theta},\]
+
+\[z(r,\theta) = e^{-r^2}.\]
+
+<blockquote>
+  <p>Legend:</p>
+  <ul>
+    <li>\(r\ \ \ \ \    =\) How far along the right pointing arrow to go before taking it for a spin.</li>
+    <li>\(e^{-r^2} =\)  The height of the half bell above that point.</li>
+    <li>\(\theta \ \ \ \ \ =\) How far to rotate the bell.</li>
+  </ul>
+</blockquote>
+
+<h3 id="slice-and-dice">Slice and dice</h3>
+
+<p>Now, the crux of the calculation is looking at <strong>the volume</strong> of this solid from <strong>two different points of view</strong>.</p>
+
+<h4 id="first-approach">First approach</h4>
+<p>This one is common practice for solids of revolution, nothing unique here.</p>
+
+<p><strong>Step 1:</strong> Chop up the bell with the provided circular blades.</p>
+
+<figcaption class="centerme"> Move the slider to slice the 3d bell.</figcaption>
+<canvas class="centerme newline" id="Sketch3" height="200" width="400"></canvas>
+
+<p><strong>Step 2:</strong> Calculate the <strong>area</strong> of each slice. Look carefully and convince yourself that <strong>each slice is a cylinder</strong>. Also of note, if the radius of the cylinder is some value \(r\) then its height has to be \(z = e^{-r^2}\) (that’s how high the bell goes at the distance \(r\) from the origin).  Conclude that</p>
+
+\[\mathrm{Area\  of\  cylinder} = 2\pi re^{-r^2}.\]
+
+<p><strong>Step 3:</strong> Sum up the <strong>area of all the cylinders</strong> and you get the <strong>volume of the 3d bell</strong> (this is <a href="https://en.wikipedia.org/wiki/Shell_integration">shell integration</a>). There’s a cylinder for every radius between \(0\) and \(\infty\) (I’m showing you just a select few of them up above), so the “sum” of the areas is</p>
+
+\[\int_{0}^{\infty}2\pi re^{-r^2}dr.\]
+
+<p>While \(e^{-r^2}\) doesn’t have a nice anti-derivative, \(re^{-r^2}\) <em>does</em>, so we can calculate this integral the usual way.</p>
+
+\[\int_{0}^{\infty}2\pi re^{-r^2}dr = 2\pi\left.\frac{-e^{-r^2}}{2}\right|_0^\infty = \pi.\]
+
+<blockquote>
+  <p><strong>Side note:</strong> these days, this part of the proof is usually obfuscated by a <strong>substitution to polar coordinates</strong>. It’s interesting to note that the earliest renditions of this proof still had the solid of revolution front and center. See more <a href="https://www.york.ac.uk/depts/maths/histstat/normal_history.pdf">here</a> (item #4, partly in French).</p>
+</blockquote>
+
+<h4 id="second-approach">Second approach</h4>
+
+<p>We’ll slice up the bell again, but this time we use a <strong>different set of blades</strong>.</p>
+
+<figcaption class="centerme"> Move the slider to slice the 3d bell.</figcaption>
+<canvas class="centerme newline" id="Sketch2" height="200" width="400"></canvas>
+
+<p>It’s no coincidence that <strong>these slices look like 2d bells themselves</strong>, since each slice is obtained by:</p>
+<ol>
+  <li>Fixing some \(x\) value (that’s the line on the floor where the blade is positioned).</li>
+  <li>Sweeping over all possible \(y\)’s: from \(-\infty\) to \(\infty\) (that’s you moving the blade).</li>
+  <li>Collecting all points \((x,y,z)\) between the floor and the top of the bell as we sweep.</li>
+</ol>
+
+<p>Now, looking back at the definitions of \(x,y\) and \(z\), we get:</p>
+
+\[z = e^{-r^2} = e^{-(x^2+y^2)} = e^{-x^2}e^{-y^2}.\]
+
+<blockquote>
+  <p>\(r^2 = x^2+y^2\) comes from applying a trig identity.</p>
+</blockquote>
+
+<p>This, combined with having \(x\) fixed at some value means that the top of each slice is indeed <strong>the original Gaussian</strong>, \(e^{-y^2}\), scaled down by the constant \(e^{-x^2}\).</p>
+
+<blockquote>
+  <p>This part only works with Gaussians, you usually won’t get such nice expressions by slicing a random solid of revolution this way. See the math <a href="https://www.unf.edu/~dbell/Poisson.pdf">here</a>.</p>
+</blockquote>
+
+<p>From here we just <strong>follow the recipe of the first approach.</strong></p>
+
+<p><strong>Step 2</strong>: calculate the <strong>area of each slice</strong>. This time it’s just the scaled down area of the original 2d bell,</p>
+
+\[e^{-x^2}\int_{-\infty}^{\infty}e^{-y^2}dy.\]
+
+<p><strong>Step 3:</strong> sum all the areas. we have slices for <strong>all possible values of</strong> \(x\), which goes from \(-\infty\) to \(\infty\), so the sum of all of them is</p>
+
+\[\int_{-\infty}^{\infty}e^{-x^2}dx\int_{-\infty}^{\infty}e^{-y^2}dy.\]
+
+<p>Renaming \(y\) as \(x\), we finally get a second expression for the volume:</p>
+
+\[\left(\int_{-\infty}^{\infty}e^{-x^2}dx\right)^2.\]
+
+<h3 id="tying-ends">Tying ends</h3>
+
+<p>We now know that <strong>volume</strong> of the 3d bell is the <strong>square of the area</strong> of the 2d bell. We also know from the first approach that <strong>the volume is \(\pi\)</strong>, so we can finish the calculation:</p>
+
+\[\left( \int_{-\infty}^{\infty}e^{-x^2}dx \right)^2=\pi\]
+
+\[\int_{-\infty}^{\infty}e^{-x^2}dx =\sqrt{\pi}.\]]]></content><author><name>Idan Alter</name></author><category term="probability" /><category term="calculus" /><category term="integration" /><summary type="html"><![CDATA[More 3d graphics and less symbol manipulations really make this classic proof shine.]]></summary></entry><entry><title type="html">Rejection Sampling and the Ziggurat Algorithm</title><link href="/2023/01/12/Ziggurat-Algorithm.html" rel="alternate" type="text/html" title="Rejection Sampling and the Ziggurat Algorithm" /><published>2023-01-12T00:00:00+00:00</published><updated>2023-01-12T00:00:00+00:00</updated><id>/2023/01/12/Ziggurat-Algorithm</id><content type="html" xml:base="/2023/01/12/Ziggurat-Algorithm.html"><![CDATA[<p>It’s <strong>blazingly</strong> fast and is the best RNG you’ve never heard of. Let me show you how it works with some interactive sketches. We’ll throw darts along the way!</p>
+
+<!--more-->
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#throwing-darts">Throwing darts</a></li>
+  <li><a href="#rejection-blues">Rejection blues</a></li>
+  <li><a href="#i-never-liked-y-anyway">I never liked y anyway</a></li>
+  <li><a href="#the-algorithm">The algorithm</a></li>
+  <li><a href="#my-very-first-ziggurat">My very first ziggurat</a></li>
+  <li><a href="#sampling-from-the-ziggurat">Sampling from the ziggurat</a></li>
+  <li><a href="#youre-still-here">You’re still here?</a></li>
+</ul>
+
+<script>
+  function makeGrid(p,origin, v0, v1, myColor) {
+    p.push();
+    p.stroke(myColor);
+    p.strokeWeight(0.5)
+    
+    let up = origin.copy();
+    let down = origin.copy();
+    
+    let v1mega = v1.copy().setMag(10 ** 4 * p.max(p.width, p.height));
+    
+    for (let k = 0; k <= 10; k++) {
+      
+      let upv1 = p5.Vector.add(up, v1mega);
+      let downv1 = p5.Vector.sub(up, v1mega);
+      p.line(upv1.x, upv1.y, downv1.x, downv1.y);
+        // I should calculate here the intersection of the line with the canvas, but taking a huge step up and down the line will usually cover the entire visible area. it's a hack, but it works.
+      
+      up.add(v0);
+  
+      upv1 = p5.Vector.add(down, v1mega);
+      downv1 = p5.Vector.sub(down, v1mega);
+      p.line(upv1.x, upv1.y, downv1.x, downv1.y);
+      down.sub(v0);
+    }
+    p.pop();
+  }
+</script>
+
+<h3 id="throwing-darts">Throwing darts</h3>
+
+<p>How do you calculate π? One way to do it is to throw (a lot) of darts.</p>
+
+<div style="text-align: center; margin-bottom: 5px;" id="myPI_html"></div>
+<div id="estimating_pi_sktch" class="centerme"></div>
+<figcaption class="centerme">
+Run this sketch yourself in the <a href="https://editor.p5js.org/Idan-Alter/sketches/evP67pvrG">p5.js web editor</a>.
+</figcaption>
+
+<script>
+estimating_pi_sktch = function(p){
+  p.diameter = 200;
+  p.radius = p.diameter/2;
+  p.setup = function(){
+    p.createCanvas(200,200)
+    p.background(220);
+
+    p.line(0,0,p.width,0);
+    p.line(0,0,0,p.height);
+    p.line(0,p.height,p.width,p.height);
+    p.line(p.width,0,p.width,p.height);
+
+    p.translate(p.width/2, p.height/2);
+    p.circle(0,0,200);
+    p.origin = p.createVector(p.width/2,p.height/2) 
+    p.frameRate(10);
+  };
+  
+  p.throwDart = function() {
+    let x = Math.random();
+    let y = Math.random();
+    return p.createVector(x,y)
+  };
+  
+  
+  p.in_circle = 0;
+  p.total = 0;
+  
+  p.draw = function(){
+    let dart = p.throwDart();
+    dart.mult(p.diameter);
+  
+    if (dart.dist(p.origin) < p.radius) {
+      p.in_circle += 1;
+      p.stroke("rgba(0,0,255,0.5)")
+    } else {
+      p.stroke("rgba(255,0,0,0.5)")
+    };
+    p.strokeWeight(5)
+    p.point(dart.x, dart.y)
+    p.total += 1;
+  
+    let myPI = 4*p.in_circle/ p.total;
+    myPI_html.innerHTML = `<code> π ≈ `+p.nfc(myPI,5)+ `<\code>`;  };
+};
+p = new p5(estimating_pi_sktch,"estimating_pi_sktch");
+</script>
+
+<p><strong>Huh?</strong> I’ll explain step by step. It might be useful to have the code open in another tab.</p>
+
+<p><strong>Step 1:</strong> First, we throw a dart randomly inside the square by calling this aptly named function:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">throwDart</span><span class="p">()</span> <span class="p">{</span>
+<span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<span class="k">return</span> <span class="nx">createVector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><code class="language-plaintext highlighter-rouge">Math.random()</code> gives us <em>i.i.d. standard uniform variates</em>, which is a fancy way to say that:</p>
+<ul>
+  <li>Each time we call it we get any number between 0 and 1.</li>
+  <li>There’s no way to know in advance which one it’ll be,</li>
+  <li>but we do know no one is favored.</li>
+</ul>
+
+<blockquote>
+  <p>Everything I just said is flat out wrong, but it’s very practical to <em>pretend</em> this is the way it works. Go read about <strong>true</strong> randomness <a href="https://www.random.org/">somewhere else</a>.</p>
+</blockquote>
+
+<p><strong>Step 2:</strong> We check where the dart landed. That’s line 31 in the code, <code class="language-plaintext highlighter-rouge">if (dart.dist(origin) &lt; radius)</code> (you did open it in another tab, right?). If it falls within the circle, we color it blue and increase the counter <code class="language-plaintext highlighter-rouge">in_circle</code> by one. Otherwise we color it red.</p>
+
+<p><strong>Step 3:</strong> We do some math.</p>
+<ul>
+  <li>
+    <p>It is intuitively clear to some people that</p>
+
+\[P(\mathrm{a\ dart\ is\ blue}) =\frac{\mathrm{circle\ area}}{\mathrm{square\ area}}.\]
+
+    <p>The intuition is that if no number is favored by the uniform coordinates <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> then every piece of the square should get its “fair share”. The proof, however, just so happens to require some (slightly) nontrivial math. I’ll go ahead and assume you’re OK with the intuition.</p>
+  </li>
+  <li>
+    <p>The area of the circle is \(\pi r^2\) while the area of the square is \((2r)^2\) (because its side is twice the length of the radius). Take the ratio of the areas and you have</p>
+
+\[\frac{\mathrm{circle\ area}}{\mathrm{square\ area}} = \pi/4.\]
+  </li>
+  <li>
+    <p>The law of large numbers says that</p>
+  </li>
+</ul>
+
+\[P(\mathrm{a\ dart\ is\ blue})\approx \frac{\mathrm{\#\ of\  blue\ darts}}{\mathrm{\#\ of\ total\ darts}}.\]
+
+<p><strong>Step 4:</strong> We calculate <code class="language-plaintext highlighter-rouge">4*in_circle/total</code> as our estimate for π, and it seems to work, in the long run.</p>
+
+<h3 id="rejection-blues">Rejection blues</h3>
+<p>Throwing darts in a <em>square</em> is easy, two portions of <code class="language-plaintext highlighter-rouge">Math.random()</code> and you’re done. What if I wanted something a bit more special? Maybe <strong>sampling uniformly in, say, a <em>circle</em></strong>?</p>
+
+<p>Let’s change the game: now we throw the same old darts in the square, though <strong>every time we miss</strong> the circle <strong>we start over</strong>. About \(\pi/4\approx 78 \%\) of the time we’ll score on the first try, the rest of the time we’ve wasted a throw, but we pick ourselves up and try again.</p>
+
+<div style="text-align: center; margin-bottom: 5px;" id="rejection_circle_text">`<code>THROWS: 0 | HITS: 0</code>`</div>
+<div id="rejection_circle_sktch" class="centerme"></div>
+<p><button class="centerme" onclick="do_a_throw()">THROW A DART</button></p>
+
+<script>
+rejection_circle_sktch = function(p){
+  p.diameter = 200;
+  p.radius = p.diameter/2;
+  p.setup = function(){
+    p.createCanvas(200,200);
+    p.main = p.createGraphics(200,200);
+    p.main.background(220);
+    p.main.line(0,0,p.main.width,0);
+    p.main.line(0,0,0,p.main.height);
+    p.main.line(0,p.main.height,p.main.width,p.main.height);
+    p.main.line(p.main.width,0,p.main.width,p.main.height);
+
+    p.main.translate(p.main.width/2, p.main.height/2);
+    p.main.circle(0,0,200);
+     p.main.translate(-p.main.width/2, -p.main.height/2);
+    p.origin = p.createVector(p.main.width/2,p.main.height/2) 
+    p.image(p.main,0,0);
+
+    p.red = p.createGraphics(200,200);
+
+    p.frameRate(30);
+  };
+  
+  p.throwDart = function() {
+    let x = Math.random();
+    let y = Math.random();
+    return p.createVector(x,y)
+  };
+  
+  p.red_alpha = 0;
+  p.in_circle = 0;
+  p.throw_flag = false;
+  p.draw = function(){
+      p.red_alpha =0.9*p.red_alpha;
+    if (p.throw_flag){
+      p.throw_flag = false;
+      let dart = p.throwDart();
+      dart.mult(p.diameter);
+      if (dart.dist(p.origin) < p.radius) {
+        p.in_circle += 1;
+        p.main.stroke("rgba(0,0,255,0.5)")
+        p.main.strokeWeight(5);  
+        p.main.point(dart.x, dart.y);
+        console.log(dart)
+      } else{
+        p.red_alpha = 120;
+      }
+      rejection_circle_text.innerHTML =`<code>THROWS: `+p.nfc(n_throws,0)+` | HITS: `+p.nfc(p.in_circle,0) +`</code>`;
+    }
+    p.image(p.main,0,0);
+    p.red.clear();
+    p.red.background(255,0,0,p.red_alpha)
+    p.image(p.red,0,0);
+   }
+};
+//darts thrown, hti
+p_circle_rejection = new p5(rejection_circle_sktch,"rejection_circle_sktch");
+let n_throws = 0;
+function do_a_throw(){
+  n_throws += 1;
+  p_circle_rejection.throw_flag = true;
+}
+</script>
+
+<p>By clicking this button until you get a hit you manually iterate through the following loop:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">do</span> <span class="p">{</span>
+  <span class="nx">dart</span> <span class="o">=</span> <span class="nx">throwDart</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">dart</span><span class="p">.</span><span class="nx">dist</span><span class="p">(</span><span class="nx">origin</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nx">radius</span><span class="p">)</span></code></pre></figure>
+
+<p>Once the loop terminates, we know for sure that the last dart landed within the white circle, it fulfilled the <strong>condition</strong>. In fact,</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">do</span> <span class="p">{</span>
+  <span class="nx">Sample</span> <span class="nx">X</span>
+<span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">X</span> <span class="nx">does</span> <span class="nx">not</span> <span class="nx">fulfill</span> <span class="nx">condition</span> <span class="nx">A</span><span class="p">)</span></code></pre></figure>
+
+<p>is a general way to get a sample of <code class="language-plaintext highlighter-rouge">X</code> <strong>conditioned on</strong> <code class="language-plaintext highlighter-rouge">A</code>. It’s called the <a href="https://en.wikipedia.org/wiki/Rejection_sampling">acceptance-rejection method</a>. In our case we <em>reject</em> the red darts and start over until we <em>accept</em> a blue dart and move on.</p>
+
+<p>This works with everything, so <strong>why limit ourselves to circles?</strong></p>
+
+<div style="text-align: center; margin-bottom: 5px;" id="bell_rejection_text">`<code>THROWS: 0 | HITS: 0</code>`</div>
+<div id="bell_rejection_sktch" class="centerme"></div>
+<p><button id="bell_lets_go" class="centerme" onclick="bell_lets_go()">LET’S GO</button></p>
+
+<script>
+var x_hist = [];
+bell_rejection_sktch = function(p){
+p.scl = 50;
+p.sig = 1;
+p.normpdf = (x) => p.exp(-((x)**2)/(2*p.sig)) / p.sqrt(p.sig*2*p.PI);
+p.bell = (x) => p.normpdf(x)/p.normpdf(0)*4;
+
+p.setup= function () {
+  p.createCanvas(200, 200);
+  p.background(220);
+  p.line(0,0,p.width,0);
+  p.line(0,0,0,p.height);
+  p.line(0,p.height,p.width,p.height);
+  p.line(p.width,0,p.width,p.height);
+ 
+  p.origin = p.createVector(p.width / 2, 200);
+  p.e0 = p.createVector(p.scl,0);
+  p.e1 = p.createVector(0,-p.scl);
+  makeGrid(p,p.origin, p.e0, p.e1,"rgba(0,0,0,0.3)");
+  makeGrid(p,p.origin, p.e1, p.e0,"rgba(0,0,0,0.3)");
+  
+  p.push()
+  p.translate(p.origin.x,p.origin.y);
+  p.scale(1,-1);
+  p.beginShape()
+  p.vertex(-p.width/2,0);
+  for (let k=0; k<=p.width; k++){
+    let x = -p.width/2 + k;
+    p.vertex(x,p.bell(x/p.scl)*p.scl);
+  }
+  p.vertex(p.width/2,0);
+  p.endShape(p.CLOSE);
+  p.pop()
+
+  p.frameRate(10);
+}
+
+p.throwDart = function() {
+  let x = 4*Math.random()-2;
+  let y = 4*Math.random();
+  return p.createVector(x, y);
+}
+
+p.in_bell = 0;
+p.total = 0;
+p.go_flag = false;
+p.draw = function() {
+  if (p.go_flag){
+  do {
+    p.total += 1;
+    var dart = p.throwDart();
+    bell_rejection_text.innerHTML =`<code>THROWS: `+p.nfc(p.total,0)+` | HITS: `+p.nfc(p.in_bell,0) +`</code>`;
+    //console.log(dart.y,dart.x, p.bell(dart.x))
+    } while (dart.y > p.bell(dart.x));
+  p.stroke("rgba(0,0,255,0.5)");
+  p.strokeWeight(5);
+  x_hist.push(dart.x);
+  dart.x = dart.x * p.scl;
+  dart.y = dart.y * p.scl;
+  p.translate(p.origin.x,p.origin.y)
+  p.scale(1,-1);
+  p.point(dart.x, dart.y);
+  
+
+  p.in_bell +=1;
+  bell_rejection_text.innerHTML =`<code>THROWS: `+p.nfc(p.total,0)+` | HITS: `+p.nfc(p.in_bell,0) +`</code>`;
+
+}
+}
+}
+</script>
+
+<script>
+p_bell_rejection = new p5(bell_rejection_sktch,"bell_rejection_sktch");
+function bell_lets_go(){
+  p_bell_rejection.go_flag = true;
+  let button = document.getElementById("bell_lets_go");
+  button.outerHTML= "<p> </p>";
+}
+</script>
+
+<p>What you see is a zoomed in bell curve:</p>
+
+\[\mathrm{bell}(x) = C\cdot {e^{-x^2/2}}\]
+
+<p>Where \(C\) is just some constant I chose to make the bell curve touch the top of the sketch (It’s \(4\sqrt{2\pi}\) if you have to know). We want to accept any dart that hits <strong>below</strong> this curve, so the loop looks like this now:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">do</span> <span class="p">{</span>
+  <span class="nx">dart</span> <span class="o">=</span> <span class="nx">throwDart</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nx">dart</span><span class="p">.</span><span class="nx">y</span> <span class="o">&gt;</span> <span class="nx">bell</span><span class="p">(</span><span class="nx">dart</span><span class="p">.</span><span class="nx">x</span><span class="p">))</span></code></pre></figure>
+
+<p>There’s one more thing that I’ve intentionally made easy to miss: <strong>the square we’re throwing at has changed</strong>. It’s now within these boundaries:</p>
+
+\[-2 &lt;x &lt;2 ,\   0&lt; y &lt; 4.\]
+
+<blockquote>
+  <p>Look very hard at the grid lines to see why.</p>
+</blockquote>
+
+<p>This means we need to change the dart throwing function. Luckily, this is an easy fix:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">throwDart</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">//x ~ U[-2,2]</span>
+  <span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>     <span class="c1">//y ~ U[0,4]</span>
+  <span class="k">return</span> <span class="nx">createVector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<h3 id="i-never-liked-y-anyway">I never liked y anyway</h3>
+
+<p><strong>Let’s do the same thing, but slower.</strong> I want us to get just an <code class="language-plaintext highlighter-rouge">x</code> at first.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">throwX</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span> 
+<span class="p">}</span></code></pre></figure>
+
+<p>Now it’s up to you to randomly choose <code class="language-plaintext highlighter-rouge">y</code>. Close your eyes and click the button.</p>
+
+<div style="text-align: center; margin-bottom: 5px;" id="bell__throw_x_text">`<code>THROWS: 0 | HITS: 0</code>`</div>
+<div id="bell__throw_x_sktch" class="centerme"></div>
+<div class="centerme" style="margin-bottom: 15px;">
+<button onclick="throwXbutton(p_bell_throwx)">THROW X</button> <button onclick="STOPbutton(p_bell_throwx)">STOP Y</button> <button onclick="setXbutton(p_bell_throwx)">SET X=1.5</button>
+</div>
+
+<script>
+bell__throw_x_sktch = function(p){
+  p.scl = 50;
+  p.sig = 1;
+  p.normpdf = (x) => p.exp(-((x)**2)/(2*p.sig)) / p.sqrt(p.sig*2*p.PI);
+  p.bell = (x) => p.normpdf(x)/p.normpdf(0)*4;
+  
+  p.back = function(){
+    p.background(220);
+    p.strokeWeight(1);
+  
+    p.origin = p.createVector(p.width / 2, 200);
+    p.e0 = p.createVector(p.scl,0);
+    p.e1 = p.createVector(0,-p.scl);
+    makeGrid(p,p.origin, p.e0, p.e1,"rgba(0,0,0,0.3)");
+    makeGrid(p,p.origin, p.e1, p.e0,"rgba(0,0,0,0.3)");
+    p.push()
+    p.stroke("rgba(0,0,0,1)");
+    p.line(0,0,p.width,0);
+    p.line(0,0,0,p.height);
+    p.line(0,p.height,p.width,p.height);
+    p.line(p.width,0,p.width,p.height);
+    
+    p.translate(p.origin.x,p.origin.y);
+    p.scale(1,-1);
+    p.beginShape()
+    p.vertex(-p.width/2,0);
+    for (let k=0; k<=p.width; k++){
+      let x = -p.width/2 + k;
+      p.vertex(x,p.bell(x/p.scl)*p.scl);
+    }
+    p.vertex(p.width/2,0);
+    p.endShape(p.CLOSE);
+    p.pop()
+    p.stroke("rgba(0,0,0,1)");
+  }
+  p.setup= function () {
+    p.createCanvas(200, 200);
+   p.back();
+  }
+  p.throwX = function (){
+    let x = 4*Math.random()-2; 
+    return x
+  }
+  p.step = 4/60;
+  p.y = 1;
+  p.x = p.throwX();
+  p.stop_flag = false;
+  p.total = 0;
+  p.in_bell = 0;
+  p.draw = function (){
+  p.back();
+  let x = p.x
+  let y_top = p.bell(x)*p.scl;
+  if (p.y >= 4 || p.y <= 0){
+    p.step = -p.step;
+  }
+  p.y += p.step
+  let y = p.y;
+
+  p.translate(p.origin.x,p.origin.y)
+  p.scale(1,-1);
+  p.strokeWeight(1.5);
+  p.stroke("rgba(0,0,255,0.5)");
+  p.line(x*p.scl, 0, x*p.scl, y_top);
+
+  p.stroke("rgba(255,0,0,0.5)");
+  p.line(x*p.scl, y_top, x*p.scl, p.height);
+
+  p.push()
+  p.stroke("rgba(0,0,0,1)");
+  p.strokeWeight(7);
+  let dart = {};
+  dart.x = x * p.scl;
+  dart.y = y * p.scl;
+  if (p.stop_flag){
+    p.total += 1;
+    if (y > p.bell(x)){
+      p.text_hit = false;
+      p.stroke("rgba(255,0,0,1)");
+    } else{
+      p.text_hit = true;
+      p.stroke("rgba(0,0,255,1)");
+      p.in_bell += 1;
+
+    }
+    p.push();
+    p.textSize(24);
+    p.scale(1,-1);
+    p.noStroke();
+    p.strokeWeight(0.5)
+    if (p.text_hit === true){
+      p.text("HIT",-18,-90);
+    } else{
+      p.text("MISS",-28,-90);
+    }
+    p.pop()
+
+    p.noLoop();
+  }
+  p.point(dart.x, dart.y);
+
+  p.pop()
+  bell__throw_x_text.innerHTML =`<code>THROWS: `+p.nfc(p.total,0)+` | HITS: `+p.nfc(p.in_bell,0) +`</code>`;
+  }
+}
+</script>
+
+<script>
+p_bell_throwx = new p5(bell__throw_x_sktch,"bell__throw_x_sktch");
+
+function throwXbutton(p){
+  p.x = p.throwX();
+  p.stop_flag = false;
+  p.loop();
+}
+
+function setXbutton(p){
+  p.x = 1.5;
+  p.stop_flag = false;
+  p.loop();
+}
+
+function STOPbutton(p){
+  p.stop_flag = true;
+}
+
+</script>
+
+<p>Hopefully this experience convinced you that <strong>it’s harder to score the further \(x\) is from zero</strong>. How much harder though? Suppose <code class="language-plaintext highlighter-rouge">throwX()</code> gave us 1.5 back, what are the chances we’ll score a hit? The vertical line above \(x=1.5\) turns red at \(y= \mathrm{bell}(1.5)\approx 4/3\), which is a third of the way up, so I’d say</p>
+
+\[P(\mathrm{the\ dart\ is\ blue, \ given \ that\ } x=1.5) \approx 1/3.\]
+
+<p>The logic works the other way around as well: this <em>selection</em> process makes it less likely that we’ll see darts with larger \(x\) values. In fact, it turns out that if we:</p>
+<ol>
+  <li>Take the blue darts.</li>
+  <li>Ignore their <code class="language-plaintext highlighter-rouge">y</code>’s.</li>
+  <li>Keep just the <code class="language-plaintext highlighter-rouge">x</code>’s.</li>
+</ol>
+
+<p>Then what we get is no longer uniform, but normally distributed! I won’t go through the proper proof here (it’s Bayes’ law, basically), but here’s a <strong>proof by statistics:</strong> Below you’ll find a live histogram generated from the darts we’ve been throwing automatically since you clicked “LET’S GO”.</p>
+
+<div id="rejection_histogram"></div>
+
+<script>
+var data = [
+  {
+    x: x_hist,
+    type: 'histogram',
+	marker: {
+    color: '"rgba(0, 0, 255,0.5)"',
+	},
+  }
+];
+var layout ={xaxis:{title:{text:'x Value'}},
+             yaxis:{title:{text:'No. of Darts'}}};
+Plotly.newPlot('rejection_histogram', data, layout)             
+const hist_el = document.getElementById("rejection_histogram")
+function in_view () {
+    const rect = hist_el.getBoundingClientRect();
+    return (rect.top<= window.innerHeight && 
+           rect.bottom >= 0) 
+}
+setInterval(()=>{
+  if (in_view()) {Plotly.newPlot('rejection_histogram', data, layout)
+  console.log('render')};
+},500)
+
+</script>
+
+<blockquote>
+  <p>You should be thinking: Surely a sample or two should be farther out than \(\pm2\). We’ll get to it later.</p>
+</blockquote>
+
+<h3 id="the-algorithm">The algorithm</h3>
+<p>Our little game is actually an algorithm: it calls <code class="language-plaintext highlighter-rouge">Math.random()</code> a few times and spits out <strong>other flavors of randomness</strong>, all you need is to:</p>
+<ol>
+  <li>Draw the graph of the target density. In our case this is the bell curve.</li>
+  <li>Put a box around it.</li>
+  <li>Keep throwing darts at the box until one hits under the density.</li>
+  <li>The \(x\) coordinate of the dart is a sample from this density.</li>
+</ol>
+
+<h3 id="my-very-first-ziggurat">My very first ziggurat</h3>
+
+<p>Every time we miss a dart, we have to start over. That’s a lot of wasted effort. Could we do something about this? Yes, think <em>inside</em> the box!</p>
+
+<div id="p_bell_to_zig" class="centerme"></div>
+<div class="centerme" style="margin-bottom: 15px;">
+<button onclick="make_the_zig()">ZIGGURATIFY</button>
+<button onclick="reset_the_zig()">RESET</button>
+</div>
+
+<script>
+bell_to_zig_sktch = function(p){
+  p.scl = 50;
+  p.sig = 1;
+  p.normpdf = (x) => p.exp(-((x)**2)/(2*p.sig)) / p.sqrt(p.sig*2*p.PI);
+  p.bell = (x) => p.normpdf(x)/p.normpdf(0)*4;
+  p.inv_bell = (y) => p.sqrt(2*p.sig*p.log(4/y))
+  p.zig = [{x: 1.6680748679238604, y: 0.9950696727808446},
+     {x:1.0983989302497676,y:2.1881452258216267}];
+  
+  p.setup= function () {
+    p.createCanvas(200, 200);
+    p.background(220);
+    p.line(0,0,p.width,0);
+    p.line(0,0,0,p.height);
+    p.line(0,p.height,p.width,p.height);
+    p.line(p.width,0,p.width,p.height);
+
+   
+    p.origin = p.createVector(p.width / 2, 200);
+    p.e0 = p.createVector(p.scl,0);
+    p.e1 = p.createVector(0,-p.scl);
+
+    p.push()
+    p.translate(p.origin.x,p.origin.y);
+    p.scale(1,-1);
+    p.beginShape()
+    p.vertex(-p.width/2,0);
+    for (let k=0; k<=p.width; k++){
+      let x = -p.width/2 + k;
+      p.vertex(x,p.bell(x/p.scl)*p.scl);
+    }
+    p.vertex(p.width/2,0);
+    p.endShape(p.CLOSE);
+    p.pop()
+  
+    p.line(0, p.origin.y, p.width, p.origin.y);
+  }
+  p.go_flag = false;
+  p.step = 0.005;
+  p.t = 1;
+  p.draw = function() {
+    if (p.go_flag){
+    p.background(255);
+    if (p.t > 0){
+      p.t -= p.step
+    }
+      p.push();
+      p.fill(220);
+      p.translate(p.origin.x,p.origin.y);
+      p.scale(1,-1);
+      let x0 = -2*p.scl;
+      let y0 = 0*p.scl;
+      for (point of p.zig){
+      var x1 = (1-p.t)*point.x*p.scl+ p.t*2*p.scl;
+      var y1 = point.y*p.scl;
+      p.rect(-x0, y0, 2*x0, y1-y0);      
+      x0=x1;
+      y0=y1;
+      }
+      p.rect(-x0, y1, 2*x0, 4*p.scl-y1);
+      p.pop();
+
+      p.push()
+      p.fill("rgba(255,255,255,1)");
+      p.translate(p.origin.x,p.origin.y);
+      p.scale(1,-1);
+      p.beginShape()
+      p.vertex(-p.width/2,0);
+      for (let k=0; k<=p.width; k++){
+        let x = -p.width/2 + k;
+        p.vertex(x,p.bell(x/p.scl)*p.scl);
+      }
+      p.vertex(p.width/2,0);
+      p.endShape(p.CLOSE);
+      p.pop()
+           
+      p.line(0, p.origin.y, p.width, p.origin.y);
+  
+
+      
+
+    }
+  }
+}
+</script>
+
+<script>
+p_bell_to_zig = new p5(bell_to_zig_sktch,"p_bell_to_zig");
+make_the_zig = function (){
+  p_bell_to_zig.go_flag=true;
+}
+reset_the_zig = function(){
+    p_bell_to_zig.go_flag=false;
+    p_bell_to_zig.t = 1;
+    p_bell_to_zig.setup();
+}
+</script>
+
+<!-- <script id ="Ziggoratify>
+function Zigguratify(curve,inv_curve,box_right,box_top,n,x0){
+  let xs = [box_right, x0];
+  let ys = [0, curve(xs[1])];
+  let area = xs[0]*ys[1];
+  for (let k=1; k <= n-1; k++){
+    let y = ys[k] + area/xs[k];
+    let x = xs[k];
+    if (y < box_top){
+      x = inv_curve(y);
+    }
+    xs.push(x)
+    ys.push(y)
+  }
+  return {xs:xs , ys:ys}
+}
+
+
+
+function bisect(l,fl,r,fr,func,tol=1e-10){
+  if (fl*fr>0){
+    console.error("bisection err")
+  }
+  let diff = (r-l)/2;
+  let mid = (l+r)/2;
+  if (diff<tol){
+    return mid;
+  }
+  let val = func(mid);
+  if (val*fr > 0){
+    return bisect(l,fl,mid,val,func,tol);
+  } else{
+    return bisect(mid,val,r,fr,func,tol);
+  }
+
+}
+
+let Zigf = function (x){
+  let res = Zigguratify(curve,inv_curve,box_right,box_top,n,x);
+  return res.ys[n]-box_top;
+} 
+res = bisect(0.1,Zigf(0.1),box_right,Zigf(box_right),Zigf)
+console.log(Zigguratify(curve,inv_curve,box_right,box_top,n,res))
+</script> -->
+
+<p><strong>The ziggurat hugs the density</strong>, so there’s very little leftover area. We’ll throw darts within the ziggurat, and reject the small minority that land outside the bell curve. The incredible part is that <strong>sampling from the ziggurat is even faster</strong> than sampling from inside a plain old square: each throw is more accurate <em>and</em> cheaper!</p>
+
+<h3 id="sampling-from-the-ziggurat">Sampling from the ziggurat</h3>
+
+<p>Play with the sketch and let’s talk later.</p>
+
+<div class="centerme">
+<div id="div_text" style="margin-bottom: 5px;"><code>THROWS: 0 | HITS: 0</code></div>
+<div id="zig_phases_sktch"></div>
+<div style="margin-bottom: 15px;" id="div_buttons">
+  <button onclick="zig_choose_level()">CHOOSE LEVEL</button>
+</div>
+</div>
+
+<script>
+zig_phases_sktch = function(p){
+  p.scl = 300/4;
+  p.sig = 1;
+  p.normpdf = (x) => p.exp(-((x)**2)/(2*p.sig)) / p.sqrt(p.sig*2*p.PI);
+  p.bell = (x) => p.normpdf(x)/p.normpdf(0)*4;
+  p.inv_bell = (y) => p.sqrt(2*p.sig*p.log(4/y))
+  p.zig = [{x: 1.6680748679238604, y: 0.9950696727808446},
+     {x: 1.0983989302497676,y: 2.1881452258216267}];
+
+  p.for_rect =[];
+  let x0 = 2*p.scl;
+  let y0 = 0*p.scl; 
+  for (point of p.zig){
+    var x1 = point.x*p.scl;
+    var y1 = point.y*p.scl;
+    p.for_rect.push([-x0, y0, 2*x0, y1-y0])
+    x0=x1;
+    y0=y1;
+  }
+  p.for_rect.push([-x0, y1, 2*x0, 4*p.scl-y1]);
+  p.setup= function () {
+    p.createCanvas(300, 303);
+   
+    p.origin = p.createVector(p.width / 2, 300);
+    p.e0 = p.createVector(p.scl,0);
+    p.e1 = p.createVector(0,-p.scl);
+
+
+  }
+  p.draw_back = function() {
+    p.background(255);
+    p.push();
+    p.fill(220);
+    p.translate(p.origin.x,p.origin.y);
+    p.scale(1,-1);
+    for (box of p.for_rect){
+    p.rect(...box);      
+    }
+    p.pop();
+
+    p.push()
+    p.fill("rgba(255,255,255,1)");
+    p.translate(p.origin.x,p.origin.y);
+    p.scale(1,-1);
+    p.beginShape()
+    p.vertex(-p.width/2,0);
+    for (let k=0; k<=p.width; k++){
+      let x = -p.width/2 + k;
+      p.vertex(x,p.bell(x/p.scl)*p.scl);
+    }
+    p.vertex(p.width/2,0);
+    p.endShape(p.CLOSE);
+    p.pop();
+         
+    p.line(0, p.origin.y, p.width, p.origin.y);
+  };
+
+  p.step = 1/30;
+  p.level_timer = 3;
+
+  p.x_step = 1/60;
+  p.x_timer = 1-p.x_step;
+
+  p.y_step = 1/30;
+  p.y_timer = 1-p.y_step;
+
+  p.dart = {};
+  p.phase = "choose level";
+
+  p.check_y_flag = false;
+  p.total = 0;
+  p.in_zig = 0;
+  p.hit = false;
+  p.draw_level= function() {
+    p.push();
+    p.fill("rgba(220,220,220,0.5)");
+    p.rect(...p.level_box); 
+    p.pop()
+  }
+
+  p.draw_danger_y = function (){
+    if (p.y_timer <= 0 || p.y_timer >= 1){
+      p.y_step = -p.y_step;
+    }
+    p.y_timer -= p.y_step;
+    p.dart.y = p.y_timer*p.level_box[1] + (1-p.y_timer)*(p.level_box[1]+p.level_box[3]);
+    p.push();
+    p.strokeWeight(7)
+    if (p.bell(p.dart.x/p.scl) > p.dart.y/p.scl){
+      p.stroke("rgba(0,0,255,1)")
+    } else{
+      p.stroke("rgba(255,0,0,1)")
+    };
+    p.point(p.dart.x,p.dart.y);
+    p.pop();
+  }
+
+  p.draw = function() {
+    p.draw_back();
+    p.push();
+    p.translate(p.origin.x,p.origin.y);
+    p.scale(1,-1);
+    if (p.phase === "choose level"){
+
+      if (p.level_timer > p.step){
+        p.level_timer -= p.step;
+      } else{
+        p.level_timer = 3-p.step;
+      }
+      p.level_idx = Math.floor(p.level_timer);
+      p.level_box = p.for_rect[p.level_idx];
+      p.draw_level();
+    }
+    if (p.phase === "choose x"){
+      p.draw_level();
+      if (p.x_timer <= 0 || p.x_timer >= 1){
+        p.x_step = -p.x_step;
+      }
+      p.x_timer -= p.x_step;
+      p.dart.x = (2*p.x_timer-1) * p.level_box[0];
+      p.push();
+      p.strokeWeight(7)
+      p.point(p.dart.x,p.level_box[1]);
+      p.pop();
+    }
+
+    if (p.phase === "check safe"){
+      if (p.level_idx === 2){
+        p.next_x = 0;
+        p.phase = "top level";
+        div_buttons.innerHTML =`<button onclick="zig_choose_y()">STOP Y</button>`
+      } else {
+        p.next_x = p.for_rect[p.level_idx+1][0];
+        if (p.dart.x < p.next_x || p.dart.x > -p.next_x){
+          div_buttons.innerHTML =`<button onclick="zig_choose_y()">STOP Y</button>`
+          p.phase = "danger zone";
+        } else{
+          p.phase = "safe";
+        }
+      }
+    }
+    if (p.phase === "safe"){
+      p.draw_level();
+      p.push();
+      p.fill("rgba(0,0,255,0.2)")
+      let safebox = [p.next_x, p.level_box[1], -2*p.next_x, p.level_box[3]]
+      p.rect(...safebox)
+      p.pop();
+      p.total += 1;
+      p.in_zig += 1;
+      p.hit = true;
+      p.phase = "end";
+    }
+    if (p.phase === "danger zone"){
+      p.draw_level();
+      p.push();
+      p.fill("rgba(255,0,0,0.2)")
+      let danger = [p.level_box[0], p.level_box[1], p.next_x-p.level_box[0],p.level_box[3]]
+      p.rect(...danger);
+      p.scale(-1,1);
+      p.rect(...danger);
+      p.pop(); // finish choose y //update text HTML element;
+
+      p.draw_danger_y()
+      if (p.check_y_flag){
+        p.total += 1;
+        if (p.bell(p.dart.x/p.scl) > p.dart.y/p.scl){
+          p.in_zig += 1;
+          p.hit = true;
+        }
+       
+        p.phase = "end";
+      }
+    }
+    if (p.phase === "top level") {
+      p.draw_level();
+      p.push();
+      p.fill("rgba(255,0,0,0.2)")
+      let danger = [p.level_box[0], p.level_box[1], -2*p.level_box[0],p.level_box[3]]
+      p.rect(...danger);
+      p.pop(); // copy from danger zone choose y. //update text HTML element;
+      p.draw_danger_y()
+      if (p.check_y_flag){
+        p.total += 1;
+        if (p.bell(p.dart.x/p.scl) > p.dart.y/p.scl){
+          p.in_zig += 1;
+          p.hit = true;
+        }
+        p.phase = "end";
+      }
+    }
+    if (p.phase === "end") {
+      zig_udpate_text()
+      div_buttons.innerHTML =`<button onclick="zig_reset()">THROW AGAIN</button>`
+      p.noLoop();
+      p.pop();
+      p.textSize(24);
+      if (p.hit){
+        p.text("HIT", p.width/2-18,p.height/2+40);
+      } else {
+        p.text("MISS",p.width/2-28,p.height/2+40);
+      }
+      p.hit = false;
+    }
+  }
+}
+p_zig_phases = new p5(zig_phases_sktch,"zig_phases_sktch");
+</script>
+
+<script>
+zig_choose_level = function() {
+  if (p_zig_phases.phase === "choose level"){
+    div_buttons.innerHTML =`<button onclick="zig_choose_x()">STOP X</button>`
+    p_zig_phases.phase = "choose x";
+  };
+}
+zig_choose_x = function() {
+  if (p_zig_phases.phase === "choose x"){
+    p_zig_phases.phase = "check safe";
+  }
+}
+zig_choose_y = function(){
+  let p = p_zig_phases;
+  if (p.phase === "danger zone" || p.phase === "top level"){
+    p.check_y_flag = true;
+  }
+}
+zig_reset = function() {
+  let p = p_zig_phases;
+  p.x_step = 1/60;
+  p.x_timer = 1-p.x_step;
+
+  p.y_step = 1/60;
+  p.y_timer = 1-p.y_step;
+
+  p.dart = {};
+  p.phase = "choose level";
+
+  p.check_y_flag = false;
+  p.loop();
+  div_buttons.innerHTML =`<button onclick="zig_choose_level()">CHOOSE LEVEL</button>`
+}
+zig_udpate_text = function(){
+  let p = p_zig_phases;
+  div_text.innerHTML =`<code>THROWS: `+p.nfc(p.total,0)+` | HITS: `+p.nfc(p.in_zig,0) +`</code>`
+}
+</script>
+
+<p>You probably got it, but just to make sure:</p>
+<ol>
+  <li>We start by choosing one of the three levels of the ziggurat at random.
+    <blockquote>
+      <p>When you get down to the nuts and bolts, this costs basically <em>nothing</em>.</p>
+    </blockquote>
+  </li>
+  <li>Now we want to throw a dart within the chosen level, so we start by getting just an <code class="language-plaintext highlighter-rouge">x</code>, like with <code class="language-plaintext highlighter-rouge">throwX</code> from earlier.</li>
+  <li>Most of the time we get an <code class="language-plaintext highlighter-rouge">x</code> in the <strong>safe zone</strong> (that’s the blue box that pops up). This means <strong>the dart’s going to be blue, no matter what</strong>. We don’t need to get a <code class="language-plaintext highlighter-rouge">y</code> in this case.
+    <blockquote>
+      <p>This is where most of the savings come from.</p>
+    </blockquote>
+  </li>
+  <li>Some of the time <code class="language-plaintext highlighter-rouge">x</code> lands in the <strong>danger zone</strong> (red boxes). Now we’re forced to get a <code class="language-plaintext highlighter-rouge">y</code> because the dart can be blue <strong>or</strong> red given the current information.</li>
+</ol>
+
+<p>This thing should only work if in the end <strong>we don’t play favorites with any area inside the ziggurat</strong>. We <em>have</em> to throw a dart that’s equally likely to land anywhere inside. Obviously, within each level everyone gets their fair share, so we just need to make sure the levels themselves are chosen in proportion to their area.</p>
+<blockquote>
+  <p>Think about it, if the top is tiny, it doesn’t make sense to go there a third of the time.</p>
+</blockquote>
+
+<p>The problem also shows us the solution: when setting up the ziggurat, we move things around to make sure <strong>the levels have the same area</strong>.</p>
+
+<h3 id="youre-still-here">You’re still here?</h3>
+
+<ul>
+  <li>I still owe you an answer regarding the <strong>tails</strong>: there’s more to the normal distribution than the range -2 to 2, but you’re not getting any of values beyond it with what we’ve done so far. So… 99% of the solution is to make the box/ziggurat wider, thereby covering more of the density. The last 1% is tricky. Not satisfied? Read the next comment then.</li>
+  <li>Most academic papers don’t end up on my recommended reading list, but George Marsaglia’s are actually fun. Check out (one of) the <a href="https://www.jstatsoft.org/article/view/v005i08">original ziggurat papers</a>. <strong>This paper is also where you find out how to set up the zigguart.</strong></li>
+  <li>The zigguart is cool, but the <a href="https://en.wikipedia.org/wiki/Alias_method">alias method</a> is the <strong>OG RNG</strong>. An algorithm that runs at \(O(1)\)? It’s one of those rare free lunches. <a href="https://www.keithschwarz.com/darts-dice-coins/">Here’s</a> a nice writeup.</li>
+</ul>]]></content><author><name>Idan Alter</name></author><category term="probability" /><category term="approximations" /><category term="RNG" /><summary type="html"><![CDATA[It’s blazingly fast and is the best RNG you’ve never heard of. Let me show you how it works with some interactive sketches. We’ll throw darts along the way!]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="/assets/post_gifs/2023-01-12-Ziggurat-Algorithm.gif" /><media:content medium="image" url="/assets/post_gifs/2023-01-12-Ziggurat-Algorithm.gif" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Discovering Euler’s Formula Like a Physicist</title><link href="/2022/12/12/Eulers-Formula.html" rel="alternate" type="text/html" title="Discovering Euler’s Formula Like a Physicist" /><published>2022-12-12T00:00:00+00:00</published><updated>2022-12-12T00:00:00+00:00</updated><id>/2022/12/12/Eulers-Formula</id><content type="html" xml:base="/2022/12/12/Eulers-Formula.html"><![CDATA[<p>Euler’s identity is widely regarded as the prime example of <strong>mathematical beauty</strong>. In this post we’ll rediscover it using high school math and a bit of common sense.
+<!--more--></p>
+
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#eulers-formula-and-eulers-identity">Euler’s formula and Euler’s identity</a></li>
+  <li><a href="#how-do-we-calculate-ex">How do we calculate \(e^x\)?</a></li>
+  <li><a href="#ok-were-good-with-ex-but-what-does-eix-even-mean">OK, we’re good with \(e^x\), but what does \(e^{ix}\) <em>even mean</em>?</a></li>
+  <li><a href="#this-is-what-youve-come-to-see">This is what you’ve come to see</a></li>
+  <li><a href="#whats-next">What’s next?</a></li>
+</ul>
+
+<script>
+  function makeGrid(p,origin, v0, v1, myColor) {
+    p.push();
+    p.stroke(myColor);
+    p.strokeWeight(0.5)
+    
+    let up = origin.copy();
+    let down = origin.copy();
+    
+    let v1mega = v1.copy().setMag(10 ** 4 * p.max(p.width, p.height));
+    
+    for (let k = 0; k <= 15; k++) {
+      
+      let upv1 = p5.Vector.add(up, v1mega);
+      let downv1 = p5.Vector.sub(up, v1mega);
+      p.line(upv1.x, upv1.y, downv1.x, downv1.y);
+        // I should calculate here the intersection of the line with the canvas, but taking a huge step up and down the line will usually cover the entire visible area. it's a hack, but it works.
+      
+      up.add(v0);
+  
+      upv1 = p5.Vector.add(down, v1mega);
+      downv1 = p5.Vector.sub(down, v1mega);
+      p.line(upv1.x, upv1.y, downv1.x, downv1.y);
+      down.sub(v0);
+    }
+    p.pop();
+  }
+</script>
+
+<h3 id="eulers-formula-and-eulers-identity">Euler’s formula and Euler’s identity</h3>
+
+<p>You’re here, so you probably know the identity is</p>
+
+\[e^{i\cdot\pi}+1=0.\]
+
+<p>It ties up all the mathematical constants we know from high school, namely \(0,1,e,\pi\) and \(i=\sqrt{-1}\) in one surprisingly neat formula. What’s even more surprising is that this <em>identity</em> is effectively a special case of Euler’s <em>formula</em>:</p>
+
+\[e^{i\cdot x}=\mathrm{cos}(x)+i\cdot\mathrm{sin}(x).\]
+
+<blockquote>
+  <p>Don’t see it?
+Plug in \(x=\pi\) and remember that \(\mathrm{cos}(\pi)=-1, \mathrm{sin}(\pi)=0.\)</p>
+</blockquote>
+
+<p>You could argue that this one is even more beautiful: the trig functions also make an appearance now. Richard Feynman went as far as to say that it’s <em>“the most remarkable formula in mathematics”</em>, but only after <a href="https://www.feynmanlectures.caltech.edu/I_22.html">having shown</a> experimentally that the formula is actually true. What I’m going to show you is heavily inspired by his take on the matter, but today <strong>you’ll help me do the experiment</strong>.</p>
+
+<h3 id="how-do-we-calculate-ex">How do we calculate \(e^x\)?</h3>
+
+<p>Using <code class="language-plaintext highlighter-rouge">Math.exp(x)</code> would be cheating! But no worries, there’s a way to do it using only:</p>
+
+<ol>
+  <li>An estimate of \(e\). \(2.718\) is good enough for me, but go ahead and use something better.</li>
+  <li>Square roots (If the <em>Babylonians</em> <a href="/2022/11/05/Babylonian-Square-Root.html">could do it</a>, so can we).</li>
+  <li>
+    <p>The exponent rules:</p>
+
+\[e^{a+b}=e^{a}\cdot e^{b},\]
+
+\[(e^{a})^{b}= e^{a \cdot b}.\]
+  </li>
+</ol>
+
+<p>Let’s calculate \(e^{3.626}\) as an example. Start by rewriting the exponent:</p>
+
+\[3.626 = 3 + 625/1000 + 1/1000.\]
+
+<blockquote>
+  <p>Why are we even doing this? Give me a sec.</p>
+</blockquote>
+
+<p>Make sure you notice that</p>
+
+\[625/1000 = 5/8,\]
+
+<p>which gives:</p>
+
+\[e^{3.626} = e^{3\ +\ 5/8 \ +\ 1/1000} = e^{3}\cdot e^{5/8}\cdot e^{1/1000}.\]
+
+<p>We can more or less easily calculate the three multiplicands on the right, but each requires his own treatment:</p>
+
+<ol>
+  <li>\(e^{3}=e\cdot e \cdot e \approx 2.718 \cdot 2.718 \cdot 2.718 \approx 20.08.\)
+    <blockquote>
+      <p>If you ever need a more accurate result, just plug in that fancier estimate of \(e\) you’ve got.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>For \(e^{5/8}\), we need to know \(e^{1/8}\) first, which we calculate by taking the square root three times in succession:</p>
+
+\[e^{1/8} = \sqrt{e^{1/4}} = \sqrt{\sqrt{e^{1/2}}} = \sqrt{\sqrt{\sqrt{e}}} \approx\]
+
+\[\approx \sqrt{\sqrt{\sqrt{2.718}}} \approx 1.133.\]
+
+    <p>Now we just multiply this number by itself five times:</p>
+
+\[e^{5/8}=(e^{1/8})^{5}\approx 1.133^{5} \approx 1.867.\]
+  </li>
+  <li>Finally, \(1/1000\) is so small that we can just say
+\(e^{1/1000}\approx e^{0} = 1.\)
+    <blockquote>
+      <p>In case \(1/1000\) is not so small after all, can you think of a way to get an even better estimate here? Hint: \(1/1000 = 1/1024 + 3/128000\).</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>Putting everything together, we get</p>
+
+\[e^{3.626} \approx  20.08\cdot 1.867 \approx 37.49,\]
+
+<p>and as I hinted above, we can get as close as we want to the actual value with better approximations and more of the same work.</p>
+
+<p>This example should make it clear that numbers like \(e^{5/8}=e^{5/2^{3}}\) play a big role here: they’re <strong>the only ones we can actually calculate!</strong> Let’s go about this methodically and find a bunch of these all at once. Specifically, I want the values of:</p>
+
+\[e^{0/16},\ e^{1/16},\ e^{2/16}, \ldots,\ e^{3}.\]
+
+<p>You can run the following code in the <a href="https://editor.p5js.org/Idan-Alter/sketches/nrNKniKQY">p5.js web editor</a>, or, you know, just take my word for it.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">e</span> <span class="o">=</span> <span class="mf">2.718281828459045</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">kth_sq_root</span> <span class="o">=</span> <span class="nx">e</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">kth_sq_root</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">kth_sq_root</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">kth_sq_root</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>In every iteration of the loop we calculate another square root of \(e\), till we get to \(e^{1/16}\):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.6487212707001282
+1.2840254166877414
+1.1331484530668263
+1.0644944589178595
+</code></pre></div></div>
+
+<p>Now we take that last number and calculate</p>
+
+\[e^{2/16}=e^{1/16}\cdot e^{1/16} \approx 1.064 \cdot 1.064.\]
+
+<p>Using this result we get the next one,</p>
+
+\[e^{3/16}=e^{2/16}\cdot e^{1/16} \approx 1.064 \cdot 1.064 \cdot 1.064,\]
+
+<p>and so on.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">let</span> <span class="nx">ex</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">let</span> <span class="nx">current</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">k</span> <span class="o">&lt;=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">x</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">k</span> <span class="o">/</span> <span class="mi">16</span><span class="p">);</span>
+  <span class="nx">ex</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">current</span><span class="p">);</span>
+  <span class="nx">current</span> <span class="o">=</span> <span class="nx">current</span> <span class="o">*</span> <span class="nx">kth_sq_root</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>plotting <code class="language-plaintext highlighter-rouge">ex</code> against <code class="language-plaintext highlighter-rouge">x</code>, we get:</p>
+
+<div id="x_ex_scatterplot"></div>
+<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+
+<script>
+let e = 2.718281828459045;
+let roots_of_e = [e];
+kth_sq_root = e;
+for (let k = 1; k <= 4; k++) {
+  kth_sq_root = Math.sqrt(kth_sq_root);
+  roots_of_e.push(kth_sq_root);
+}
+
+let x = [];
+let ex = [];
+let current = 1;
+
+for (let k = 1; k <= 3 * 16; k++) {
+  x.push(k / 16);
+  ex.push(current);
+  current = current * kth_sq_root;
+}
+
+var trace = {
+  x: x,
+  y: ex,
+  mode: 'markers',
+  type: 'scatter'
+};
+
+Plotly.newPlot('x_ex_scatterplot', [trace]);
+</script>
+
+<p>You’re saying: <em>“that’s just \(e^{x}\), I’ve seen it before, what’s the big deal?”</em> You just did all the calculations here by “hand”, take it in.</p>
+
+<p>This isn’t the end of it. We could fill in the blanks in the figure by taking \(e^{1/32}\) as <code class="language-plaintext highlighter-rouge">kth_sq_root</code> and we could run the loop a bit longer to go past \(x=3\). <strong>In short</strong>, we know how to find \(e^x\) for any \(x\ge0\), up to any desired accuracy.</p>
+
+<p>What about \(e^{-x}\)?  That one’s easy: \(e^{-x}=1/e^{x}.\)</p>
+
+<blockquote>
+  <p>If you feel like it, change the code above to calculate</p>
+
+\[e^{-1},\ldots,\ e^{-1/2^{10}},\ e^{0},\ e^{1/2^{10}},\ldots,\ e^{1}.\]
+</blockquote>
+
+<h3 id="ok-were-good-with-ex-but-what-does-eix-even-mean">OK, we’re good with \(e^x\), but what does \(e^{ix}\) <em>even mean</em>?</h3>
+
+<p>Obviously you <em>felt like it</em>, so I’m assuming you’ve seen this:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">\(k\)</th>
+      <th style="text-align: center">\(x=k/2^{10}\)</th>
+      <th style="text-align: center">\(e^{x}\)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0.000976</td>
+      <td style="text-align: center">1.000977</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">0.001953</td>
+      <td style="text-align: center">1.001955</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">0.002929</td>
+      <td style="text-align: center">1.002933</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">0.003906</td>
+      <td style="text-align: center">1.003913</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+      <td style="text-align: center">…</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">50</td>
+      <td style="text-align: center">0.048828</td>
+      <td style="text-align: center">1.050040</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Did you notice the pattern though? It looks like</p>
+
+\[e^x\approx1+x\]
+
+<p>is a really good approximation for small values of \(x\), but it gets worse very fast as \(x\) increases. This should come as no surprise to you if you’ve had some calculus. Otherwise, here’s a proof by graphics:</p>
+
+<div id="1+x_vs_ex_lineplot"></div>
+<script>
+let x1 = [];
+let ex1 = [];
+let tangent = [];
+let current_x = -1;
+let num_samp = 10 ** 3;
+let spacing = 2 / num_samp;
+for (let k = 0; k <= num_samp; k++) {
+  x1.push(current_x);
+  ex1.push(Math.exp(current_x));
+  tangent.push(1 + current_x);
+  current_x = current_x + spacing;
+}
+  var trace1 = {
+  x: x1,
+  y: ex1,
+  mode: 'line',
+  type: 'scatter',
+  name: 'e^x'
+};
+  var trace2 = {
+  x: x1,
+  y: tangent,
+  mode: 'line',
+  type: 'scatter',
+  name: '1+x'
+};
+Plotly.newPlot('1+x_vs_ex_lineplot', [trace1,trace2]);
+</script>
+
+<p>How does this apply to \(e^{ix}\)? Well, the thing is, if \(x \approx 0\), then by multiplying both sides by \(i\) we get</p>
+
+\[i \cdot x \approx i\cdot 0 = 0\]
+
+\[ix \approx 0.\]
+
+<p>Now, we just said \(e^x\approx1+x\) for small \(x\), and we just saw that \(ix\) is also small, so I’ll go out on a limb and guess that</p>
+
+\[e^{ix} \approx 1+ix\]
+
+<p>is good (when \(x\) is not too large). We still have no idea what \(e^{ix}\) means in general, but having written the rest of this post already, I can tell you that we don’t need anything more to see <strong>Euler’s formula materialize</strong>.</p>
+
+<h3 id="this-is-what-youve-come-to-see">This is what you’ve come to see</h3>
+
+<p>The recipe is as follows:</p>
+
+<ol>
+  <li>
+    <p>\(0.1\) is a small number, so say that</p>
+
+\[e^{0.1i} \approx 1+0.1i.\]
+  </li>
+  <li>
+    <p>Use the exponent rule a lot:</p>
+    <ul>
+      <li>\(e^{0.2i} = e^{0.1i}\cdot e^{0.1i} \approx (1+0.1i)\cdot (1+0.1i)\)</li>
+      <li>\(e^{0.3i} = e^{0.2i}\cdot e^{0.1i} \approx (1+0.1i)\cdot (1+0.1i)\cdot (1+0.1i)\)</li>
+      <li>
+        <p>\(e^{0.4i} = e^{0.3i}\cdot e^{0.1i} \approx (1+0.1i)\cdot (1+0.1i)\cdot (1+0.1i)\cdot (1+0.1i)\)</p>
+
+\[\vdots\]
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>Doesn’t sound too complicated right? We just need to keep track of which number we’ve just calculated and keep on multiplying with \(1+0.1i\):</p>
+
+\[(a+ib)(1+0.1i) = a-0.1b +i(0.1a+b).\]
+
+<p>In code it should look like this:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// e^(0.1ni) = a_n + ib_n</span>
+<span class="kd">const</span> <span class="nx">a_0</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">b_0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="nx">iterate</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">a_n</span><span class="p">,</span><span class="nx">b_n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">a_n1</span> <span class="o">=</span> <span class="nx">a_n</span> <span class="o">-</span> <span class="mf">0.1</span><span class="o">*</span><span class="nx">b_n</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">b_n1</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">*</span><span class="nx">a_n</span> <span class="o">+</span> <span class="nx">b_n</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">a_n1</span><span class="p">,</span><span class="nx">b_n1</span><span class="p">]</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The rest is just graphics.</p>
+
+<div class="centerme">
+<button onclick="animateIterations()">ITERATE ONCE</button>
+<button style="margin-bottom: 5px" onclick="animateIterations_10()">ITERATE 10 TIMES</button>
+<button style="margin-bottom: 5px" onclick="animateIterations_reset()">RESET</button>
+<div style="text-align: center;" id="complex_plane"> </div>
+<figcaption>Check out the code for this sketch <a href="https://editor.p5js.org/Idan-Alter/sketches/2jIbqBVp9">here</a>.</figcaption>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+
+<script>
+  let sketch_e01 = function (p) {
+  p.x = 0.1;
+  // e^ix = 1 + ix = a +ib
+  p.a = 1;
+  p.b = p.x;
+  p.a_n = 1;
+  p.b_n = 0;
+  // e^inx = a_n + ib_n
+  p.iterate = function () {
+    return [p.a_n * p.a - p.b_n * p.b, p.a_n * p.b + p.b_n * p.a];
+  };
+  p.setup = function () {
+    p.createCanvas(300, 300);
+    p.background(220);
+    p.fill(0);
+    p.line(p.width / 2, 0, p.width / 2, p.height);
+    p.line(0, p.height / 2, p.width, p.height / 2);
+    p.translate(p.width / 2, p.height / 2);
+    p.textSize(18);
+    p.text("1", 85, 25);
+    p.text("i", -15, -80);
+    p.scale(1, -1);
+    p.strokeWeight(7);
+    p.point(100, 0);
+    p.point(0, 100);
+    p.origin = p.createVector(0,0);
+    p.v0 = p.createVector(0,50);
+    p.v1 = p.createVector(50,0);
+    makeGrid(p,p.origin, p.v0, p.v1,"rgba(0,0,0,0.3)");
+    makeGrid(p,p.origin, p.v1, p.v0,"rgba(0,0,0,0.3)");
+  };
+}
+let p5complex_plane = new p5(sketch_e01,'complex_plane');
+</script>
+
+<script>
+  flag_first = true;
+  function animateIterations_reset(){
+    flag_first = true;
+    p5complex_plane.remove();
+    p5complex_plane = new p5(sketch_e01,'complex_plane');
+  }
+  function animateIterations(){
+    if (flag_first === true) {
+      p5complex_plane.remove();
+      p5complex_plane = new p5(exponentIterations,'complex_plane');
+      flag_first = false;
+    }
+    p5complex_plane.draw_one();
+  }
+  function animateIterations_10(){
+    if (flag_first === true) {
+      p5complex_plane.remove();
+      p5complex_plane = new p5(exponentIterations,'complex_plane');
+      flag_first = false;
+    }
+    for (let k = 0; k<=9;k++) {
+      p5complex_plane.draw_one();
+      p5complex_plane.redraw();
+    };
+  }
+
+  let exponentIterations = function (p) {
+  p.x = 0.1;
+  // e^ix = 1 + ix = a +ib
+  p.a = 1;
+  p.b = p.x;
+  p.a_n = 1;
+  p.b_n = 0;
+  // e^inx = a_n + ib_n
+  p.iterate = function () {
+    return [p.a_n * p.a - p.b_n * p.b, p.a_n * p.b + p.b_n * p.a];
+  };
+  p.setup = function () {
+    p.createCanvas(300, 300);
+    p.background(220);
+    p.line(p.width / 2, 0, p.width / 2, p.height);
+    p.line(0, p.height / 2, p.width, p.height / 2);
+    p.origin = p.createVector(p.width / 2,p.height/2);
+    p.v0 = p.createVector(0,50);
+    p.v1 = p.createVector(50,0);
+    makeGrid(p,p.origin, p.v0, p.v1,"rgba(0,0,0,0.3)");
+    makeGrid(p,p.origin, p.v1, p.v0,"rgba(0,0,0,0.3)");
+  };
+  p.draw = function (){
+  }
+  p.draw_one = function () {
+    e_inx = p.iterate();
+    p.a_n = e_inx[0];
+    p.b_n = e_inx[1];
+    p.translate(p.width / 2, p.height / 2);
+    p.scale(1, -1);
+    p.scale(100); 
+    p.strokeWeight(1 / 20);
+    p.point(p.a_n, p.b_n);
+  };
+};
+</script>
+
+<p>Cool spiral… But how does this relate to Euler’s formula? We just drew (what we believe to be) <strong>the left hand side of</strong></p>
+
+\[e^{ix}=\mathrm{cos}(x)+i\cdot \mathrm{sin}(x),\ \ x = 0,0.1,0.2,..\]
+
+<p>Let’s compare it head to head with the RHS. We need to keep track of the iteration number, <code class="language-plaintext highlighter-rouge">n</code>, and calculate</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">cos_n</span> <span class="o">=</span> <span class="nx">cos</span><span class="p">(</span><span class="nx">n</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="nx">sin_n</span> <span class="o">=</span> <span class="nx">sin</span><span class="p">(</span><span class="nx">n</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span></code></pre></figure>
+
+<p>I’ve colored these points red here:</p>
+
+<div class="centerme">
+<button onclick="addSinCos()">GO</button>
+<button style="margin-bottom:5px" onclick="addSinCos_reset()">RESET</button>
+<div style="text-align: center; margin-bottom: 15px;" id="LHS_vs_RHS"> </div>
+</div>
+
+<script>
+  let p5LHS_vs_RHS = new p5(sketch_e01,'LHS_vs_RHS');
+  function addSinCos(){
+    if (p5LHS_vs_RHS !== null){
+      p5LHS_vs_RHS.remove()
+    }
+    p5LHS_vs_RHS = new p5(exponentIterationsWithRHS,'LHS_vs_RHS');
+  }
+  function addSinCos_reset(){
+    p5LHS_vs_RHS.remove()
+    p5LHS_vs_RHS = new p5(sketch_e01,'LHS_vs_RHS');
+  }
+  let exponentIterationsWithRHS = function (p) {
+  exponentIterations(p)
+  p.n = 0
+  p.draw = function () {
+    e_inx = p.iterate();
+    p.a_n = e_inx[0];
+    p.b_n = e_inx[1];
+    p.translate(p.width / 2, p.height / 2);
+    p.scale(1, -1);
+    p.scale(100); 
+    p.strokeWeight(1 / 20);
+    p.stroke("black");
+    p.point(p.a_n, p.b_n);
+    p.n++;
+    p.cos_xn = p.cos(p.n * p.x);
+    p.sin_xn = p.sin(p.n * p.x);
+    p.stroke("red");
+    p.point(p.cos_xn, p.sin_xn);
+  };
+};
+</script>
+
+<p>Somewhat disappointing, no? Why do the black and red points diverge?</p>
+
+<p>Do you remember I said \(0.1\) is small, so \(e^{0.1i} \approx 1+0.1i\) should be true? Maybe \(0.1\) is just <strong>not small enough</strong>! Maybe. <strong>You tell me:</strong></p>
+
+<div style="text-align: center;">
+<input type="range" min="0.001" max="0.3" value="0.1" step="0.001" width="100%" id="x_range" />
+
+<div style="text-align: center; margin-bottom: 5px;" id="output"></div>
+<button style="margin-bottom: 5px;" onclick="runFinalSketch()">GO</button>
+</div>
+
+<script>
+  let slider = document.getElementById("x_range");
+  let output = document.getElementById("output");
+  output.innerHTML = `<code> 1 + ` + slider.value+`i<\code>`;
+  slider.oninput = function() {
+  output.innerHTML = `<code> 1 + ` + this.value+`i<\code>`;
+}
+</script>
+
+<div style="text-align: center; margin-bottom: 15px;" id="final_sketch"> </div>
+<script>
+  let p5final = new p5(sketch_e01,'final_sketch');;
+  function runFinalSketch() {
+    if (p5final !== null) {
+      p5final.remove();
+    };
+    p5final = new p5(final_sketch_closure,'final_sketch');
+  }
+  let final_sketch_closure = function (p) {
+      exponentIterationsWithRHS(p);
+      p.x = slider.value;
+      p.b = slider.value;
+      p.setup = function () {
+        p.createCanvas(300, 300);
+        p.background(220);
+        p.line(p.width / 2, 0, p.width / 2, p.height);
+        p.line(0, p.height / 2, p.width, p.height / 2);
+        p.frameRate(30*0.1/p.x)
+        p.origin = p.createVector(p.width / 2,p.height/2);
+        p.v0 = p.createVector(0,50);
+        p.v1 = p.createVector(50,0);
+        makeGrid(p,p.origin, p.v0, p.v1,"rgba(0,0,0,0.3)");
+       makeGrid(p,p.origin, p.v1, p.v0,"rgba(0,0,0,0.3)");
+      };
+      };
+</script>
+
+<p>Take the slider <strong>all the way to the left</strong> and it’s right on the money! That’s it, we’re done here.</p>
+
+<h3 id="whats-next">What’s next?</h3>
+
+<ul>
+  <li>We now have <strong>reasonable evidence</strong> that Euler’s formula is true, but how do we <strong>prove</strong> it? I particularly like Euler’s original <a href="https://en.wikipedia.org/wiki/Euler%27s_formula#Using_power_series">proof</a>. Also, definitely watch <a href="https://www.youtube.com/watch?v=v0YEaeIClKY">the video by 3Blue1Brown</a> for another intuitive explanation, using a completely different approach.</li>
+  <li>Some would argue that Euler’s formula is even more beautiful with \(\tau\) instead of \(\pi\). Read all about it (and much more) <a href="https://tauday.com/tau-manifesto">here</a>.</li>
+</ul>
+
+<p>Finally, some challenges to think about:</p>
+<ul>
+  <li>Look closely at the last sketch. If you’re patient enough, you’ll see the black points diverge away from the origin, while the red ones stay on a circle. This always happens. Can you figure out why?
+    <blockquote>
+      <p>Hint: calculate the distance from the origin of \(1+ix,(1+ix)^{2},\ldots\)</p>
+    </blockquote>
+  </li>
+  <li>It looks as if the black and red points go around <strong>in phase</strong>: they always complete a full circle at the same time. Can you use this “fact” to make the black points better approximate \(e^{ix}\)?
+    <blockquote>
+      <p>Check your idea by changing the function <code class="language-plaintext highlighter-rouge">iterate</code> and rerunning the sketch.</p>
+    </blockquote>
+  </li>
+</ul>]]></content><author><name>Idan Alter</name></author><category term="approximation" /><category term="complex-numbers" /><summary type="html"><![CDATA[Euler’s identity is widely regarded as the prime example of mathematical beauty. In this post we’ll rediscover it using high school math and a bit of common sense.]]></summary></entry><entry><title type="html">The Geometry of Leibniz’s Product Rule</title><link href="/2022/11/16/Leibniz-Product-Rule.html" rel="alternate" type="text/html" title="The Geometry of Leibniz’s Product Rule" /><published>2022-11-16T00:00:00+00:00</published><updated>2022-11-16T00:00:00+00:00</updated><id>/2022/11/16/Leibniz-Product-Rule</id><content type="html" xml:base="/2022/11/16/Leibniz-Product-Rule.html"><![CDATA[<p>In high school you learned by rote how to calculate the derivative of <em>“f times g”</em>. In first year calculus you proved it mathematically. But can you say off the cuff why it <em>should</em> be true?
+<!--more--></p>
+
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#credit-where-credit-is-due">Credit where credit is due</a></li>
+  <li><a href="#this-is-going-to-be-short">This is going to be short</a></li>
+  <li><a href="#bonus-round">Bonus round</a></li>
+</ul>
+
+<h3 id="credit-where-credit-is-due">Credit where credit is due</h3>
+
+<p>You know the rule,</p>
+
+\[(f\cdot g)^\prime = f^\prime \cdot g +f\cdot g^\prime .\]
+
+<p>It has a sweet geometric interpretation that we’re going to make into a p5.js (<a href="/2022/11/01/JavaScript-Miscellanea.html#p5js">What’s p5?</a>) interactive sketch here. This is pretty much general knowledge (<a href="https://en.wikipedia.org/wiki/Product_rule">Wiki</a>, <a href="https://www.3blue1brown.com/lessons/chain-rule-and-product-rule">3Blue1Brown</a>), but I should mention I first saw it in a book by <a href="https://en.wikipedia.org/wiki/Vladimir_Arnold">Vladimir Arnol’d</a>. Arnol’d had a lot to say about how we teach math these days, and if what you see in this blog resonates with you, definitely check out his work.</p>
+
+<h3 id="this-is-going-to-be-short">This is going to be short</h3>
+
+<p>Let’s get to it. First, we draw \(f\cdot g\) as the <strong>area</strong> of a rectangle with sides \(f\) and \(g\) and imagine that both are actually some nice functions of \(t\). Something like this:</p>
+
+<figure class="centerme">  
+  <div id="fg"> </div>
+  <figcaption class="centerme">
+  Run this sketch yourself in the <a href="https://editor.p5js.org/Idan-Alter/sketches/0zK3E0gow">p5.js web editor</a>.
+  </figcaption>
+  </figure>
+
+<script>
+  function skecth1(p) {
+    p.f = (t) => Math.sqrt(t + 2);
+    p.g = (t) => Math.sin(t);
+    p.t = 0.2;
+    p.setup = function () {
+      p.createCanvas(350, 180);
+      p.textSize(16);
+    };
+    p.draw = function () {
+      p.background(220);
+      let ft = 150 * p.f(p.t);
+      let gt = 150 * p.g(p.t);
+      p.t = p.t + 0.01;
+      p.text("t = " + p.nfc(p.t, 2), p.width / 2 - 35, 20);
+      p.translate(5, p.height - 5);
+      p.scale(1, -1);
+      p.beginShape();
+      p.vertex(0, 0);
+      p.vertex(ft, 0);
+      p.vertex(ft, gt);
+      p.vertex(0, gt);
+      p.endShape(p.CLOSE);
+      p.scale(1, -1);
+      p.textSize(16);
+      p.text("f(t) = " + p.nfc(p.f(p.t), 2), ft / 2 - 30, -5);
+      p.text("g(t) = " + p.nfc(p.g(p.t), 2), 5, -gt / 2);
+      if (p.t >= 2.9) {
+        p.t = 0.2;
+      }
+    };
+  }
+  let fgsketch = new p5(skecth1,"fg");
+  </script>
+
+<p>Now, we freeze frame the sketch above, say at \(t_0 = 0.7\), and scrub forward very slowly. I’ll let you do it:</p>
+
+<figure class="centerme">  
+<input type="range" min="0" max="1.2" value="0" step="0.01" width="100%" id="dt_range" />
+<div id="sketch2div"> </div>
+<button onclick="addColor()">ADD COLOR</button>
+<button onclick="removeColor()">REMOVE COLOR</button>
+</figure>
+
+<script>
+function addColor(){
+  sketch2obj.color_flag = true;
+}
+
+function removeColor(){
+  sketch2obj.color_flag = false;
+}
+
+let slider = document.getElementById("dt_range");
+slider.oninput = function() {
+    sketch2obj.dt = parseFloat(slider.value);
+};
+</script>
+
+<script>
+sketch2 = function (p) {
+  p.f = (t) => Math.sqrt(t + 2);
+  p.g = (t) => Math.sin(t);
+  p.t = 0.7;
+  p.dt = 0;
+  p.color_flag = false;
+
+  p.setup = function () {
+    p.createCanvas(350, 180);
+    p.textSize(16);
+  };
+
+  p.ft = 150 * p.f(p.t);
+  p.gt = 150 * p.g(p.t);
+
+  p.draw = function () {
+    p.background(220);
+    p.text(
+      "t = " + p.nfc(p.t, 2) + " + " + p.nfc(p.dt, 2),
+      p.width / 2 - 50,
+      20
+    );
+
+    p.translate(5, p.height - 5);
+    p.scale(1, -1);
+    p.beginShape();
+    p.vertex(0, 0);
+    p.vertex(p.ft, 0);
+    p.vertex(p.ft, p.gt);
+    p.vertex(0, p.gt);
+    p.endShape(p.CLOSE);
+
+    p.fdt = 150 * p.f(p.t + p.dt);
+    p.gdt = 150 * p.g(p.t + p.dt);
+
+    if (p.color_flag){
+    p.push();
+    p.fill("rgba(255,0,0,0.5)");
+    p.beginShape();
+    p.vertex(p.ft, 0);
+    p.vertex(p.ft, p.gdt);
+    p.vertex(p.fdt, p.gdt);
+    p.vertex(p.fdt, 0);
+    p.endShape(p.CLOSE);
+
+    p.beginShape();
+    p.vertex(0, p.gt);
+    p.vertex(0, p.gdt);
+    p.vertex(p.fdt, p.gdt);
+    p.vertex(p.fdt, p.gt);
+    p.endShape(p.CLOSE);
+
+    p.fill(0);
+    p.beginShape();
+    p.vertex(p.ft, p.gt);
+    p.vertex(p.ft, p.gdt);
+    p.vertex(p.fdt, p.gdt);
+    p.vertex(p.fdt, p.gt);
+    p.endShape(p.CLOSE);
+    p.pop();
+    } else {
+    p.beginShape();
+    p.vertex(0, 0);
+    p.vertex(0, p.gdt);
+    p.vertex(p.fdt, p.gdt);
+    p.vertex(p.fdt, 0);
+    p.endShape(p.CLOSE);
+    };
+    p.scale(1, -1);
+    p.text("f(t) = f(0.7) + " + p.nfc((p.fdt-p.ft)/150, 2), p.fdt / 2 - 65, -5);
+    p.text("g(t) = g(0.7) + " + p.nfc((p.gdt-p.gt)/150, 2), 5, -p.gdt / 2);
+  };
+};
+let sketch2obj = new p5(sketch2,"sketch2div");
+</script>
+
+<p>How has the area \(f(t)g(t)\) changed? Put some color in that sketch and you’ll see the added area conveniently divided into three small-ish rectangles:</p>
+<ul>
+  <li>The red one up top has long side \(f(0.7)\) and the short side is \(g(t) - g(0.7),\) AKA what’s currently written up there after “g(t) = g(0.7) + “. The area then, is the product of the two.</li>
+  <li>Similarly, the red one to the right has area  \(g(0.7) \cdot (f(t) - f(0.7))\).</li>
+  <li>That leaves the black area, but you can see right now that it’s nothing in comparison to the red area, at least when  \(t\) is close to \(0.7\), so let’s not bother with it anymore.
+    <blockquote>
+      <p>This is not mathematically rigorous, but you’re not here for rigor, are you?</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>So we know by how much the area \(f(t)g(t)\) grew, but we’re after the derivative, the <strong>rate</strong> of growth: per unit of \(t\), how much area did we get? Well, \(t\) grew by \(t-0.7\) units of whatever, so after neglecting the black area, the rate is:</p>
+
+\[\frac{\Delta\mathrm{Area}}{\Delta t}=\frac{f(0.7)(g(t)-g(0.7)) + g(0.7)(f(t)-f(0.7))}{t-0.7}.\]
+
+<p>Let me distribute the denominator, here:</p>
+
+\[\frac{\Delta\mathrm{Area}}{\Delta t}=f(0.7)\frac{g(t)-g(0.7)}{t-0.7} + g(0.7)\frac{f(t)-f(0.7)}{t-0.7}.\]
+
+<p>Now you see where it goes?  Take the limit \(t\to 0.7\) and you get:</p>
+
+\[(fg)^\prime = fg^\prime + gf^\prime.\]
+
+<blockquote>
+  <p>I should say that everything is evaluated at \(0.7\), but obviously the result generalizes to any \(t_0\).</p>
+</blockquote>
+
+<p>To summarize in words what we’ve just shown:</p>
+<ul>
+  <li>the rate of change of the entire area \(fg\) is (up to a negligible error) the rate of change of the red areas.</li>
+  <li>Each of these red rectangles grows <strong>proportionally</strong> to the length of only <em>one</em> of its sides, because the other one is fixed. The fixed side is the constant of proportionality.</li>
+  <li>The side lengths are \(f\) and \(g\), and they alternate roles between rectangles.</li>
+</ul>
+
+<h3 id="bonus-round">Bonus round</h3>
+<p>It’s worth mentioning that all of this works perfectly fine when one (or two) of \(f\), \(g\) is decreasing:</p>
+
+<figure class="centerme"> 
+
+<div style="margin-bottom: 5px;">
+<button onclick="sketch3go()">GO \ STOP</button>
+</div>
+<div id="sketch3div"> </div>
+<figcaption class="centerme">
+The code is <a href="https://editor.p5js.org/Idan-Alter/sketches/b_1K-6Sr1">here</a>.
+</figcaption>
+</figure>
+
+<p>This time we need to <em>subtract</em> the blue area. Conveniently, \(g^\prime\) is negative, so the formula stays the same.</p>
+
+<script>
+  gostoptoggle = true;
+function sketch3go(){
+  if (gostoptoggle){
+    sketch3obj.loop()
+  } else {
+    sketch3obj.noLoop()
+  }
+  gostoptoggle = !gostoptoggle;
+}
+function sketch3(p){
+ 
+p.f = (t) => Math.sqrt(t + 2);
+p.g = (t) => Math.sin(t);
+p.t = 1.7;
+p.dt = 0;
+
+p.setup = function() {
+  p.createCanvas(350, 180);
+  p.textSize(16);
+  p.noLoop()
+};
+
+p.ft = 150 * p.f(p.t);
+p.gt = 150 * p.g(p.t);
+p.draw = function() {
+  p.background(220);
+  p.text("t = " + p.nfc(p.t, 2) + " + " + p.nfc(p.dt, 2), p.width / 2 - 70, 20);
+
+  p.translate(5, p.height - 5);
+  p.scale(1, -1);
+  p.beginShape();
+  p.vertex(0, 0);
+  p.vertex(p.ft, 0);
+  p.vertex(p.ft, p.gt);
+  p.vertex(0, p.gt);
+  p.endShape(p.CLOSE);
+
+  p.fdt = 150 * p.f(p.t + p.dt);
+  p.gdt = 150 * p.g(p.t + p.dt);
+
+  p.push();
+  p.fill("rgba(255,0,0,0.5)");
+
+  p.beginShape();
+  p.vertex(p.ft, 0);
+  p.vertex(p.ft, p.gdt);
+  p.vertex(p.fdt, p.gdt);
+  p.vertex(p.fdt, 0);
+  p.endShape(p.CLOSE);
+
+  p.fill("rgba(0,0,255,0.5)");
+  p.beginShape();
+  p.vertex(0, p.gt);
+  p.vertex(0, p.gdt);
+  p.vertex(p.fdt, p.gdt);
+  p.vertex(p.fdt, p.gt);
+  p.endShape(p.CLOSE);
+
+  p.fill(0);
+  p.beginShape();
+  p.vertex(p.ft, p.gt);
+  p.vertex(p.ft, p.gdt);
+  p.vertex(p.fdt, p.gdt);
+  p.vertex(p.fdt, p.gt);
+  p.endShape(p.CLOSE);
+  p.pop();
+
+  p.scale(1, -1);
+  p.text("f(t) = f(1.7) + " + p.nfc((p.fdt-p.ft)/150, 2), p.fdt / 2 - 30, -5);
+  p.text("g(t) = g(1.7) - " + p.nfc((p.gt-p.gdt)/150, 2), 5, -p.gdt / 2);
+  p.dt = p.dt + 0.006;
+  if (p.dt > 0.6) {
+    p.dt = 0;
+  };
+};
+}
+let sketch3obj = new p5(sketch3, "sketch3div")
+</script>]]></content><author><name>Idan Alter</name></author><category term="calculus" /><category term="geometry" /><summary type="html"><![CDATA[In high school you learned by rote how to calculate the derivative of “f times g”. In first year calculus you proved it mathematically. But can you say off the cuff why it should be true?]]></summary></entry><entry><title type="html">How Did They Calculate Square Roots in 1700 BCE?</title><link href="/2022/11/05/Babylonian-Square-Root.html" rel="alternate" type="text/html" title="How Did They Calculate Square Roots in 1700 BCE?" /><published>2022-11-05T00:00:00+00:00</published><updated>2022-11-05T00:00:00+00:00</updated><id>/2022/11/05/Babylonian-Square-Root</id><content type="html" xml:base="/2022/11/05/Babylonian-Square-Root.html"><![CDATA[<p>The <em>Babylonian method</em> might be the first known algorithm for approximating square roots. In this post we’re going to visualize its amazing geometric interpretation.</p>
+
+<!--more-->
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#exposition-belongs-on-wikipedia">Exposition belongs on Wikipedia</a></li>
+  <li><a href="#but-pythagoras-was-greek">But… Pythagoras was Greek!</a></li>
+  <li><a href="#this-is-all-you-need-to-see-basically">This is all you need to see, basically</a></li>
+  <li><a href="#final-thoughts-and-random-sqrt-trivia">Final thoughts and random sqrt trivia</a></li>
+</ul>
+
+<h3 id="exposition-belongs-on-wikipedia">Exposition belongs on Wikipedia</h3>
+<p>So, in case you’re not aware, there’s a Babylonian clay tablet from ~1700 BCE with an incredibly accurate approximation of \(\sqrt{2}\) written on it <a href="https://en.wikipedia.org/wiki/YBC_7289">[Wiki]</a>. This is a big thing: it seems like they knew it’s just an approximation of (what we call today) an irrational number. More than 1,000 years later, the Pythagoreans allegedly drowned Hippasus because he rediscovered this fact <a href="https://en.wikipedia.org/wiki/Hippasus">[more Wiki]</a>. Obviously <code class="language-plaintext highlighter-rouge">Math.sqrt(2)</code> didn’t exist yet, so how did they calculate it?</p>
+
+<h3 id="but-pythagoras-was-greek">But… Pythagoras was Greek!</h3>
+<p>To approximate \(\sqrt{2}\) like they do in Babylon we need to think like the ancients, and they were really big on <strong>geometry</strong>. What’s \(\sqrt{2}\) in geometry? Well, the usual suspect is the hypotenuse of a right triangle with two legs of length 1.</p>
+
+<p>Let’s draw one in p5.js:
+<script type="text/p5" data-height="300" data-preview-width="300">
+createCanvas(210, 210);
+background(220);
+triangle(20, 80, 20, 180, 120, 180);
+// The vertices of the triangle are:
+// (20,80), (20, 180), and (120, 180). 
+text('a', 60, 195);
+text('b', 5, 130);
+text('c', 70, 120);
+</script>
+Most of the numbers you see in this code point to locations in that gray canvas on the right. We start from the top-left and count in pixels. Since pixels are so small, let’s say that 100 of them are worth one unit of length. Then, by the Pythagorean theorem,</p>
+
+\[c^2 = a^2 + b^2 = 1^2+1^2\]
+
+\[c = \sqrt{2}.\]
+
+<p>There are over 300 proofs of Pythagoras’ theorem, and if you’ve seen a few of them you know that \(c^2\) usually comes into play as the area of a square sitting on the hypotenuse. Da Vinci’s proof is one example of this, expertly animated on <a href="https://www.youtube.com/watch?v=ZlGaQdNRdqA">YouTube</a>.</p>
+
+<p>The Babylonian method is all about finding this <strong>square</strong> with area 2:</p>
+
+<p><strong>Step 1:</strong> start with a <strong>rectangle</strong> of area 2, but one with side lengths that you can actually calculate, like 1 for the short side and 2 for the long side.</p>
+
+<script type="text/p5" data-height="300" data-preview-width="300">
+createCanvas(210, 210);
+background(220);
+let a = 1;
+let b = 2;
+rect(5, 5, a*100, b*100);
+text('a', 50, 200);
+text('b', 10, 105);
+</script>
+
+<p><strong>Step 2:</strong> the short side is obviously too short, so let’s make it a bit bigger. How much bigger? Let’s just split the difference.</p>
+
+<script type="text/p5" data-height="300" data-preview-width="300">
+createCanvas(210, 210);
+background(220);
+let a = 1;
+let b = 2;
+
+//This is new:
+let new_side = (a+b)/2;
+rect(5, 5, new_side*100, b*100);
+</script>
+
+<p>OK, but now the rectangle is too big! Its area is <code class="language-plaintext highlighter-rouge">new_side*b</code> and that’s surely more than 2. Patience please, we’re not done yet.</p>
+
+<p><strong>Step 3:</strong> shorten that long side so that the total area is still 2.</p>
+
+<script type="text/p5" data-height="330" data-preview-width="300">
+createCanvas(210, 210);
+background(220);
+let a = 1;
+let b = 2;
+
+let new_side = (a+b)/2;
+
+//Now this is new:
+let new_side2 = 2/new_side;
+rect(5, 5, new_side*100, new_side2*100);
+</script>
+
+<p>Are the sides equal?</p>
+<ul>
+  <li>Yes? Congratulations, you just found a square of area 2. Conveniently, you also know its side length, <code class="language-plaintext highlighter-rouge">new_side</code>, that’s your \(\sqrt{2}\).</li>
+  <li>Oh, they’re not? Then back to <strong>Step 2:</strong> make the short side a bit bigger…</li>
+</ul>
+
+<h3 id="this-is-all-you-need-to-see-basically">This is all you need to see, basically</h3>
+
+<p>Let’s see the method in play. I already drew that first rectangle, it’s up to you to make it <button onclick="updateSketch()">GO</button> (click a bunch of times). Also useful:  <button onclick="resetSketch()">RESET</button></p>
+
+<figure class="centerme">
+<div id="long_side"></div>
+<div id="short_side"></div>
+<div id="sketch_div"> </div>
+<figcaption> You can run this sketch yourself in the <a href="https://editor.p5js.org/Idan-Alter/sketches/wEjTnaAz0">p5.js web editor </a>BTW.</figcaption>
+</figure>
+<script>
+  let sqrt_sketch_fact = function (p) {
+  p.a = 1;
+  p.b = 2;
+  p.scl = 120;
+  p.shift = 5;
+  p.bckgrnd = 220
+  p.setup = function () {
+    p.createCanvas(520, 250);
+    p.background(220);
+    p.rect(p.shift, 5, p.a * p.scl, p.b * p.scl);
+    p.frameRate(1);
+    p.noLoop()
+  }
+  p.iterate = function() {
+    p.shift += p.a * p.scl;
+    p.new_side = (p.a + p.b) / 2;
+    p.new_side2 = 2 / p.new_side;
+
+    p.a = p.min(p.new_side, p.new_side2);
+    p.b = p.max(p.new_side, p.new_side2);
+
+    if (p.shift + p.a * p.scl > p.width) {
+      p.shift = 5;
+      p.bckgrnd -= 50
+      p.background(p.bckgrnd);
+    }
+    p.rect(p.shift, 5, p.a * p.scl, p.b * p.scl);
+  }
+};
+  function ExtractSideLenghts(){
+  long_side.innerHTML = `<code>long side = ` + sqrt_sketch.nfc(sqrt_sketch.b,15) +`<\code>`;
+  short_side.innerHTML = `<code>short side = ` + sqrt_sketch.nfc(sqrt_sketch.a,15) +`<\code>`;
+  }
+  let sqrt_sketch = new p5(sqrt_sketch_fact,'sketch_div');
+  ExtractSideLenghts()
+
+  function resetSketch(){
+  sqrt_sketch.remove()
+  sqrt_sketch = new p5(sqrt_sketch_fact,'sketch_div');ExtractSideLenghts()
+  }
+
+  function updateSketch(){
+  sqrt_sketch.iterate()
+  ExtractSideLenghts()
+  }
+</script>
+
+<blockquote>
+  <p>Up for a challenge? Rewrite the code to calculate the square root of any given <code class="language-plaintext highlighter-rouge">x</code>. If you still draw squares after a few iterations, it works.</p>
+
+  <p>Are you <strong><em>sure</em></strong> it works? Did you check with <code class="language-plaintext highlighter-rouge">x</code> smaller than 1?</p>
+</blockquote>
+
+<h3 id="final-thoughts-and-random-sqrt-trivia">Final thoughts and random sqrt trivia</h3>
+
+<ul>
+  <li>We only used basic arithmetic for the calculations, cool huh? Even cooler is the fact that almost 4,000 years later, the algorithm behind <code class="language-plaintext highlighter-rouge">Math.sqrt(2)</code> is not <em>that much</em> different.</li>
+  <li>Does it always work? Yes. Why? <a href="https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method">[Wiki]</a>.</li>
+  <li>Look at this line of code:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> i  = * ( long * ) &amp;y; // evil floating point bit level hacking
+</code></pre></div>    </div>
+    <p>This is part of the “Quake III” algorithm for the (inverse) square root, and it gets even better. I obviously can’t write about approximating square roots without mentioning this immortal stroke of genius. Read up on it <a href="https://en.wikipedia.org/wiki/Fast_inverse_square_root">[Wiki]</a>, or watch this <a href="https://www.youtube.com/watch?v=p8u_k2LIZyo">great video</a> if you’re not afraid of C and its pointers, but at the very least, read this <a href="https://www.explainxkcd.com/wiki/index.php/664:_Academia_vs._Business">xkcd comic</a>.</p>
+  </li>
+  <li>Did you know that the A series of paper sizes, which includes the GOAT, A4 paper, is designed such that the long side is exactly \(\sqrt{2}\) times the length of the short side. Why? It has to do with preserving the ratio when you fold it in half <a href="https://en.wikipedia.org/wiki/Paper_size#A_series">[Wiki]</a>.</li>
+</ul>]]></content><author><name>Idan Alter</name></author><category term="approximation" /><category term="algorithms" /><category term="geometry" /><summary type="html"><![CDATA[The Babylonian method might be the first known algorithm for approximating square roots. In this post we’re going to visualize its amazing geometric interpretation.]]></summary></entry><entry><title type="html">JavaScript Miscellanea</title><link href="/2022/11/01/JavaScript-Miscellanea.html" rel="alternate" type="text/html" title="JavaScript Miscellanea" /><published>2022-11-01T00:00:00+00:00</published><updated>2022-11-01T00:00:00+00:00</updated><id>/2022/11/01/JavaScript-Miscellanea</id><content type="html" xml:base="/2022/11/01/JavaScript-Miscellanea.html"><![CDATA[<p>Technical details that get in the way instead of helping go here. What’s p5.js? How to orient the canvas? Etc.
+<!--more--></p>
+
+<h4 id="contents">Contents:</h4>
+<ul>
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li><a href="#p5js">p5.js</a></li>
+  <li><a href="#drawing-a-cartesian-plane">Drawing a Cartesian plane</a></li>
+  <li><a href="#plotlyjs">plotly.js</a></li>
+</ul>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>I’ll be assuming throughout this blog that you know a bit of coding, just the basic concepts:</p>
+<ul>
+  <li>variables</li>
+  <li>flow control</li>
+  <li>functions</li>
+</ul>
+
+<p>If that doesn’t mean anything to you, maybe come back here later.  The <a href="https://thecodingtrain.com/guides/getting-started">Coding Train</a> is a good place to start learning JavaScript, but it doesn’t really matter which language you learn, the knowledge is transferable.</p>
+
+<h3 id="p5js">p5.js</h3>
+
+<p>p5.js is a framework focused on <em>“on making coding accessible”</em>. For me, that means I can write cool interactive visualizations (<strong>sketches</strong>, as they are called), with code that’s basically self explanatory. Check it out:</p>
+
+<script type="text/p5" data-height="350" data-preview-width="350">
+function setup() {
+  createCanvas(200, 200);
+  background(220);
+  line(width/2, 0, width/2, height);
+  line(0, height/2, width, height/2);
+}
+</script>
+
+<p>Edit the code a bit and run it again. Try changing the second line to <code class="language-plaintext highlighter-rouge">createCanvas(200, 100)</code> with <code class="language-plaintext highlighter-rouge">100</code> instead of <code class="language-plaintext highlighter-rouge">200</code> at the end. Also give <code class="language-plaintext highlighter-rouge">background(110)</code> a go. You can always check the <a href="https://p5js.org/reference/#/p5/background">official reference</a> to find out how something works exactly.</p>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">setup</code> function to create and, well, <em>setup</em> the canvas, but if we want something dynamic, we need to add a <code class="language-plaintext highlighter-rouge">draw</code> function: p5.js calls it repeatedly for as long as this page is open in your browser.</p>
+
+<script type="text/p5" data-height="350" data-preview-width="350">
+function setup() {
+  createCanvas(200, 200);
+  background(220);
+}
+
+function draw() {
+  background(220);
+  rect(mouseX,mouseY,15,15)
+}
+</script>
+
+<p>Can you guess what <code class="language-plaintext highlighter-rouge">mouseX</code> does? This is what sold me on p5.js. There’s plenty other ways to interact with the sketch, and they’re all just as easy! <a href="https://p5js.org/learn/interactivity.html">This tutorial</a> is a good place to read about them.</p>
+
+<h3 id="drawing-a-cartesian-plane">Drawing a Cartesian plane</h3>
+
+<p>You can imagine that using the canvas to draw points in a Cartesian plane will be useful in a blog about math. Unfortunately for me, the creators of p5.js followed the HTML standards when choosing default settings. I specifically don’t enjoy their answers to the following questions:</p>
+<ul>
+  <li>Where is the origin?
+    <blockquote>
+      <p>“top-left.”</p>
+    </blockquote>
+  </li>
+  <li>In which way are the axes directed?
+    <blockquote>
+      <p>“to the right and <strong>down</strong>.”</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>The result is that <code class="language-plaintext highlighter-rouge">(x,y)</code> of p5.js is not <em>my</em> \((x,y).\) Let me show you this by drawing a circle of radius 50 pixels around (0,0).</p>
+
+<script type="text/p5" data-height="450" data-preview-width="350">
+let t = 0;
+
+function setup() {
+  createCanvas(200, 200);
+  background(220);
+  line(width/2, 0, width/2, height);
+  line(0, height/2, width, height/2);
+}
+
+function draw() {
+  let x = 50*cos(t);
+  let y = 50*sin(t);
+  stroke("red")
+  point(x,y)
+  t = t+0.01
+}
+</script>
+
+<p>What I expect to see, given that we start out with</p>
+
+\[(x,y) = 50\cdot(\cos(0),\sin(0)) = (50,0)\]
+
+<p>and increase the angle inside the trig functions slowly, is a circle going counterclockwise in the middle of the canvas. Obviously, the result is quite different than what I had in mind. Luckily, we have a quick fix for that: add the following code to <code class="language-plaintext highlighter-rouge">draw</code> right before <code class="language-plaintext highlighter-rouge">point(x,y)</code> and run it again.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js">  <span class="nx">translate</span><span class="p">(</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// Move the origin to the center of the canvas.</span>
+  <span class="nx">scale</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>  <span class="c1">// Make the y-axis point upwards.</span></code></pre></figure>
+
+<h3 id="plotlyjs">plotly.js</h3>
+<p>p5.js gives you the ability to draw anything you want on the canvas super easily, but sometimes you might want to plot a function without any boilerplate code. In those cases I use <a href="https://plotly.com/javascript/">plotly.js</a>. It does require working just a bit behind the scenes of this webpage though.</p>
+
+<p>Try it yourself: <button onclick="letsGo()">Go</button> <button onclick="stop()">Stop</button></p>
+
+<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+
+<div id="plotly_sin_cos"></div>
+<script>
+  var trace11 = {
+    x: [0],
+    y: [1],
+    mode: 'line',
+    type: 'scatter',
+    name: `50cos(t)`
+  };
+  var trace22 = {
+    x: [0],
+    y: [0],
+    mode: 'line',
+    type: 'scatter',
+    name: `50sin(t)`
+  };
+  Plotly.newPlot('plotly_sin_cos', [trace11, trace22]);
+  let t = 0;
+  function updatePlots(){
+  let a = 50*Math.cos(t);
+  let b = 50*Math.sin(t);
+  Plotly.extendTraces('plotly_sin_cos',{
+    x: [[t],[t]],
+    y: [[a], [b]]
+  }, [0,1]);
+  t += 0.1;
+  };
+  let interval_id = null;
+  function letsGo(){
+    if (interval_id === null) {
+    interval_id = setInterval(updatePlots,10);
+    }
+  };
+  function stop(){
+    clearInterval(interval_id);
+    interval_id = null
+  };
+</script>]]></content><author><name>Idan Alter</name></author><summary type="html"><![CDATA[Technical details that get in the way instead of helping go here. What’s p5.js? How to orient the canvas? Etc.]]></summary></entry></feed>

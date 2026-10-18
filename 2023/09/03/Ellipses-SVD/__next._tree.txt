@@ -1,0 +1,9 @@
+:HL["/assets/main.css","style"]
+:HL["https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css","style",{"crossOrigin":"anonymous","integrity":"sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn"}]
+:HL["/assets/imgs/900px-Conic_sections_with_plane.svg.png","image"]
+5:[["children",{"s":"__PAGE__","h":160}]]
+4:[["children",{"s":{"n":"slug","t":"d","k":"Ellipses-SVD","s":[]},"h":65632,"c":"$Q5"}]]
+3:[["children",{"s":{"n":"day","t":"d","k":"03","s":[]},"h":196704,"c":"$Q4"}]]
+2:[["children",{"s":{"n":"month","t":"d","k":"09","s":[]},"h":196704,"c":"$Q3"}]]
+1:[["children",{"s":{"n":"year","t":"d","k":"2023","s":["_not-found","_global-error"]},"h":196704,"c":"$Q2"}]]
+0:{"b":"S9Mcigp7V24R4ASTS-40q","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
