@@ -1,7 +1,8 @@
+:HL["/_next/static/css/37ce5647c89e619e.css","style"]
 :HL["/assets/main.css","style"]
 5:[["children",{"s":"__PAGE__","h":160}]]
 4:[["children",{"s":{"n":"slug","t":"d","k":"Babylonian-Square-Root","s":[]},"h":65632,"c":"$Q5"}]]
 3:[["children",{"s":{"n":"day","t":"d","k":"05","s":[]},"h":196704,"c":"$Q4"}]]
 2:[["children",{"s":{"n":"month","t":"d","k":"11","s":[]},"h":196704,"c":"$Q3"}]]
 1:[["children",{"s":{"n":"year","t":"d","k":"2022","s":["_not-found","_global-error"]},"h":196704,"c":"$Q2"}]]
-0:{"b":"lruA_oNa4J9U69l_eNYKG","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
+0:{"b":"A6utMxP_FZ--x4OhI0RuK","t":{"t":{"s":"","h":131152,"c":"$Q1"}}}
